@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {Country} from "../country.model"
-import {AppUrl} from "app/services/AppUrl.services"
+import {Country} from "./country.model"
+import {AppUrl} from "app/appservice/AppUrl.services"
 
 @Injectable()
 export class HttpCountryService{
@@ -22,5 +22,17 @@ export class HttpCountryService{
     private extractData(res: Response) {
         let body = res.json();
         return body || [];
+    }
+
+    postCountry(country: Country): Observable<any>  {
+        
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return this.http.post(this.appUrl.RootLocation+'country/country',country , opts);
     }
 }

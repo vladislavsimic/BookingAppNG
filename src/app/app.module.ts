@@ -4,20 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
+import {AppUrl} from "./appservice/AppUrl.services"
+import {HttpCountryService} from "./country/country.service";
 
-import {AppUrl} from "./services/AppUrl.services"
-import {HttpCountryService} from "./services/country.service"
+import { AppComponent } from './app.component';
+import { CountryComponent } from './country/country.component';
+import { CountryAddComponent } from './country/country-add/country-add.component'
 
 const Routes=[
-  {path: "test",component:TestComponent}
+  {path: "country",component:CountryComponent},
+  {path: "country-add",component:CountryAddComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    CountryComponent,
+    CountryAddComponent
   ],
   imports: [
     BrowserModule,

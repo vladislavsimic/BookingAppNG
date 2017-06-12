@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {Country} from "../country.model"
+import {Country} from "./country.model"
 import { Http, Response } from '@angular/http';
-import {HttpCountryService} from "../services/country.service"
+import {HttpCountryService} from "./country.service"
 import { Observable } from "rxjs/Observable";
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css'],
+  selector: 'app-country',
+  templateUrl: './country.component.html',
+  styleUrls: ['./country.component.css'],
   providers: [HttpCountryService]
 })
-export class TestComponent implements OnInit {
+export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
 
   constructor(private httpCountryService:HttpCountryService) {
-   }
+  }
 
   ngOnInit() {
     this.httpCountryService.getCountries().subscribe(

@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Add Country</h1>
-  <form type="form" (ngSubmit)="f.form.valid && saveCountry()" #f="ngForm" novalidate>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveCountry(f.value,f)"  novalidate>
       <div>
           <label for="name">Name:</label>
           <input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" required />

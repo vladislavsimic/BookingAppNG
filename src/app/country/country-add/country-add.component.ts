@@ -17,30 +17,21 @@ export class CountryAddComponent implements OnInit {
 
   model: any={};
 
-  constructor(private httpCountryService:HttpCountryService,private appUrl:AppUrl,private http: Http) {
+  constructor(private httpCountryService:HttpCountryService) {
   }
 
   ngOnInit() {}
 
-  saveCountry(){
+  saveCountry(country: Country, form: NgForm){
+      
       alert("Usao u saveCountry");
       
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/x-www-form-urlencoded'); 
-
-       this.http.post(this.appUrl+'country', 
-       `Name=${this.model.name}
-       &Code=${this.model.code}`,
-       {headers:headers})
-       .subscribe(
-        response => {
-          alert('Added '+this.model.name+' country.');
-        },
-        error => {
-          alert(error.text());
-          console.log(error.text());
-        }
-      );
+       this.httpCountryService.postCountry(country).subscribe(
+          ()=>{ 
+            console.log('Country successfuly posted');
+          },
+          error => {alert("Close!"); console.log(error);}
+        );
 
   }
 }

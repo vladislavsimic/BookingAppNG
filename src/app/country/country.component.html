@@ -1,4 +1,23 @@
-<ul>
-    <li *ngFor="let country of countries">{{country.Name}}</li>
-</ul>
+<table border="1">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <!--<tr *ngFor="let country of countries">
+        <td>{{country.Id}}</td>
+        <td>{{country.Name}}</td>
+        <td>{{country.Code}}</td>
+        <td><button>Edit</button></td>
+        <td><button>Delete</button></td>
+    </tr>-->
+    <tr><td>{{countryObj.Id}}</td>
+        <td>{{countryObj.Name}}</td>
+        <td>{{countryObj.Code}}</td>
+        <td><button>Edit</button></td>
+        <td><button>Delete</button></td></tr>
+</table>
 <a [routerLink]="['/country-add']">Add Country</a>
+<router-outlet></router-outlet>

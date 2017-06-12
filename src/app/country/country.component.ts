@@ -13,6 +13,7 @@ import { Observable } from "rxjs/Observable";
 export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
+  private countryObj:Country;
 
   constructor(private httpCountryService:HttpCountryService) {
   }
@@ -21,6 +22,19 @@ export class CountryComponent implements OnInit {
     this.httpCountryService.getCountries().subscribe(
       (res: any) => {this.countries = res; console.log(this.countries)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
+    
+  }
+
+  deleteCountry(country:Country){
+    
+    alert("usao u deleteCountry");
+    
+    this.httpCountryService.deleteCountry(country).subscribe(
+      ()=>{
+      console.log('Country ' + country.Name + ' successfuly deleted');
+      },
+      error=>{alert("Country ' + country.Name + ' failed delete!"); console.log(error);}
     );
   }
 }

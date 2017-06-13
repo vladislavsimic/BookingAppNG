@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Add Country</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && savePlace(f.value,f)"  novalidate>
+      <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" [(ngModel)]="nPlace.name" #name="ngModel" required />
+          <div *ngIf="f.submitted && !name.valid">Name is required</div>
+      </div>
+      <div>
+        <label for="region">Region:</label>
+        <select  [(ngModel)]="nPlace.region" name="region" #name="ngModel" required>
+            <option *ngFor="let region of regions" [value]="region">
+                {{region.Name}}
+            </option>
+        </select>
+        <div *ngIf="f.submitted && !region.valid">Region is required</div>
+      </div>
+        <button type="submit">Save</button>
+  </form>
+</div>
+

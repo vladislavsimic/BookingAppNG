@@ -36,8 +36,8 @@ export class HttpCountryService{
         return this.http.post(this.appUrl.RootLocation+'country/country', country , opts);
     }
 
-    deleteCountry(country:Country){
-        return this.http.delete(this.appUrl.RootLocation + 'country/country/'+ country.Id);
+    deleteCountry(Id:number){
+        return this.http.delete(this.appUrl.RootLocation + 'country/country/'+ Id);
     }
 
     editCountry(country:Country){

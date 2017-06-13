@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Country} from "../country.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpCountryService} from "../country.service"
@@ -15,12 +15,15 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 })
 export class CountryAddComponent implements OnInit {
 
-  model: any={};
-
   constructor(private httpCountryService:HttpCountryService) {
   }
 
-  ngOnInit() {}
+  nCountry:any={};
+  @Input() eCountry:Country;
+
+  ngOnInit() {
+    console.log("dadsa"+this.eCountry);
+  }
 
   saveCountry(country: Country, form: NgForm){
       

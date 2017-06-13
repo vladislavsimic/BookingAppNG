@@ -13,7 +13,8 @@ import { Observable } from "rxjs/Observable";
 export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
-  private countryObj:Country;
+  editFlag=false;
+  country:any;
 
   constructor(private httpCountryService:HttpCountryService) {
   }
@@ -26,11 +27,20 @@ export class CountryComponent implements OnInit {
     
   }
 
-  deleteCountry(country:Country){
-    
-    alert("usao u deleteCountry");
-    
-    this.httpCountryService.deleteCountry(country).subscribe(
+  editClick(country:Country){
+    alert("usao u ediclick")
+    this.editFlag=true;
+    this.country=country;
+    console.log(country);
+  }
+
+  edit(country:Country){
+    alert("bla bla");
+  }
+
+  delete(country:Country){
+
+    this.httpCountryService.deleteCountry(country.Id).subscribe(
       ()=>{
       console.log('Country ' + country.Name + ' successfuly deleted');
       },

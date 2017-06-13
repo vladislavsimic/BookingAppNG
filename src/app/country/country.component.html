@@ -6,18 +6,17 @@
         <th>Edit</th>
         <th>Delete</th>
     </thead>
-    <!--<tr *ngFor="let country of countries">
+    <tr *ngFor="let country of countries">
         <td>{{country.Id}}</td>
         <td>{{country.Name}}</td>
         <td>{{country.Code}}</td>
-        <td><button>Edit</button></td>
-        <td><button>Delete</button></td>
-    </tr>-->
-    <tr><td>{{countryObj.Id}}</td>
-        <td>{{countryObj.Name}}</td>
-        <td>{{countryObj.Code}}</td>
-        <td><button>Edit</button></td>
-        <td><button>Delete</button></td></tr>
+        <td><button (click)="editClick(country)">Edit</button></td>
+        <td><button (click)="delete(country)">Delete</button></td>
+    </tr>
+    
 </table>
 <a [routerLink]="['/country-add']">Add Country</a>
 <router-outlet></router-outlet>
+<div *ngIf="editFlag==true">
+    <app-country-add [eCountry] = "country"></app-country-add>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Add Room Reservation</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoomReservation(f.value,f)"  novalidate>
+      <div>
+          <label for="startDate">Start date:</label>
+          <input ngui-datetime-picker date-only="true" #StartDate = "ngModel"
+           [(ngModel)]='nRoomReservation.StartDate' name="StartDate" required/>
+           <div *ngIf="f.submitted && !StartDate.valid">StartDate is required</div>
+      </div>
+      <div>
+          <label for="endDate">End date:</label>
+      <input ngui-datetime-picker  date-only="true" #EndDate = "ngModel" 
+      [(ngModel)]='nRoomReservation.EndDate' name="EndDate" required/>
+      <div *ngIf="f.submitted && !EndDate.valid">EndDate is required</div>
+
+      </div>
+        <button type="submit">Save</button>
+  </form>
+</div>
+

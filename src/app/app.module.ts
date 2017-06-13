@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker'; //for datetime
 import {AppUrl} from "./appservice/AppUrl.services"
 import {HttpCountryService} from "./country/country.service";
 import {HttpRoomService} from "./room/room.service";
@@ -15,11 +15,15 @@ import { AccomodationComponent } from './accomodation/accomodation.component';
 import { AccomodationtypeComponent } from './accomodationtype/accomodationtype.component';
 import { CommentComponent } from './comment/comment.component';
 import { RegionComponent } from './region/region.component';
-import { RoomreservationComponent } from './roomreservation/roomreservation.component';
+import { RoomReservationComponent } from './roomreservation/roomreservation.component';
 import { RoomComponent } from './room/room.component';
 import { CountryEditComponent } from './country/country-edit/country-edit.component';
 import { RoomAddComponent } from './room/room-add/room-add.component';
-import { RoomEditComponent } from './room/room-edit/room-edit.component'
+import { RoomEditComponent } from './room/room-edit/room-edit.component';
+import { RoomReservationAddComponent } from './roomreservation/room-reservation-add/room-reservation-add.component';
+import { RoomReservationEditComponent } from './roomreservation/room-reservation-edit/room-reservation-edit.component';
+import {HttpRoomReservationService}  from './roomreservation/roomreservation.service';
+
 
 
 const Routes=[
@@ -31,10 +35,14 @@ const Routes=[
   {path: "accomodation-type",component:AccomodationtypeComponent},
   {path: "comment",component:CommentComponent},
   {path: "region",component:RegionComponent},
-  {path: "room-reservation",component:RoomreservationComponent},
+  {path: "room-reservation",component:RoomReservationComponent},
   {path: "room",component:RoomComponent},
   {path: "room-add",component:RoomAddComponent},
   {path: "room-edit",component:RoomEditComponent},
+  {path: "room-reservation-add",component:RoomReservationAddComponent},
+  {path: "room-reservation-edit",component:RoomReservationEditComponent},
+  {path: "room-reservation-add",component:RoomReservationAddComponent},
+  {path: "room-reservation-edit",component:RoomReservationEditComponent},
 ]
 
 @NgModule({
@@ -47,19 +55,24 @@ const Routes=[
     AccomodationtypeComponent,
     CommentComponent,
     RegionComponent,
-    RoomreservationComponent,
+    RoomReservationComponent,
     RoomComponent,
     CountryEditComponent,
     RoomAddComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    RoomReservationComponent,
+    RoomReservationAddComponent,
+    RoomReservationEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(Routes)
+    RouterModule.forRoot(Routes),
+    NguiDatetimePickerModule
+   
   ],
-  providers: [HttpCountryService,AppUrl,HttpRoomService],
+  providers: [HttpCountryService,AppUrl,HttpRoomService,HttpRoomReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

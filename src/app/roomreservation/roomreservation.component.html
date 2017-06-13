@@ -1,3 +1,24 @@
-<p>
-  roomreservation works!
-</p>
+<table border="1">
+    <thead>
+        <th>Id</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Timestamp</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <tr *ngFor="let roomres of roomReservations">
+        <td>{{roomres.Id}}</td>
+        <td>{{roomres.StartDate}}</td>
+        <td>{{roomres.EndDate}}</td>
+        <td>{{roomres.Timestamp}}</td>
+        <td><button (click)="editClick(roomres)">Edit</button></td>
+        <td><button (click)="delete(roomres)">Delete</button></td>
+    </tr>
+    
+</table>
+<a [routerLink]="['/room-reservation-add']">Add Room Reservation</a>
+<router-outlet></router-outlet>
+<div *ngIf="editFlag==true">
+    <app-room-reservation-edit [eRoomReservation] = "roomreservation" (notifyParent)="getNotification($event)"></app-room-reservation-edit>
+</div>

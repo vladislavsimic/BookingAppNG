@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Edit Room</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && editRoom(f.value,f)"  novalidate>
+    <div>
+          <input type="hidden" name="Id" [(ngModel)]="eRoom.Id" #Id="ngModel"/>
+      </div>
+      <div>
+          <label for="RoomNumber">Room number:</label>
+          <input type="text" name="RoomNumber" [(ngModel)]="eRoom.RoomNumber" #RoomNumber="ngModel" required />
+          <div *ngIf="f.submitted && !RoomNumber.valid">Name is required</div>
+      </div>
+      <div>
+          <label for="BedCount">Bed count:</label>
+          <input type="text" name="BedCount" [(ngModel)]="eRoom.BedCount" #BedCount="ngModel" required />
+          <div *ngIf="f.submitted && !BedCount.valid">Code is required</div>
+      </div>
+      <div>
+          <label for="Description">Description:</label>
+          <input type="text" name="Description" [(ngModel)]="eRoom.Description" #Description="ngModel"  />
+          <div *ngIf="f.submitted && !Description.valid">Name is required</div>
+      </div>
+      <div>
+          <label for="PricePerNight">Price per night:</label>
+          <input type="text" name="PricePerNight" [(ngModel)]="eRoom.PricePerNight" #PricePerNight="ngModel" required />
+          <div *ngIf="f.submitted && !PricePerNight.valid">Name is required</div>
+      </div>
+        <button type="submit">Save</button>
+  </form>
+</div>

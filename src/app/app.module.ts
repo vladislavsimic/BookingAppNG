@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {AppUrl} from "./appservice/AppUrl.services"
 import {HttpCountryService} from "./country/country.service";
-
+import {HttpRoomService} from "./room/room.service";
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
 import { CountryAddComponent } from './country/country-add/country-add.component';
@@ -17,7 +17,10 @@ import { CommentComponent } from './comment/comment.component';
 import { RegionComponent } from './region/region.component';
 import { RoomreservationComponent } from './roomreservation/roomreservation.component';
 import { RoomComponent } from './room/room.component';
-import { CountryEditComponent } from './country/country-edit/country-edit.component'
+import { CountryEditComponent } from './country/country-edit/country-edit.component';
+import { RoomAddComponent } from './room/room-add/room-add.component';
+import { RoomEditComponent } from './room/room-edit/room-edit.component'
+
 
 const Routes=[
   {path: "country",component:CountryComponent},
@@ -30,6 +33,8 @@ const Routes=[
   {path: "region",component:RegionComponent},
   {path: "room-reservation",component:RoomreservationComponent},
   {path: "room",component:RoomComponent},
+  {path: "room-add",component:RoomAddComponent},
+  {path: "room-edit",component:RoomEditComponent},
 ]
 
 @NgModule({
@@ -44,7 +49,9 @@ const Routes=[
     RegionComponent,
     RoomreservationComponent,
     RoomComponent,
-    CountryEditComponent
+    CountryEditComponent,
+    RoomAddComponent,
+    RoomEditComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,7 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [HttpCountryService,AppUrl],
+  providers: [HttpCountryService,AppUrl,HttpRoomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

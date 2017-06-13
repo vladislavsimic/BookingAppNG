@@ -20,29 +20,26 @@ export class PlaceAddComponent implements OnInit {
 
   nPlace:any={};
   public regions: Array<Region>;
-  public selectedPlace: Place;
-
+  private postPlace:Place;
+  
   constructor(private httpPlaceService:HttpPlaceService,private httpRegionService:HttpRegionService,private router: Router) {
+  }
 
-      if(this.selectedPlace == undefined){
-        this.selectedPlace = new Place();
-      }
-
+  ngOnInit() {
+    
     this.httpRegionService.getRegions().subscribe((res: any) => {
         this.regions = res; console.log(this.regions);
-        },
+      },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
   }
 
-  ngOnInit() {
-  }
-
   savePlace(place: Place, form: NgForm){
-       place.Region_Id=place.Region.Id;
-       place.Region=null;
+       this.postPlace=new Place();
+       this.postPlace.Name=place.Name;
+       this.postPlace.Region_Id=place.Region_Id;
 
-       this.httpPlaceService.postPlace(place).subscribe(
+       this.httpPlaceService.postPlace(this.postPlace).subscribe(
           ()=>{ 
             console.log('Place successfuly posted');
             this.router.navigate(['/place']);

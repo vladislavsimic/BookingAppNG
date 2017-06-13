@@ -29,7 +29,7 @@ const Routes=[
   {path: "country-add",component:CountryAddComponent},
   {path: "country-edit",component:CountryEditComponent},
   {path: "place",component:PlaceComponent},
-  {path: "place-add",component:PlaceComponent},
+  {path: "place-add",component:PlaceAddComponent},
   {path: "place-edit",component:PlaceEditComponent},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},

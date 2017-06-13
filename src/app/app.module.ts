@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {AppUrl} from "./appservice/AppUrl.services"
 import {HttpCountryService} from "./country/country.service";
+import {HttpPlaceService} from "./place/place.service";
+import {HttpRegionService} from "./region/region.service";
+
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
@@ -17,13 +20,17 @@ import { CommentComponent } from './comment/comment.component';
 import { RegionComponent } from './region/region.component';
 import { RoomreservationComponent } from './roomreservation/roomreservation.component';
 import { RoomComponent } from './room/room.component';
-import { CountryEditComponent } from './country/country-edit/country-edit.component'
+import { CountryEditComponent } from './country/country-edit/country-edit.component';
+import { PlaceAddComponent } from './place/place-add/place-add.component';
+import { PlaceEditComponent } from './place/place-edit/place-edit.component'
 
 const Routes=[
   {path: "country",component:CountryComponent},
   {path: "country-add",component:CountryAddComponent},
   {path: "country-edit",component:CountryEditComponent},
   {path: "place",component:PlaceComponent},
+  {path: "place-add",component:PlaceAddComponent},
+  {path: "place-edit",component:PlaceEditComponent},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},
   {path: "comment",component:CommentComponent},
@@ -44,7 +51,9 @@ const Routes=[
     RegionComponent,
     RoomreservationComponent,
     RoomComponent,
-    CountryEditComponent
+    CountryEditComponent,
+    PlaceAddComponent,
+    PlaceEditComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,7 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [HttpCountryService,AppUrl],
+  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

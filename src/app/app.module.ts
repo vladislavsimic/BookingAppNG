@@ -16,11 +16,13 @@ import { AccomodationtypeComponent } from './accomodationtype/accomodationtype.c
 import { CommentComponent } from './comment/comment.component';
 import { RegionComponent } from './region/region.component';
 import { RoomreservationComponent } from './roomreservation/roomreservation.component';
-import { RoomComponent } from './room/room.component'
+import { RoomComponent } from './room/room.component';
+import { CountryEditComponent } from './country/country-edit/country-edit.component'
 
 const Routes=[
   {path: "country",component:CountryComponent},
   {path: "country-add",component:CountryAddComponent},
+  {path: "country-edit",component:CountryEditComponent},
   {path: "place",component:PlaceComponent},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},
@@ -41,7 +43,8 @@ const Routes=[
     CommentComponent,
     RegionComponent,
     RoomreservationComponent,
-    RoomComponent
+    RoomComponent,
+    CountryEditComponent
   ],
   imports: [
     BrowserModule,

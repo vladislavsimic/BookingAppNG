@@ -13,26 +13,35 @@ import { Observable } from "rxjs/Observable";
 export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
-  private countryObj:Country;
+  private editFlag;
+  country:any;
 
   constructor(private httpCountryService:HttpCountryService) {
   }
 
   ngOnInit() {
+    this.editFlag=false;
     this.httpCountryService.getCountries().subscribe(
       (res: any) => {this.countries = res; console.log(this.countries)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
-    
   }
 
-  deleteCountry(country:Country){
-    
-    alert("usao u deleteCountry");
-    
-    this.httpCountryService.deleteCountry(country).subscribe(
+  getNotification(evt) {
+      this.ngOnInit();
+  }
+
+  editClick(country:Country){
+    this.editFlag=true;
+    this.country=country;
+  }
+
+  delete(country:Country){
+
+    this.httpCountryService.deleteCountry(country.Id).subscribe(
       ()=>{
       console.log('Country ' + country.Name + ' successfuly deleted');
+      this.ngOnInit();
       },
       error=>{alert("Country ' + country.Name + ' failed delete!"); console.log(error);}
     );

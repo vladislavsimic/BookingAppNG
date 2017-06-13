@@ -3,16 +3,15 @@
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveCountry(f.value,f)"  novalidate>
       <div>
           <label for="name">Name:</label>
-          <input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" required />
+          <input type="text" name="name" [(ngModel)]="nCountry.name" #name="ngModel" required />
           <div *ngIf="f.submitted && !name.valid">Name is required</div>
       </div>
       <div>
           <label for="code">Code:</label>
-          <input type="text" name="code" [(ngModel)]="model.code" #code="ngModel" required />
+          <input type="text" name="code" [(ngModel)]="nCountry.code" #code="ngModel" required />
           <div *ngIf="f.submitted && !code.valid">Code is required</div>
       </div>
-      <div>
-          <button type="submit">Save</button>
-      </div>
+        <button type="submit">Save</button>
   </form>
 </div>
+

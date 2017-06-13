@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {Country} from "../country.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpCountryService} from "../country.service"
@@ -9,29 +9,32 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-country-add',
-  templateUrl: './country-add.component.html',
-  styleUrls: ['./country-add.component.css'],
+  selector: 'app-country-edit',
+  templateUrl: './country-edit.component.html',
+  styleUrls: ['./country-edit.component.css'],
   providers: [HttpCountryService]
 })
-export class CountryAddComponent implements OnInit {
+export class CountryEditComponent implements OnInit {
 
-  nCountry:any={};
+  @Input() eCountry:Country;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
   constructor(private httpCountryService:HttpCountryService,private router: Router) {
-  }
+    this.notifyParent=new EventEmitter();
+   }
 
   ngOnInit() {
   }
 
-  saveCountry(country: Country, form: NgForm){
-            
-       this.httpCountryService.postCountry(country).subscribe(
+  editCountry(country: Country, form: NgForm){
+    
+      this.httpCountryService.editCountry(country).subscribe(
           ()=>{ 
-            console.log('Country successfuly posted');
-            this.router.navigate(['/country']);
+            console.log('Country successfuly edited');
+            this.notifyParent.emit('Some value to send to the parent');
           },
           error => {alert("Close!"); console.log(error);}
         );
+       
   }
 }

@@ -8,7 +8,7 @@ import {AppUrl} from "./appservice/AppUrl.services"
 import {HttpCountryService} from "./country/country.service";
 import {HttpPlaceService} from "./place/place.service";
 import {HttpRegionService} from "./region/region.service";
-
+import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
@@ -22,7 +22,9 @@ import { RoomreservationComponent } from './roomreservation/roomreservation.comp
 import { RoomComponent } from './room/room.component';
 import { CountryEditComponent } from './country/country-edit/country-edit.component';
 import { PlaceAddComponent } from './place/place-add/place-add.component';
-import { PlaceEditComponent } from './place/place-edit/place-edit.component'
+import { PlaceEditComponent } from './place/place-edit/place-edit.component';
+import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
+import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component'
 
 const Routes=[
   {path: "country",component:CountryComponent},
@@ -33,6 +35,8 @@ const Routes=[
   {path: "place-edit",component:PlaceEditComponent},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},
+  {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
+  {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
   {path: "comment",component:CommentComponent},
   {path: "region",component:RegionComponent},
   {path: "room-reservation",component:RoomreservationComponent},
@@ -53,7 +57,9 @@ const Routes=[
     RoomComponent,
     CountryEditComponent,
     PlaceAddComponent,
-    PlaceEditComponent
+    PlaceEditComponent,
+    AccomodationtypeAddComponent,
+    AccomodationtypeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,7 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService],
+  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

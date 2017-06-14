@@ -22,7 +22,9 @@ export class PlaceAddComponent implements OnInit {
   public regions: Array<Region>;
   private postPlace:Place;
   
-  constructor(private httpPlaceService:HttpPlaceService,private httpRegionService:HttpRegionService,private router: Router) {
+  constructor(private httpPlaceService:HttpPlaceService,
+              private httpRegionService:HttpRegionService,
+              private router: Router) {
   }
 
   ngOnInit() {

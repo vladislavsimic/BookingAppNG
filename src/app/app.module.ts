@@ -27,7 +27,9 @@ import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
 import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component';
 import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
-import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component'
+import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
+import { RegionAddComponent } from './region/region-add/region-add.component';
+import { RegionEditComponent } from './region/region-edit/region-edit.component'
 
 const Routes=[
   {path: "country",component:CountryComponent},
@@ -44,6 +46,8 @@ const Routes=[
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
   {path: "comment",component:CommentComponent},
   {path: "region",component:RegionComponent},
+  {path: "region-add",component:RegionAddComponent},
+  {path: "region-edit",component:RegionEditComponent},
   {path: "room-reservation",component:RoomreservationComponent},
   {path: "room",component:RoomComponent},
 ]
@@ -66,7 +70,9 @@ const Routes=[
     AccomodationtypeAddComponent,
     AccomodationtypeEditComponent,
     AccommodationAddComponent,
-    AccommodationEditComponent
+    AccommodationEditComponent,
+    RegionAddComponent,
+    RegionEditComponent
   ],
   imports: [
     BrowserModule,

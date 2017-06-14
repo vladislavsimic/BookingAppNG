@@ -1,6 +1,8 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {RoomReservation} from "../roomreservation.model"
+import {Room} from "app/room/room.model"
 import { Http, Headers, Response } from '@angular/http';
+import {HttpRoomService} from "app/room/room.service";
 import {HttpRoomReservationService} from "../roomreservation.service"
 import { Observable } from "rxjs/Observable";
 import { FormsModule } from '@angular/forms';
@@ -20,14 +22,21 @@ export class RoomReservationEditComponent implements OnInit {
   @Input() eRoomReservation:RoomReservation;
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private httpRoomResService:HttpRoomReservationService,private router: Router) {
+   public rooms : Array<Room>;
+
+  constructor(private httpRoomResService:HttpRoomReservationService,private httRoomService : HttpRoomService,private router: Router) {
     this.notifyParent=new EventEmitter();
    }
 
   ngOnInit() {
+    this.httRoomService.getRooms().subscribe((res: any) => {
+        this.rooms = res; console.log(this.rooms);
+      },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
   }
 
-  editRoom(roomRes: RoomReservation, form: NgForm){
+  editRoomReservation(roomRes: RoomReservation, form: NgForm){
     
       this.httpRoomResService.editRoomReservation(roomRes).subscribe(
           ()=>{ 

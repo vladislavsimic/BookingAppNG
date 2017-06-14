@@ -3,14 +3,13 @@ import {Place} from "./place.model"
 import {Region} from "../region/region.model"
 import { Http, Response } from '@angular/http';
 import {HttpPlaceService} from "./place.service"
-import {HttpRegionService} from "../region/region.service"
 import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-place',
   templateUrl: './place.component.html',
   styleUrls: ['./place.component.css'],
-  providers: [HttpPlaceService,HttpRegionService]
+  providers: [HttpPlaceService]
 })
 export class PlaceComponent implements OnInit {
 
@@ -18,7 +17,7 @@ export class PlaceComponent implements OnInit {
   private editFlag;
   place:any;
 
-  constructor(private httpPlaceService:HttpPlaceService,private httRegionService:HttpRegionService) {
+  constructor(private httpPlaceService:HttpPlaceService) {
   }
 
   ngOnInit() {

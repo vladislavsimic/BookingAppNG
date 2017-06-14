@@ -9,6 +9,7 @@ import {HttpCountryService} from "./country/country.service";
 import {HttpPlaceService} from "./place/place.service";
 import {HttpRegionService} from "./region/region.service";
 import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
+import {HttpAccommodationService} from "./accomodation/accommodation.service"
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
@@ -24,7 +25,9 @@ import { CountryEditComponent } from './country/country-edit/country-edit.compon
 import { PlaceAddComponent } from './place/place-add/place-add.component';
 import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
-import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component'
+import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component';
+import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
+import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component'
 
 const Routes=[
   {path: "country",component:CountryComponent},
@@ -34,6 +37,8 @@ const Routes=[
   {path: "place-add",component:PlaceAddComponent},
   {path: "place-edit",component:PlaceEditComponent},
   {path: "accomodation",component:AccomodationComponent},
+  {path: "accommodation-add",component:AccommodationAddComponent},
+  {path: "accommodation-edit",component:AccommodationEditComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
@@ -59,7 +64,9 @@ const Routes=[
     PlaceAddComponent,
     PlaceEditComponent,
     AccomodationtypeAddComponent,
-    AccomodationtypeEditComponent
+    AccomodationtypeEditComponent,
+    AccommodationAddComponent,
+    AccommodationEditComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,7 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService],
+  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,HttpAccommodationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

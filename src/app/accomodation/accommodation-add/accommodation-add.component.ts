@@ -53,7 +53,7 @@ export class AccommodationAddComponent implements OnInit {
        this.postAccommodation.Latitude=accommodation.Latitude;
        this.postAccommodation.Longitude=accommodation.Longitude;
        this.postAccommodation.Place_Id=accommodation.Place_Id;
-       this.postAccommodation.AppUser_Id=1;
+       this.postAccommodation.AppUser_Id=1;    /*TODO User from local*/
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

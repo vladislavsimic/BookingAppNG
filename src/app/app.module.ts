@@ -23,6 +23,8 @@ import { RoomEditComponent } from './room/room-edit/room-edit.component';
 import { RoomReservationAddComponent } from './roomreservation/room-reservation-add/room-reservation-add.component';
 import { RoomReservationEditComponent } from './roomreservation/room-reservation-edit/room-reservation-edit.component';
 import {HttpRoomReservationService}  from './roomreservation/roomreservation.service';
+import { CommentAddComponent } from './comment/comment-add/comment-add.component';
+import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
 
 
 
@@ -43,6 +45,8 @@ const Routes=[
   {path: "room-reservation-edit",component:RoomReservationEditComponent},
   {path: "room-reservation-add",component:RoomReservationAddComponent},
   {path: "room-reservation-edit",component:RoomReservationEditComponent},
+  {path: "comment-add",component:CommentAddComponent},
+  {path: "comment-edit",component:CommentEditComponent},
 ]
 
 @NgModule({
@@ -62,7 +66,9 @@ const Routes=[
     RoomEditComponent,
     RoomReservationComponent,
     RoomReservationAddComponent,
-    RoomReservationEditComponent
+    RoomReservationEditComponent,
+    CommentAddComponent,
+    CommentEditComponent
   ],
   imports: [
     BrowserModule,

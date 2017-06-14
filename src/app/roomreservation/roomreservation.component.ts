@@ -42,6 +42,7 @@ export class RoomReservationComponent implements OnInit {
       this.ngOnInit();
       },
       error=>{alert("Country ' + country.Name + ' failed delete!"); console.log(error);}
+      
     );
   }
 }

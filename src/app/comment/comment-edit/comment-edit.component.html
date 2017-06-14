@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Edit Comment</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && editComment(f.value,f)"  novalidate>
+    <div>
+          <input type="hidden" name="Id" [(ngModel)]="eComment.Id" #Id="ngModel"/>
+      </div>
+      <div>
+          <label for="Grade">Grade:</label>
+          <input type="text" name="Grade" [(ngModel)]="eComment.Grade" #Grade="ngModel" required />
+          <div *ngIf="f.submitted && !Grade.valid">Grade is required</div>
+      </div>
+      <div>
+          <label for="Text">Text:</label>
+          <input type="text" name="Text" [(ngModel)]="eComment.Text" #TextC="ngModel" required />
+          <div *ngIf="f.submitted && !TextC.valid">Text is required</div>
+      </div>
+      <div>
+          <label for="Accomodation">Accomodation:</label>
+          
+          <div *ngIf="f.submitted && !AccId.valid">Accomodation is required</div>
+      </div>
+      
+        <button type="submit">Save</button>
+  </form>
+</div>

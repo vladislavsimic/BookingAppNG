@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Add Comment</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveComment(f.value,f)"  novalidate>
+      <div>
+          <label for="Grade">Grade:</label>
+          <input type="text" name="Grade" [(ngModel)]="nComment.Grade" #Grade="ngModel" required />
+          <div *ngIf="f.submitted && !Grade.valid">Grade is required</div>
+      </div>
+      <div>
+          <label for="Text">Text:</label>
+          <input type="text" name="Text" [(ngModel)]="nComment.Text" #Text="ngModel" required />
+          <div *ngIf="f.submitted && !Text.valid">Text is required</div>
+      </div>
+      <div>
+          <label for="Accomodation">Accomodation:</label>
+         
+          <div *ngIf="f.submitted && !AccId.valid">Accomodation is required</div>
+      </div>
+      
+        <button type="submit">Save</button>
+  </form>
+</div>

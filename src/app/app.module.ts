@@ -25,7 +25,7 @@ import { RoomReservationEditComponent } from './roomreservation/room-reservation
 import {HttpRoomReservationService}  from './roomreservation/roomreservation.service';
 import { CommentAddComponent } from './comment/comment-add/comment-add.component';
 import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
-
+import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule} from '@angular/material/';
 
 
 const Routes=[
@@ -75,7 +75,8 @@ const Routes=[
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-    NguiDatetimePickerModule
+    NguiDatetimePickerModule,
+    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule
    
   ],
   providers: [HttpCountryService,AppUrl,HttpRoomService,HttpRoomReservationService],

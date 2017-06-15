@@ -39,9 +39,10 @@ import { AccomodationtypeEditComponent } from './accomodationtype/accomodationty
 import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
 import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
 import { RegionAddComponent } from './region/region-add/region-add.component';
-import { RegionEditComponent } from './region/region-edit/region-edit.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { RegionEditComponent } from './region/region-edit/region-edit.component'
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const Routes=[
@@ -112,7 +113,8 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes),
     NguiDatetimePickerModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule
+    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,
+    BrowserAnimationsModule,
    
   ],
 

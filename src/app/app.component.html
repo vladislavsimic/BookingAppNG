@@ -3,12 +3,18 @@
   <h2 >Booking App</h2>
    </div>
   <span class="example-spacer"></span>
-  <div class="divlog">
-  <button class="example-icon" md-raised-button color="primary" > Login</button>
-  </div>
-  <div class="divreg">
-  <button class="example-icon" md-raised-button color="primary" [routerLink]="['/register']"> Register</button>
- </div>
+    <div class="divlog" *ngIf="!isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" (click)="loginClick()"> Login</button>
+    </div>
+    <div class="divreg" *ngIf="!isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" [routerLink]="['/register']"> Register</button>
+    </div>
+    <div class="divuser" *ngIf="isLoggedIn">
+        <button md-button title="Edit profile">{{username}}</button>
+    </div>
+    <div class="divlout" *ngIf="isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" (click)="logout()"> Log Out</button>
+    </div>
 </md-toolbar>
 <!--
 <md-tab-group>
@@ -30,7 +36,9 @@
     </nav>
    <router-outlet></router-outlet>
 </div>
-
+<div *ngIf="loginFlag==true">
+    <app-login (notifyParent)="getNotification($event)"></app-login>
+</div>
 
 
 <!--

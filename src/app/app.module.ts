@@ -12,6 +12,7 @@ import {HttpRegionService} from "./region/region.service";
 import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
 import {HttpAccommodationService} from "./accomodation/accommodation.service"
 import {HttpRegisterService} from "./register/register.service"
+import {HttpAuthenticationService} from "./login/userAuthentication.service"
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
@@ -43,6 +44,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegionEditComponent } from './region/region-edit/region-edit.component'
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
 
 
 const Routes=[
@@ -66,6 +68,7 @@ const Routes=[
   {path: "room-reservation",component:RoomReservationComponent},
   {path: "room",component:RoomComponent},
   {path: "register",component:RegisterComponent},
+  {path: "login",component:LoginComponent},
   {path: "room-add",component:RoomAddComponent},
   {path: "room-edit",component:RoomEditComponent},
   {path: "room-reservation-add",component:RoomReservationAddComponent},
@@ -106,6 +109,7 @@ const Routes=[
     RegionEditComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +123,7 @@ const Routes=[
   ],
 
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService],
+  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpAuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

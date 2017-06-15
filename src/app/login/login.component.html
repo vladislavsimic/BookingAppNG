@@ -1,3 +1,14 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <h1>Login</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && login(f.value,f)"  novalidate>
+      <div>
+          <input mdInput placeholder="Username" type="text" name="username" ngModel  required />
+      </div>
+      <div>
+          <input mdInput placeholder="Password" type="password" name="password" ngModel  required />
+      </div>
+      
+        <button type="submit">Login</button>
+  </form>
+</div>
+

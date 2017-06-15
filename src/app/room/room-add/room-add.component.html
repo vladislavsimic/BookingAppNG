@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Add Room</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoom(f.value,f)"  novalidate>
+      <div>
+          <label for="RoomNumber">Room number:</label>
+          <input type="text" name="RoomNumber" [(ngModel)]="nRoom.RoomNumber" #RoomNumber="ngModel" required />
+          <div *ngIf="f.submitted && !RoomNumber.valid">RoomNumber is required</div>
+      </div>
+      <div>
+          <label for="BedCount">Bed count:</label>
+          <input type="text" name="BedCount" [(ngModel)]="nRoom.BedCount" #BedCount="ngModel" required />
+          <div *ngIf="f.submitted && !BedCount.valid">BedCount is required</div>
+      </div>
+      <div>
+          <label for="Description">Description:</label>
+          <input type="text" name="Description" [(ngModel)]="nRoom.Description" #Description="ngModel" required  />
+          <div *ngIf="f.submitted && !Description.valid">Description is required</div>
+      </div>
+      <div>
+          <label for="PricePerNight">Price per night:</label>
+          <input type="text" name="PricePerNight" [(ngModel)]="nRoom.PricePerNight" #PricePerNight="ngModel" required />
+          <div *ngIf="f.submitted && !PricePerNight.valid">PricePerNight is required</div>
+      </div>
+        <button type="submit">Save</button>
+  </form>
+</div>

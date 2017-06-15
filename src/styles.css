@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+		#center {
+		  position: absolute;
+		  top: 40%;
+		  left: 50%;
+		  margin: -150px 0 0 -150px;
+		}
+		.mainTitle{
+		   text-align: center
+		}
+		footer {
+           background-color: #008080;
+        }
+        
+.example-icon {
+  flex: 0.05 1 auto;
+  margin-right: 100px;
+  
+}
+.divlog{
+    margin-right: 50px;
+}
+.divreg{
+    margin-right: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.title{
+    text-align: center;
+}

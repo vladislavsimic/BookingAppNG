@@ -1,3 +1,20 @@
-<p>
-  accomodationtype works!
-</p>
+<table border="1">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <tr *ngFor="let accomodationType of accomodationTypes">
+        <td>{{accomodationType.Id}}</td>
+        <td>{{accomodationType.Name}}</td>
+        <td><button (click)="editClick(accomodationType)">Edit</button></td>
+        <td><button (click)="delete(accomodationType)">Delete</button></td>
+    </tr>
+    
+</table>
+<a [routerLink]="['/accomodation-type-add']">Add AccomodationType</a>
+<router-outlet></router-outlet>
+<div *ngIf="editFlag==true">
+    <app-accomodationtype-edit [eAccomodationType] = "accomodationType" (notifyParent)="getNotification($event)"></app-accomodationtype-edit>
+</div>

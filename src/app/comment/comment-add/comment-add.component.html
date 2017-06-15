@@ -13,7 +13,11 @@
       </div>
       <div>
           <label for="Accomodation">Accomodation:</label>
-         
+          <select  [(ngModel)]="nComment.Acc_Id" name="Acc_Id" #Acc="ngModel" required>
+            <option *ngFor="let acc of accomodations" [value]="acc.Id">
+                {{acc.Name}}
+            </option>
+        </select>
           <div *ngIf="f.submitted && !AccId.valid">Accomodation is required</div>
       </div>
       

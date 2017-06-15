@@ -16,8 +16,12 @@
       </div>
       <div>
           <label for="Accomodation">Accomodation:</label>
-          
-          <div *ngIf="f.submitted && !AccId.valid">Accomodation is required</div>
+           <select  [(ngModel)]="eComment.Acc_Id" name="Acc_Id" #Acc="ngModel" required>
+            <option *ngFor="let acc of accomodations" [value]="acc.Id">
+                {{acc.Name}}
+            </option>
+        </select>
+          <div *ngIf="f.submitted && !Acc.valid">Accomodation is required</div>
       </div>
       
         <button type="submit">Save</button>

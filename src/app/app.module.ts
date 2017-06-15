@@ -7,6 +7,10 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker'; //for datetime
 import {AppUrl} from "./appservice/AppUrl.services"
 import {HttpCountryService} from "./country/country.service";
 import {HttpRoomService} from "./room/room.service";
+import {HttpPlaceService} from "./place/place.service";
+import {HttpRegionService} from "./region/region.service";
+import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
+import {HttpAccommodationService} from "./accomodation/accommodation.service"
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
 import { CountryAddComponent } from './country/country-add/country-add.component';
@@ -26,6 +30,14 @@ import {HttpRoomReservationService}  from './roomreservation/roomreservation.ser
 import { CommentAddComponent } from './comment/comment-add/comment-add.component';
 import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule} from '@angular/material/';
+import { PlaceAddComponent } from './place/place-add/place-add.component';
+import { PlaceEditComponent } from './place/place-edit/place-edit.component';
+import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
+import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component';
+import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
+import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
+import { RegionAddComponent } from './region/region-add/region-add.component';
+import { RegionEditComponent } from './region/region-edit/region-edit.component'
 
 
 const Routes=[
@@ -33,10 +45,19 @@ const Routes=[
   {path: "country-add",component:CountryAddComponent},
   {path: "country-edit",component:CountryEditComponent},
   {path: "place",component:PlaceComponent},
+  {path: "place-add",component:PlaceAddComponent},
+  {path: "place-edit",component:PlaceEditComponent},
   {path: "accomodation",component:AccomodationComponent},
+  {path: "accommodation-add",component:AccommodationAddComponent},
+  {path: "accommodation-edit",component:AccommodationEditComponent},
   {path: "accomodation-type",component:AccomodationtypeComponent},
+  {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
+  {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
   {path: "comment",component:CommentComponent},
   {path: "region",component:RegionComponent},
+  {path: "room-reservation",component:RoomReservationComponent},
+  {path: "region-add",component:RegionAddComponent},
+  {path: "region-edit",component:RegionEditComponent},
   {path: "room-reservation",component:RoomReservationComponent},
   {path: "room",component:RoomComponent},
   {path: "room-add",component:RoomAddComponent},
@@ -68,7 +89,15 @@ const Routes=[
     RoomReservationAddComponent,
     RoomReservationEditComponent,
     CommentAddComponent,
-    CommentEditComponent
+    CommentEditComponent,
+    PlaceAddComponent,
+    PlaceEditComponent,
+    AccomodationtypeAddComponent,
+    AccomodationtypeEditComponent,
+    AccommodationAddComponent,
+    AccommodationEditComponent,
+    RegionAddComponent,
+    RegionEditComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +108,8 @@ const Routes=[
     MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule
    
   ],
-  providers: [HttpCountryService,AppUrl,HttpRoomService,HttpRoomReservationService],
+  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
+  HttpAccommodationService,HttpRoomService,HttpRoomReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

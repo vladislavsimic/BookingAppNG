@@ -1,0 +1,55 @@
+<div class="container">
+  <h1>Add Accomodation</h1>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveAccommodation(f.value,f)"  novalidate>
+      <div>
+          <label for="name">Name:</label>
+          <input type="text" name="Name" [(ngModel)]="nAccommodation.Name" #Name="ngModel" required />
+          <div *ngIf="f.submitted && !Name.valid">Name is required</div>
+      </div>
+      <div>
+          <label for="name">Description:</label>
+          <input type="text" name="Description" [(ngModel)]="nAccommodation.Description" #Description="ngModel" required />
+          <div *ngIf="f.submitted && !Description.valid">Description is required</div>
+      </div>
+      <div>
+          <label for="name">Address:</label>
+          <input type="text" name="Address" [(ngModel)]="nAccommodation.Address" #Address="ngModel" required />
+          <div *ngIf="f.submitted && !Address.valid">Address is required</div>
+      </div>
+      <div>
+          <label for="name">Latitude:</label>
+          <input type="text" name="Latitude" [(ngModel)]="nAccommodation.Latitude" #Latitude="ngModel" required />
+          <div *ngIf="f.submitted && !Latitude.valid">Latitude is required</div>
+      </div>
+      <div>
+          <label for="name">Longitude:</label>
+          <input type="text" name="Longitude" [(ngModel)]="nAccommodation.Longitude" #Longitude="ngModel" required />
+          <div *ngIf="f.submitted && !Longitude.valid">Longitude is required</div>
+      </div>
+      <div>
+          <label for="name">ImageURL:</label>
+          <input type="text" name="ImageURL" [(ngModel)]="nAccommodation.ImageURL" #ImageURL="ngModel" required />
+          <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
+      </div>
+      <div>
+        <label for="accommodationtype">AccommodationType:</label>
+        <select  [(ngModel)]="nAccommodation.AccommodationType_Id" name="AccommodationType_Id" #AccommodationTypeId="ngModel" required>
+            <option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
+                {{accommodationType.Name}}
+            </option>
+        </select>
+        <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
+      </div>
+      <div>
+        <label for="place">Place:</label>
+        <select  [(ngModel)]="nAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" required>
+            <option *ngFor="let place of places" [value]="place.Id">
+                {{place.Name}}
+            </option>
+        </select>
+        <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
+      </div>
+        <button type="submit">Save</button>
+  </form>
+</div>
+

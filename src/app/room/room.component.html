@@ -1,3 +1,26 @@
-<p>
-  room works!
-</p>
+<table border="1">
+    <thead>
+        <th>Id</th>
+        <th>Room number</th>
+        <th>Bed count</th>
+        <th>Description</th>
+        <th>Price per night</th>
+        <th>Edit </th>
+        <th>Delete</th>
+    </thead>
+    <tr *ngFor="let room of rooms">
+        <td>{{room.Id}}</td>
+        <td>{{room.RoomNumber}}</td>
+        <td>{{room.BedCount}}</td>
+        <td>{{room.Description}}</td>
+        <td>{{room.PricePerNight}}</td>
+        <td><button (click)="editClick(room)">Edit</button></td>
+        <td><button (click)="delete(room)">Delete</button></td>
+    </tr>
+    
+</table>
+<a [routerLink]="['/room-add']">Add Room</a>
+<router-outlet></router-outlet>
+<div *ngIf="editFlag==true">
+    <app-room-edit [eRoom] = "room" (notifyParent)="getNotification($event)"></app-room-edit>
+</div>

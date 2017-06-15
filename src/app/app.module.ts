@@ -10,6 +10,7 @@ import {HttpPlaceService} from "./place/place.service";
 import {HttpRegionService} from "./region/region.service";
 import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
 import {HttpAccommodationService} from "./accomodation/accommodation.service"
+import {HttpRegisterService} from "./register/register.service"
 
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
@@ -29,7 +30,9 @@ import { AccomodationtypeEditComponent } from './accomodationtype/accomodationty
 import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
 import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
 import { RegionAddComponent } from './region/region-add/region-add.component';
-import { RegionEditComponent } from './region/region-edit/region-edit.component'
+import { RegionEditComponent } from './region/region-edit/region-edit.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const Routes=[
   {path: "country",component:CountryComponent},
@@ -50,6 +53,7 @@ const Routes=[
   {path: "region-edit",component:RegionEditComponent},
   {path: "room-reservation",component:RoomreservationComponent},
   {path: "room",component:RoomComponent},
+  {path: "register",component:RegisterComponent}
 ]
 
 @NgModule({
@@ -72,7 +76,9 @@ const Routes=[
     AccommodationAddComponent,
     AccommodationEditComponent,
     RegionAddComponent,
-    RegionEditComponent
+    RegionEditComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,7 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,HttpAccommodationService],
+  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,HttpAccommodationService,HttpRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

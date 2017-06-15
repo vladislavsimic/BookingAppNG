@@ -1,6 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 import { HttpAuthenticationService } from 'app/login/userAuthentication.service';
 import { Http, Headers, Response } from '@angular/http';
+import { MdDialog } from '@angular/material';
+import {LoginComponent} from "app/login/login.component"
+import {RegisterComponent} from "app/register/register.component"
 
 @Component({
   selector: 'app-root',
@@ -10,19 +13,43 @@ import { Http, Headers, Response } from '@angular/http';
 
 })
 export class AppComponent {
-  title = 'app';
 
   username: string;
   isLoggedIn:boolean;
-  private loginFlag;
-
-  constructor(private httpAuthService:HttpAuthenticationService){
+  
+  constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog){
   }
 
-  ngOnInit():void{
-      this.loginFlag=false;
+  ngOnInit(){
       this.checkForUser();
   }
+
+  openLoginDialog() {
+
+        let dialogRef = this.dialog.open(LoginComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result == undefined){
+                return;
+            }
+              this.ngOnInit();
+        },
+            error => { alert("Close!"); console.log(error); }
+        );
+    }
+
+    openRegistrationDialog() {
+        let dialogRef = this.dialog.open(RegisterComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result == undefined)
+                return;
+
+            if (result == "success") {
+                this.ngOnInit();            
+            }
+        },
+            error => { alert("Close!"); console.log(error); }
+        );
+    }
 
   checkForUser(){
       this.username=localStorage.getItem('username');
@@ -33,27 +60,22 @@ export class AppComponent {
       this.isLoggedIn=true;
   }
 
-  loginClick(){
-      this.ngOnInit();
-      this.loginFlag=true;
-  }
-
-  getNotification(evt) {
-      this.loginFlag=false;
-      this.ngOnInit();
-  }
-
   logout(){
       this.httpAuthService.logout().subscribe(
           response=>{
               localStorage.clear();
-              this.checkForUser();
+              this.ngOnInit();
           },
           error=>{console.log(error); alert("Logout failed!");}
       );
   }
 
   routeForLink = [
+        {
+            route:['/home'],
+            label: "Home"
+
+        },
         {
             route: ['/country'],
             label: "Country"

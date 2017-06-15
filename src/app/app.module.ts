@@ -77,6 +77,7 @@ const Routes=[
   {path: "room-reservation-edit",component:RoomReservationEditComponent},
   {path: "comment-add",component:CommentAddComponent},
   {path: "comment-edit",component:CommentEditComponent},
+  {path: "home",component:HomeComponent}
 ]
 
 @NgModule({

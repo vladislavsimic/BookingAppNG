@@ -6,8 +6,7 @@ import { Observable } from "rxjs/Observable";
 import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
-import {Router, ActivatedRoute} from '@angular/router';
-
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   nUser:any={};
 
-  constructor(private httpRegisterService:HttpRegisterService,private router:Router) { }
+  constructor(private httpRegisterService:HttpRegisterService,
+              public dialogRef: MdDialogRef<RegisterComponent>) { }
 
   ngOnInit() {
   }
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.httpRegisterService.registerUser(user).subscribe(
       data => {
         console.log('User successfuly registered');
-        alert("User registered.");
+        this.dialogRef.close("success");
       },
       error => { alert(error); console.log(error); })
   }

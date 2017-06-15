@@ -4,10 +4,10 @@
    </div>
   <span class="example-spacer"></span>
     <div class="divlog" *ngIf="!isLoggedIn">
-        <button class="example-icon" md-raised-button color="primary" (click)="loginClick()"> Login</button>
+        <button class="example-icon" md-raised-button color="primary" (click)="openLoginDialog()"> Login</button>
     </div>
     <div class="divreg" *ngIf="!isLoggedIn">
-        <button class="example-icon" md-raised-button color="primary" [routerLink]="['/register']"> Register</button>
+        <button class="example-icon" md-raised-button color="primary" (click)="openRegistrationDialog()"> Register</button>
     </div>
     <div class="divuser" *ngIf="isLoggedIn">
         <button md-button title="Edit profile">{{username}}</button>
@@ -36,9 +36,7 @@
     </nav>
    <router-outlet></router-outlet>
 </div>
-<div *ngIf="loginFlag==true">
-    <app-login (notifyParent)="getNotification($event)"></app-login>
-</div>
+
 
 
 <!--

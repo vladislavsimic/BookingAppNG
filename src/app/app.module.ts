@@ -46,6 +46,7 @@ import { RegionEditComponent } from './region/region-edit/region-edit.component'
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import {AdminGuard} from './adminGuard';
+import {ManagerGuard} from './managerGuard';
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -55,11 +56,11 @@ const Routes=[
   {path: "place-add",component:PlaceAddComponent, canActivate: [AdminGuard]},
   {path: "place-edit",component:PlaceEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation",component:AccomodationComponent},
-  {path: "accommodation-add",component:AccommodationAddComponent},
-  {path: "accommodation-edit",component:AccommodationEditComponent},
-  {path: "accomodation-type",component:AccomodationtypeComponent},
-  {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
-  {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
+  {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
+  {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
+  {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},
+  {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
+  {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
   {path: "comment",component:CommentComponent},
   {path: "region",component:RegionComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent},
@@ -125,7 +126,7 @@ const Routes=[
 
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,
-  HttpAuthenticationService,AdminGuard],
+  HttpAuthenticationService,AdminGuard,ManagerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

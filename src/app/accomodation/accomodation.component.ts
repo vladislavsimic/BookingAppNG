@@ -4,6 +4,11 @@ import {Region} from "../region/region.model"
 import { Http, Response } from '@angular/http';
 import {HttpAccommodationService} from "./accommodation.service"
 import { Observable } from "rxjs/Observable";
+import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
+import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
+import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
+
+
 
 @Component({
   selector: 'app-accomodation',
@@ -16,12 +21,14 @@ export class AccomodationComponent implements OnInit {
   private accommodations:Array<Accommodation>;
   private editFlag;
   accommodation:any;
+  selectedOption: string;
   private adminRole:boolean;
   private managerRole:boolean;
   private appUser:boolean;
   private role:string;
+  
+  constructor(private httpAccommodationService:HttpAccommodationService,public dialog:MdDialog) { }
 
-  constructor(private httpAccommodationService:HttpAccommodationService) { }
 
   ngOnInit() {
     this.editFlag=false;
@@ -66,5 +73,27 @@ export class AccomodationComponent implements OnInit {
       error=>{alert("Accommodation ' + accommodation.Name + ' failed delete!"); console.log(error);}
     );
   }
+  openAccNewDialog(){
+    let dialogRef = this.dialog.open(AccommodationAddComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+      this.ngOnInit();
+    });
+  }
+    editAccNewDialog(acc:Accommodation){
+      let config = new MdDialogConfig();
+      config.data = acc;
+    let dialogRef = this.dialog.open(AccommodationEditComponent,config);
+    dialogRef.componentInstance.eAccommodation = acc;
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+      this.ngOnInit();
+    });
 
+  }
+
+
+ 
 }
+
+

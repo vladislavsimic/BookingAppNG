@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -20,16 +21,20 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class AccommodationEditComponent implements OnInit {
 
-  @Input() eAccommodation:Accommodation;
+ // @Input() eAccommodation:Accommodation;
   private accommodationForEdit:Accommodation;
   public places: Array<Place>;
   public accommodationTypes:Array<AccomodationType>;
-  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+ // @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+ public eAccommodation : Accommodation;
+ 
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
-              private router:Router) { }
+              public dialogRef: MdDialogRef<AccommodationEditComponent>,
+              private router:Router) {
+               }
 
   ngOnInit() {
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
@@ -63,7 +68,8 @@ export class AccommodationEditComponent implements OnInit {
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 
             console.log('Accommodation successfuly edited');
-            this.notifyParent.emit('Some value to send to the parent');
+            //this.notifyParent.emit('Some value to send to the parent');
+            this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );

@@ -13,16 +13,17 @@ import { Observable } from "rxjs/Observable";
 export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
-  private editFlag;
+  private editFlag:boolean;
   private adminRole:boolean;
   private role:string;
   country:any;
 
   constructor(private httpCountryService:HttpCountryService) {
   }
-
+    
+  
   ngOnInit() {
-    this.editFlag=false;
+    this.editFlag = false;
     this.adminRole=false;
     this.createPermisions();
     this.httpCountryService.getCountries().subscribe(

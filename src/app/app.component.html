@@ -1,7 +1,7 @@
-<md-toolbar layout="row" layout-align="center center"  color="warn">
-   <div class="title">
-  <h2 >Booking App</h2>
-   </div>
+<md-toolbar   color="warn">
+  
+  <span >Booking App</span>
+   
   <span class="example-spacer"></span>
     <div class="divlog" *ngIf="!isLoggedIn">
         <button class="example-icon" md-raised-button color="primary" (click)="openLoginDialog()"> Login</button>
@@ -16,7 +16,8 @@
         <button class="example-icon" md-raised-button color="primary" (click)="logout()"> Log Out</button>
     </div>
 </md-toolbar>
-<div >
+
+
     <nav md-tab-nav-bar >
         <a md-tab-link  [routerLink]="['/home']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Home</a>
         <div class="nav_bar" >

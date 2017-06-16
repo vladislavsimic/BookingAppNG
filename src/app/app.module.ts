@@ -45,15 +45,15 @@ import { RegisterComponent } from './register/register.component';
 import { RegionEditComponent } from './region/region-edit/region-edit.component'
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-
+import {AdminGuard} from './adminGuard';
 
 const Routes=[
-  {path: "country",component:CountryComponent},
-  {path: "country-add",component:CountryAddComponent},
-  {path: "country-edit",component:CountryEditComponent},
-  {path: "place",component:PlaceComponent},
-  {path: "place-add",component:PlaceAddComponent},
-  {path: "place-edit",component:PlaceEditComponent},
+  {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
+  {path: "country-add",component:CountryAddComponent, canActivate: [AdminGuard]},
+  {path: "country-edit",component:CountryEditComponent, canActivate: [AdminGuard]},
+  {path: "place",component:PlaceComponent, canActivate: [AdminGuard]},
+  {path: "place-add",component:PlaceAddComponent, canActivate: [AdminGuard]},
+  {path: "place-edit",component:PlaceEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accommodation-add",component:AccommodationAddComponent},
   {path: "accommodation-edit",component:AccommodationEditComponent},
@@ -61,10 +61,10 @@ const Routes=[
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
   {path: "comment",component:CommentComponent},
-  {path: "region",component:RegionComponent},
+  {path: "region",component:RegionComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent},
-  {path: "region-add",component:RegionAddComponent},
-  {path: "region-edit",component:RegionEditComponent},
+  {path: "region-add",component:RegionAddComponent, canActivate: [AdminGuard]},
+  {path: "region-edit",component:RegionEditComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent},
   {path: "room",component:RoomComponent},
   {path: "register",component:RegisterComponent},
@@ -124,7 +124,8 @@ const Routes=[
   ],
 
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpAuthenticationService],
+  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,
+  HttpAuthenticationService,AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

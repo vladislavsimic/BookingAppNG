@@ -14,6 +14,8 @@ export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
   private editFlag;
+  private adminRole:boolean;
+  private role:string;
   country:any;
 
   constructor(private httpCountryService:HttpCountryService) {
@@ -21,10 +23,19 @@ export class CountryComponent implements OnInit {
 
   ngOnInit() {
     this.editFlag=false;
+    this.adminRole=false;
+    this.createPermisions();
     this.httpCountryService.getCountries().subscribe(
       (res: any) => {this.countries = res; console.log(this.countries)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }
   }
 
   getNotification(evt) {

@@ -4,6 +4,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { MdDialog } from '@angular/material';
 import {LoginComponent} from "app/login/login.component"
 import {RegisterComponent} from "app/register/register.component"
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,31 @@ export class AppComponent {
 
   username: string;
   isLoggedIn:boolean;
-  
-  constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog){
+  private role:string;
+  private adminRole:boolean;
+  private managerRole:boolean;
+  private appUser:boolean;
+
+  constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router){
   }
 
   ngOnInit(){
+      this.adminRole=false;
+      this.appUser=false;
+      this.managerRole=false;
+      this.createPermision();
       this.checkForUser();
+  }
+
+  createPermision(){
+      this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }else if(this.role=="User"){
+          this.appUser=true;
+      }else if(this.role=="Manager"){
+          this.managerRole=true;
+      }
   }
 
   openLoginDialog() {
@@ -32,6 +52,8 @@ export class AppComponent {
                 return;
             }
               this.ngOnInit();
+              this.router.navigate(['/home']);
+
         },
             error => { alert("Close!"); console.log(error); }
         );
@@ -65,6 +87,7 @@ export class AppComponent {
           response=>{
               localStorage.clear();
               this.ngOnInit();
+              this.router.navigate(['/home']);
           },
           error=>{console.log(error); alert("Logout failed!");}
       );

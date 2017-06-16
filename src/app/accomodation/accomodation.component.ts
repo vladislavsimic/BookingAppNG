@@ -4,7 +4,7 @@ import {Region} from "../region/region.model"
 import { Http, Response } from '@angular/http';
 import {HttpAccommodationService} from "./accommodation.service"
 import { Observable } from "rxjs/Observable";
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
 
@@ -59,7 +59,10 @@ export class AccomodationComponent implements OnInit {
     });
   }
     editAccNewDialog(acc:Accommodation){
-    let dialogRef = this.dialog.open(AccommodationEditComponent,acc);
+      let config = new MdDialogConfig();
+      config.data = acc;
+    let dialogRef = this.dialog.open(AccommodationEditComponent,config);
+    dialogRef.componentInstance.eAccommodation = acc;
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
       this.ngOnInit();

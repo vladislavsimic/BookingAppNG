@@ -63,9 +63,9 @@
 </table>
 <a [routerLink]="['/accommodation-add']">Add Accomodation</a>
 <router-outlet></router-outlet>
-<div *ngIf="editFlag==true">
+<!--<div *ngIf="editFlag==true">
     <app-accommodation-edit [eAccommodation] = "accommodation" (notifyParent)="getNotification($event)"></app-accommodation-edit>
-</div>
+</div> -->
 
 <span class="done">
     <button md-fab (click) = "openAccNewDialog()" >

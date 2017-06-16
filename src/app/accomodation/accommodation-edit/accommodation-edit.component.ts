@@ -21,17 +21,20 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 })
 export class AccommodationEditComponent implements OnInit {
 
-  @Input() eAccommodation:Accommodation;
+ // @Input() eAccommodation:Accommodation;
   private accommodationForEdit:Accommodation;
   public places: Array<Place>;
   public accommodationTypes:Array<AccomodationType>;
-  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+ // @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+ public eAccommodation : Accommodation;
+ 
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               public dialogRef: MdDialogRef<AccommodationEditComponent>,
-              private router:Router) { }
+              private router:Router) {
+               }
 
   ngOnInit() {
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
@@ -65,7 +68,8 @@ export class AccommodationEditComponent implements OnInit {
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 
             console.log('Accommodation successfuly edited');
-            this.notifyParent.emit('Some value to send to the parent');
+            //this.notifyParent.emit('Some value to send to the parent');
+            this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );

@@ -11,6 +11,9 @@ import {HttpPlaceService} from "./place/place.service";
 import {HttpRegionService} from "./region/region.service";
 import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
 import {HttpAccommodationService} from "./accomodation/accommodation.service"
+import {HttpRegisterService} from "./register/register.service"
+import {HttpAuthenticationService} from "./login/userAuthentication.service"
+
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
 import { CountryAddComponent } from './country/country-add/country-add.component';
@@ -37,17 +40,20 @@ import { AccomodationtypeEditComponent } from './accomodationtype/accomodationty
 import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
 import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
 import { RegionAddComponent } from './region/region-add/region-add.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { RegionEditComponent } from './region/region-edit/region-edit.component'
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HomeComponent } from './home/home.component';
+import {AdminGuard} from './adminGuard';
 
 const Routes=[
-  {path: "country",component:CountryComponent},
-  {path: "country-add",component:CountryAddComponent},
-  {path: "country-edit",component:CountryEditComponent},
-  {path: "place",component:PlaceComponent},
-  {path: "place-add",component:PlaceAddComponent},
-  {path: "place-edit",component:PlaceEditComponent},
+  {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
+  {path: "country-add",component:CountryAddComponent, canActivate: [AdminGuard]},
+  {path: "country-edit",component:CountryEditComponent, canActivate: [AdminGuard]},
+  {path: "place",component:PlaceComponent, canActivate: [AdminGuard]},
+  {path: "place-add",component:PlaceAddComponent, canActivate: [AdminGuard]},
+  {path: "place-edit",component:PlaceEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation",component:AccomodationComponent},
   {path: "accommodation-add",component:AccommodationAddComponent},
   {path: "accommodation-edit",component:AccommodationEditComponent},
@@ -55,12 +61,14 @@ const Routes=[
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent},
   {path: "comment",component:CommentComponent},
-  {path: "region",component:RegionComponent},
+  {path: "region",component:RegionComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent},
-  {path: "region-add",component:RegionAddComponent},
-  {path: "region-edit",component:RegionEditComponent},
+  {path: "region-add",component:RegionAddComponent, canActivate: [AdminGuard]},
+  {path: "region-edit",component:RegionEditComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent},
   {path: "room",component:RoomComponent},
+  {path: "register",component:RegisterComponent},
+  {path: "login",component:LoginComponent},
   {path: "room-add",component:RoomAddComponent},
   {path: "room-edit",component:RoomEditComponent},
   {path: "room-reservation-add",component:RoomReservationAddComponent},
@@ -69,6 +77,7 @@ const Routes=[
   {path: "room-reservation-edit",component:RoomReservationEditComponent},
   {path: "comment-add",component:CommentAddComponent},
   {path: "comment-edit",component:CommentEditComponent},
+  {path: "home",component:HomeComponent}
 ]
 
 @NgModule({
@@ -98,7 +107,10 @@ const Routes=[
     AccommodationAddComponent,
     AccommodationEditComponent,
     RegionAddComponent,
-    RegionEditComponent
+    RegionEditComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,8 +122,10 @@ const Routes=[
     BrowserAnimationsModule,
    
   ],
+
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpRoomReservationService],
+  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,
+  HttpAuthenticationService,AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

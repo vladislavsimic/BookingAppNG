@@ -15,6 +15,8 @@ export class PlaceComponent implements OnInit {
 
   private places:Array<Place>;
   private editFlag;
+  private adminRole:boolean;
+  private role:string;
   place:any;
 
   constructor(private httpPlaceService:HttpPlaceService) {
@@ -22,10 +24,19 @@ export class PlaceComponent implements OnInit {
 
   ngOnInit() {
     this.editFlag=false;
+    this.adminRole=false;
+    this.createPermisions();
     this.httpPlaceService.getPlaces().subscribe(
       (res: any) => {this.places = res; console.log(this.places)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }
   }
 
   getNotification(evt) {

@@ -3,46 +3,47 @@
   <h2 >Booking App</h2>
    </div>
   <span class="example-spacer"></span>
-  <div class="divlog">
-  <button class="example-icon" md-raised-button color="primary" > Login</button>
-  </div>
-  <div class="divreg">
-  <button class="example-icon" md-raised-button color="primary"> Register</button>
- </div>
+    <div class="divlog" *ngIf="!isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" (click)="openLoginDialog()"> Login</button>
+    </div>
+    <div class="divreg" *ngIf="!isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" (click)="openRegistrationDialog()"> Register</button>
+    </div>
+    <div class="divuser" *ngIf="isLoggedIn">
+        <button md-button title="Edit profile">{{username}}</button>
+    </div>
+    <div class="divlout" *ngIf="isLoggedIn">
+        <button class="example-icon" md-raised-button color="primary" (click)="logout()"> Log Out</button>
+    </div>
 </md-toolbar>
-<!--
-<md-tab-group>
-  <md-tab label=Countries>Countries </md-tab>
-  <md-tab label=Places>Content 2</md-tab>
-  <md-tab label=Accomodations>Content 2</md-tab>
-  <md-tab label=AccomodationTypes>Content 2</md-tab>
-  <md-tab label=Comments>Content 2</md-tab>
-  <md-tab label=Regions>Content 2</md-tab>
-  <md-tab label=Roomreservations>Content 2</md-tab>
-  <md-tab label=Rooms>Content 2</md-tab>
-</md-tab-group>
--->
-<div>
-    <nav md-tab-nav-bar>
-        <a md-tab-link *ngFor="let route of routeForLink" [routerLink]="route.route" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
-         {{route.label}}
-        </a>
+<div >
+    <nav md-tab-nav-bar >
+        <a md-tab-link  [routerLink]="['/home']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Home</a>
+        <div class="nav_bar" >
+            <a md-tab-link *ngIf="adminRole==true"  [routerLink]="['/country']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Country</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/place']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Place</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/region']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Region</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link [routerLink]="['/accomodation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/accomodation-type']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation Type</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link [routerLink]="['/comment']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Comment</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link [routerLink]="['/room']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Room</a>
+        </div>
+        <div class="nav_bar">
+            <a md-tab-link [routerLink]="['/room-reservation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Room Reservation</a>
+        </div>
     </nav>
    <router-outlet></router-outlet>
 </div>
-
-
-
-<!--
-<br/>
-<a [routerLink]="['/country']">Countries</a>
-<a [routerLink]="['/place']">Places</a>
-<a [routerLink]="['/accomodation']">Accomodations</a>
-<a [routerLink]="['/accomodation-type']">AccomodationTypes</a>
-<a [routerLink]="['/comment']">Comments</a>
-<a [routerLink]="['/region']">Regions</a>
-<a [routerLink]="['/room-reservation']">Roomreservations</a>
-<a [routerLink]="['/room']">Rooms</a>
-<router-outlet></router-outlet>
--->
 

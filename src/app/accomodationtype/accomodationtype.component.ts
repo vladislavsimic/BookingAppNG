@@ -15,16 +15,27 @@ export class AccomodationtypeComponent implements OnInit {
 
   private accomodationTypes:Array<AccomodationType>;
   private editFlag;
+  private adminRole:boolean;
+  private role:string;
   accomodationType:any;
 
   constructor(private httpAccomodationTypeService:HttpAccomodationTypeService) { }
 
   ngOnInit() {
     this.editFlag=false;
+    this.adminRole=false;
+    this.createPermisions();
     this.httpAccomodationTypeService.getAccomodationTypes().subscribe(
       (res: any) => {this.accomodationTypes = res; console.log(this.accomodationTypes)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }
   }
 
   getNotification(evt) {

@@ -22,14 +22,36 @@ export class AccomodationComponent implements OnInit {
   private editFlag;
   accommodation:any;
   selectedOption: string;
+  private adminRole:boolean;
+  private managerRole:boolean;
+  private appUser:boolean;
+  private role:string;
+  
   constructor(private httpAccommodationService:HttpAccommodationService,public dialog:MdDialog) { }
+
 
   ngOnInit() {
     this.editFlag=false;
+    this.adminRole=false;
+    this.managerRole=false;
+    this.appUser=false;
+    this.createPermisions();
     this.httpAccommodationService.getAccommodations().subscribe(
       (res: any) => {this.accommodations = res; console.log(this.accommodations)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  createPermisions(){
+      this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }else if(this.role=="User"){
+          this.appUser=true;
+      }else if(this.role=="Manager"){
+          this.managerRole=true;
+      }
+
   }
 
   getNotification(evt) {

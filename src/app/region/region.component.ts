@@ -16,15 +16,26 @@ export class RegionComponent implements OnInit {
   private regions:Array<Region>;
   private editFlag;
   region:any;
+  private adminRole:boolean;
+  private role:string;
 
   constructor(private httpRegionService:HttpRegionService) { }
 
   ngOnInit() {
     this.editFlag=false;
+    this.adminRole=false;
+    this.createPermisions();
     this.httpRegionService.getRegions().subscribe(
       (res: any) => {this.regions = res; console.log(this.regions)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }
   }
 
   getNotification(evt) {

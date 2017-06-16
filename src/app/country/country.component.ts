@@ -13,16 +13,49 @@ import { Observable } from "rxjs/Observable";
 export class CountryComponent implements OnInit {
   
   private countries:Array<Country>;
-  private editFlag;
+  private editFlag:boolean;
+  private adminRole:boolean;
+  private role:string;
+  country:any;
+
   constructor(private httpCountryService:HttpCountryService) {
   }
     
   
   ngOnInit() {
-      this.httpCountryService.getCountries().subscribe(
+    this.editFlag = false;
+    this.adminRole=false;
+    this.createPermisions();
+    this.httpCountryService.getCountries().subscribe(
       (res: any) => {this.countries = res; console.log(this.countries)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
   }
 
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+      if(this.role=="Admin"){
+          this.adminRole=true;
+      }
+  }
+
+  getNotification(evt) {
+      this.ngOnInit();
+  }
+
+  editClick(country:Country){
+    this.editFlag=true;
+    this.country=country;
+  }
+
+  delete(country:Country){
+
+    this.httpCountryService.deleteCountry(country.Id).subscribe(
+      ()=>{
+      console.log('Country ' + country.Name + ' successfuly deleted');
+      this.ngOnInit();
+      },
+      error=>{alert("Country ' + country.Name + ' failed delete!"); console.log(error);}
+    );
+  }
 }

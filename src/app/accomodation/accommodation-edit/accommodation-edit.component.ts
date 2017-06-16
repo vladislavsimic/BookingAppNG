@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -29,6 +30,7 @@ export class AccommodationEditComponent implements OnInit {
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
+              public dialogRef: MdDialogRef<AccommodationEditComponent>,
               private router:Router) { }
 
   ngOnInit() {

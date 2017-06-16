@@ -1,22 +1,21 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-		#center {
-		  position: absolute;
-		  top: 40%;
-		  left: 50%;
-		  margin: -150px 0 0 -150px;
-		}
-		.mainTitle{
-		   text-align: center
-		}
+#center {
+	 position: absolute;
+	 top: 40%;
+	 left: 50%;
+  margin: -150px 0 0 -150px;
+}
+.mainTitle{
+   text-align: center
+}
 		footer {
-           background-color: #008080;
-        }
+   background-color: #008080;
+}
         
 .example-icon {
   flex: 0.05 1 auto;
   margin-right: 100px;
-  
 }
 .divlog{
     margin-right: 50px;
@@ -31,3 +30,26 @@
 .title{
     text-align: center;
 }
+
+.example-card {
+  
+  max-width: 60%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.example-header-image {
+  background-image: url("assets/vila1.jpg");
+  background-size: cover;
+}
+
+.done {
+  position: fixed;
+  top: 150px;
+  left: 20px;
+  color: white;
+}
+.addDialog{
+  max-width: 50%;
+}
+

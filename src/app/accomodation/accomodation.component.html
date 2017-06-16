@@ -1,3 +1,33 @@
+<div class="example-card"  *ngFor="let acc of accommodations"  >
+   
+<md-card class="example-card">
+  <md-card-header>
+    <div md-card-avatar class="example-header-image"></div>
+    <md-card-title>{{acc.Name}} </md-card-title>
+    <md-card-subtitle>{{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}
+    </md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="assets/vila1.jpg">
+  <md-card-content>
+    <p>
+    Opis: {{acc.Description}}
+    </p>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button color="primary" (click) = "editAccNewDialog(acc)">Edit</button>
+    <button md-raised-button color="warn" (click) = "delete(acc)">Delete</button>
+  </md-card-actions>
+</md-card>
+
+
+    
+</div>
+
+
+
+
+
+
 <table border="1">
     <thead>
         <th>Id</th>
@@ -36,3 +66,10 @@
 <div *ngIf="editFlag==true">
     <app-accommodation-edit [eAccommodation] = "accommodation" (notifyParent)="getNotification($event)"></app-accommodation-edit>
 </div>
+
+<span class="done">
+    <button md-fab (click) = "openAccNewDialog()" >
+    <md-icon>New</md-icon>
+    </button>
+       
+</span>

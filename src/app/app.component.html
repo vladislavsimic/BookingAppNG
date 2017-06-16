@@ -1,7 +1,7 @@
-<md-toolbar layout="row" layout-align="center center"  color="warn">
-   <div class="title">
-  <h2 >Booking App</h2>
-   </div>
+<md-toolbar   color="warn">
+  
+  <span >Booking App</span>
+   
   <span class="example-spacer"></span>
   <div class="divlog">
   <button class="example-icon" md-raised-button color="primary" > Login</button>
@@ -24,7 +24,7 @@
 -->
 <div>
     <nav md-tab-nav-bar>
-        <a md-tab-link *ngFor="let route of routeForLink" [routerLink]="route.route" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+        <a md-tab-link *ngFor="let route of routeForLink" [routerLink]="route.route" routerLinkActive #link="routerLinkActive" [active]="link.isActive">
          {{route.label}}
         </a>
     </nav>

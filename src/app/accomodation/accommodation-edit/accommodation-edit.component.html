@@ -1,59 +1,63 @@
-<div class="container">
-  <h1>Edit Accomodation</h1>
+<div class="addDialog">
+  <h1 md-dialog-title>Edit Accomodation</h1>
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && editAccommodation(f.value,f)"  novalidate>
       <div>
-          <label for="name">Name:</label>
-          <input type="text" name="Name" [(ngModel)]="eAccommodation.Name" #Name="ngModel" required />
-          <div *ngIf="f.submitted && !Name.valid">Name is required</div>
+          <input type="hidden" name="Id" [(ngModel)]="eAccommodation.Id" #name="ngModel"/>
       </div>
       <div>
-          <label for="name">Description:</label>
-          <input type="text" name="Description" [(ngModel)]="eAccommodation.Description" #Description="ngModel" required />
+          <md-input-container>
+          <input mdInput type="text" placeholder="Name" name="Name" [(ngModel)]="eAccommodation.Name" #Name="ngModel" required />
+          </md-input-container>
+          <div *ngIf="f.submitted && !Name.valid">Name is required</div> 
+      </div>
+      <div>
+          <md-input-container>
+          <input  mdInput placeholder="Description" type="text" name="Description" [(ngModel)]="eAccommodation.Description" #Description="ngModel" required />
+          </md-input-container>
           <div *ngIf="f.submitted && !Description.valid">Description is required</div>
       </div>
       <div>
-          <label for="name">Address:</label>
-          <input type="text" name="Address" [(ngModel)]="eAccommodation.Address" #Address="ngModel" required />
+         <md-input-container>
+          <input mdInput type="text" placeholder="Adress" name="Address" [(ngModel)]="eAccommodation.Address" #Address="ngModel" required />
+         </md-input-container>
           <div *ngIf="f.submitted && !Address.valid">Address is required</div>
       </div>
       <div>
-          <label for="name">Latitude:</label>
-          <input type="text" name="Latitude" [(ngModel)]="eAccommodation.Latitude" #Latitude="ngModel" required />
+         <md-input-container>
+          <input mdInput type="text" placeholder="Latitude" name="Latitude" [(ngModel)]="eAccommodation.Latitude" #Latitude="ngModel" required />
+         </md-input-container>
           <div *ngIf="f.submitted && !Latitude.valid">Latitude is required</div>
       </div>
       <div>
-          <label for="name">Longitude:</label>
-          <input type="text" name="Longitude" [(ngModel)]="eAccommodation.Longitude" #Longitude="ngModel" required />
+         <md-input-container>
+          <input mdInput type="text" placeholder="Longitude" name="Longitude" [(ngModel)]="eAccommodation.Longitude" #Longitude="ngModel" required />
+         </md-input-container>
           <div *ngIf="f.submitted && !Longitude.valid">Longitude is required</div>
       </div>
       <div>
-          <label for="name">ImageURL:</label>
-          <input type="text" name="ImageURL" [(ngModel)]="eAccommodation.ImageURL" #ImageURL="ngModel" required />
+         <md-input-container>
+          <input mdInput type="text" placeholder="ImageURL" name="ImageURL" [(ngModel)]="eAccommodation.ImageURL" #ImageURL="ngModel" required />
+         </md-input-container>
           <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
       </div>
       <div>
-        <label for="accommodationtype">AccommodationType:</label>
-        <select  [(ngModel)]="eAccommodation.AccommodationType_Id" name="AccommodationType_Id" #AccommodationTypeId="ngModel" required>
-            <option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
+        <md-select [(ngModel)]="eAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
+        placeholder="AccomodationType" required>
+            <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
                 {{accommodationType.Name}}
-            </option>
-        </select>
+            </md-option>
+        </md-select>
         <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
       </div>
       <div>
-        <label for="place">Place:</label>
-        <select  [(ngModel)]="eAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" required>
-            <option *ngFor="let place of places" [value]="place.Id">
+        <md-select  [(ngModel)]="eAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
+            <md-option *ngFor="let place of places" [value]="place.Id">
                 {{place.Name}}
-            </option>
-        </select>
+            </md-option>
+        </md-select>
         <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
       </div>
-      <div>
-        <label for="approved">Approved:</label>
-        <input type="checkbox" name="Approved" [(ngModel)]="eAccommodation.Approved"/>
-      </div>
-        <button type="submit">Edit</button>
+        <button md-raised-button color="primary" type="submit">Save</button>
   </form>
 </div>
 

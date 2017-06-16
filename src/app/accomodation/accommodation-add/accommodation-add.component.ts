@@ -11,6 +11,8 @@ import {FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdDialog, MdDialogRef} from '@angular/material';
+
 
 @Component({
   selector: 'app-accommodation-add',
@@ -19,16 +21,17 @@ import {Router, ActivatedRoute} from '@angular/router';
   providers: [HttpAccommodationService,HttpAccomodationTypeService]
 })
 export class AccommodationAddComponent implements OnInit {
-
+ 
   nAccommodation:any={};
   public accommodationTypes: Array<AccomodationType>;
   public places:Array<Place>;
   private postAccommodation:Accommodation;
-
+  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               private router: Router,
-              private httpPlaceService:HttpPlaceService) { }
+              private httpPlaceService:HttpPlaceService,
+              public dialogRef: MdDialogRef<AccommodationAddComponent>) { }
 
   ngOnInit() {
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
@@ -59,9 +62,11 @@ export class AccommodationAddComponent implements OnInit {
           ()=>{ 
             console.log('Accommodation successfuly posted');
             this.router.navigate(['/accomodation']);
+            this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );
+       
   }
 
 }

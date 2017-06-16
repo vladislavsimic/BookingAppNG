@@ -1,6 +1,5 @@
 <table border="1">
     <thead>
-        <th>Id</th>
         <th>Name</th>
         <th>Description</th>
         <th>Address</th>
@@ -10,12 +9,11 @@
         <th>ImageURL</th>
         <th>AccommodationType</th>
         <th>Place</th>
-        <th>Approved</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th *ngIf="adminRole==true">Approved</th>
+        <th *ngIf="adminRole==true || managerRole==true">Edit</th>
+        <th *ngIf="adminRole==true || managerRole==true">Delete</th>
     </thead>
     <tr *ngFor="let accommodation of accommodations">
-        <td>{{accommodation.Id}}</td>
         <td>{{accommodation.Name}}</td>
         <td>{{accommodation.Description}}</td>
         <td>{{accommodation.Address}}</td>
@@ -25,13 +23,13 @@
         <td>{{accommodation.ImageURL}}</td>
         <td>{{accommodation.AccommodationType.Name}}</td>
         <td>{{accommodation.Place.Name}}</td>
-        <td>{{accommodation.Approved}}</td>
-        <td><button (click)="editClick(accommodation)">Edit</button></td>
-        <td><button (click)="delete(accommodation)">Delete</button></td>
+        <td *ngIf="adminRole==true">{{accommodation.Approved}}</td>
+        <td *ngIf="adminRole==true || managerRole==true"><button (click)="editClick(accommodation)">Edit</button></td>
+        <td *ngIf="adminRole==true || managerRole==true"><button (click)="delete(accommodation)">Delete</button></td>
     </tr>
     
 </table>
-<a [routerLink]="['/accommodation-add']">Add Accomodation</a>
+<a *ngIf="managerRole==true" [routerLink]="['/accommodation-add']">Add Accomodation</a>
 <router-outlet></router-outlet>
 <div *ngIf="editFlag==true">
     <app-accommodation-edit [eAccommodation] = "accommodation" (notifyParent)="getNotification($event)"></app-accommodation-edit>

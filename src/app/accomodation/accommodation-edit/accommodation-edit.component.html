@@ -35,6 +35,9 @@
           <div *ngIf="f.submitted && !Longitude.valid">Longitude is required</div>
       </div>
       <div>
+            <button type="button" md-raised-button color="primary" (click)="openMapChangeLocation()">Change Location</button>
+      </div>
+      <div>
          <md-input-container>
           <input mdInput type="text" placeholder="ImageURL" name="ImageURL" [(ngModel)]="eAccommodation.ImageURL" #ImageURL="ngModel" required />
          </md-input-container>

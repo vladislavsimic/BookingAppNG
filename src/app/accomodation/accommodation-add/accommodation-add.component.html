@@ -32,6 +32,9 @@
           <div *ngIf="f.submitted && !Longitude.valid">Longitude is required</div>
       </div>
       <div>
+            <button type="button" md-raised-button color="primary" (click)="openMapAdd()">Set location</button>
+      </div>
+      <div>
          <md-input-container>
           <input mdInput type="text" placeholder="ImageURL" name="ImageURL" [(ngModel)]="nAccommodation.ImageURL" #ImageURL="ngModel" required />
          </md-input-container>
@@ -54,7 +57,7 @@
         </md-select>
         <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
       </div>
-        <button md-raised-button color="primary"  type="submit">Save</button>
+        <button md-raised-button color="primary" type="submit">Save</button>
   </form>
 </div>
 

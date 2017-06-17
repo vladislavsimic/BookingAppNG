@@ -50,6 +50,9 @@ import {ManagerGuard} from './managerGuard';
 import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
 import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
+import { MapComponent } from './map/map.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -81,7 +84,8 @@ const Routes=[
   {path: "room-reservation-edit",component:RoomReservationEditComponent},
   {path: "comment-add",component:CommentAddComponent},
   {path: "comment-edit",component:CommentEditComponent},
-  {path: "home",component:HomeComponent}
+  {path: "home",component:HomeComponent},
+  {path: "map",component:MapComponent}
 ]
 
 @NgModule({
@@ -117,6 +121,7 @@ const Routes=[
     HomeComponent,
     AccomodationDetailsComponent,
     AccomodationCommentComponent,
+    MapComponent,
     
   ],
   entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent],
@@ -128,6 +133,8 @@ const Routes=[
     NguiDatetimePickerModule,
     MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule,
     BrowserAnimationsModule,
+    //prilikom import-a mape prosleđujemo Google API key koji dobijamo preko google konzole
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyAtvp71DTpNaEw59EcmxvFMQOKRyRUiArg'})
    
   ],
    

@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
+import{MapModel} from "app/map/map.model";
+import {MapComponent} from "app/map/map.component"
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -27,13 +29,14 @@ export class AccommodationEditComponent implements OnInit {
   public accommodationTypes:Array<AccomodationType>;
  // @Output() notifyParent: EventEmitter<any> = new EventEmitter();
  public eAccommodation : Accommodation;
- 
+ mapInfo:MapModel;
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               public dialogRef: MdDialogRef<AccommodationEditComponent>,
-              private router:Router) {
+              private router:Router,
+              public dialog:MdDialog) {
                }
 
   ngOnInit() {
@@ -47,6 +50,30 @@ export class AccommodationEditComponent implements OnInit {
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+  }
+
+  openMapChangeLocation(){
+    let config = new MdDialogConfig();
+    config.height='700px';
+    config.width='700px';
+
+    this.mapInfo = new MapModel(this.eAccommodation.Latitude,this.eAccommodation.Longitude, 
+    "",
+    "" , "" , "");
+
+    let dialogRef = this.dialog.open(MapComponent);
+    dialogRef.componentInstance.mapInfo = this.mapInfo;
+    dialogRef.componentInstance.adding=true;
+    dialogRef.componentInstance.watching=false;
+
+    dialogRef.afterClosed().subscribe((res) => {
+            console.log("Successfuly checked coordinates.");
+            if (res == undefined) {
+                return;
+            }
+            this.eAccommodation.Latitude = res.latitude;
+            this.eAccommodation.Longitude = res.longitude;
+        });
   }
 
   editAccommodation(accommodation: Accommodation, form: NgForm){

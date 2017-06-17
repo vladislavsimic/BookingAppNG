@@ -23,6 +23,7 @@ export class AppComponent {
   private appUser:boolean;
 
   constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router){
+     
   }
 
   ngOnInit(){

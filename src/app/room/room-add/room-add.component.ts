@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {Accommodation} from "app/accomodation/accommodation.model";
+import {HttpAccommodationService} from "app/accomodation/accommodation.service";
 
 @Component({
   selector: 'app-room-add',
@@ -17,11 +19,18 @@ import {Router, ActivatedRoute} from '@angular/router';
 export class RoomAddComponent implements OnInit {
 
   nRoom:any={};
+  public accomodations:Array<Accommodation>;
 
-  constructor(private httpRoomService:HttpRoomService,private router: Router) {
+  constructor(private httpRoomService:HttpRoomService,private router: Router,
+  private httpAccService: HttpAccommodationService) {
   }
 
   ngOnInit() {
+     this.httpAccService.getAccommodations().subscribe((res: any) => {
+        this.accomodations = res; console.log(this.accomodations);
+      },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
   }
 
   saveRoom(room: Room, form: NgForm){

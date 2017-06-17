@@ -1,3 +1,4 @@
+import {Accommodation} from "app/accomodation/accommodation.model";
 export class Room{
 
     Id:number;
@@ -5,4 +6,6 @@ export class Room{
     BedCount:number;
     Description: string;
     PricePerNight:number;
+    Accommodation:Accommodation
+    Acc_Id:number;
 }

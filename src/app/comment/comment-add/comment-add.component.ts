@@ -17,7 +17,7 @@ import {HttpAccommodationService} from "app/accomodation/accommodation.service"
   providers: [HttpCommentService]
 })
 export class CommentAddComponent implements OnInit {
-
+  @Input() AccId:number;
   nComment:any={};
   public accomodations: Array<Accommodation>; 
   constructor(private httpCommentService:HttpCommentService,
@@ -33,8 +33,8 @@ export class CommentAddComponent implements OnInit {
       );
   }
 
-  saveComment(comment: Comment, form: NgForm){
-            
+  saveComment(comment: Comment, form: NgForm,accId:number){
+       comment.Acc_Id = accId;  
        this.httpCommentService.postComment(comment).subscribe(
           ()=>{ 
             console.log('Comment successfuly posted');

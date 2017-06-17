@@ -52,4 +52,21 @@
 .addDialog{
   max-width: 50%;
 }
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+.acc-dialog {
+  
+  max-width: 90%;
+  margin: 1em auto;
+  text-align: center;
+}
 

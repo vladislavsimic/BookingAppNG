@@ -55,6 +55,11 @@
                 {{place.Name}}
             </md-option>
         </md-select>
+      <div>
+        <section class="example-section">
+      <md-checkbox class="example-margin" [(ngModel)]="eAccommodation.Approved" name ="Approved">Approved</md-checkbox>
+    </section>
+      </div>
         <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
       </div>
         <button md-raised-button color="primary" type="submit">Save</button>

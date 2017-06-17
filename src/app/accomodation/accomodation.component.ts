@@ -7,7 +7,8 @@ import { Observable } from "rxjs/Observable";
 import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
-
+import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
+import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component"
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AccomodationComponent implements OnInit {
 
   private accommodations:Array<Accommodation>;
   private editFlag;
-  accommodation:any;
+  accommodation:Accommodation;
   selectedOption: string;
   private adminRole:boolean;
   private managerRole:boolean;
@@ -40,6 +41,7 @@ export class AccomodationComponent implements OnInit {
       (res: any) => {this.accommodations = res; console.log(this.accommodations)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+    
   }
 
   createPermisions(){
@@ -93,7 +95,38 @@ export class AccomodationComponent implements OnInit {
   }
 
 
- 
+  detailsDialog(acc:Accommodation){
+    let config = new MdDialogConfig();
+    config.data = acc;
+    config.height = '700px';
+    config.width = '850px';
+    let dialogRef = this.dialog.open(AccomodationDetailsComponent,config);
+    dialogRef.componentInstance.detAccomodation = acc;
+    
+    dialogRef.afterClosed().subscribe(result => {
+    this.selectedOption = result;
+    this.ngOnInit();
+  });
+ }
+
+ commentDialog(acc:Accommodation){
+    let config = new MdDialogConfig();
+    config.data = acc;
+    config.height = '700px';
+    config.width = '850px';
+    let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
+    dialogRef.componentInstance.commentAccomodation = acc;
+    
+    dialogRef.afterClosed().subscribe(result => {
+    this.selectedOption = result;
+    this.ngOnInit();
+  });
+ }
+
 }
+
+
+ 
+
 
 

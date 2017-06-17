@@ -32,7 +32,7 @@ import { RoomReservationEditComponent } from './roomreservation/room-reservation
 import {HttpRoomReservationService}  from './roomreservation/roomreservation.service';
 import { CommentAddComponent } from './comment/comment-add/comment-add.component';
 import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
-import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule} from '@angular/material/';
+import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule} from '@angular/material/';
 import { PlaceAddComponent } from './place/place-add/place-add.component';
 import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
@@ -47,6 +47,9 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 import { HomeComponent } from './home/home.component';
 import {AdminGuard} from './adminGuard';
 import {ManagerGuard} from './managerGuard';
+import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
+import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
+import {HttpCommentService} from "app/comment/comment.service";
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -112,20 +115,24 @@ const Routes=[
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AccomodationDetailsComponent,
+    AccomodationCommentComponent,
+    
   ],
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
     NguiDatetimePickerModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,
+    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule,
     BrowserAnimationsModule,
    
   ],
-
+   
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,
+  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
   HttpAuthenticationService,AdminGuard,ManagerGuard],
   bootstrap: [AppComponent]
 })

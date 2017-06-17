@@ -10,7 +10,7 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 import {Room} from "app/room/room.model";
-
+import{MdSnackBar} from '@angular/material'
 @Component({
   selector: 'app-room-reservation-add',
   templateUrl: './room-reservation-add.component.html',
@@ -19,9 +19,12 @@ import {Room} from "app/room/room.model";
 })
 export class RoomReservationAddComponent implements OnInit {
 
- nRoomReservation:any={};
+ public nRoomReservation: any={};
+@Input() roomId:number;
  public rooms : Array<Room>;
-  constructor(private httpRoomResService:HttpRoomReservationService,private httpRoomService : HttpRoomService,private router: Router) {
+  constructor(private httpRoomResService:HttpRoomReservationService,private httpRoomService : HttpRoomService,private router: Router,
+  public snackBar: MdSnackBar) {
+    
   }
 
   ngOnInit() {
@@ -32,14 +35,21 @@ export class RoomReservationAddComponent implements OnInit {
       );
   }
 
-  saveRoomReservation(roomRes: RoomReservation, form: NgForm){
-            
+ saveRoomReservation(roomRes: RoomReservation, form: NgForm,id:number){
+      roomRes.Room_Id = id;
        this.httpRoomResService.postRoomReservations(roomRes).subscribe(
           ()=>{ 
             console.log('RoomRes successfuly posted');
             this.router.navigate(['/room-reservation']);
+            this.openSnackBar("Succesfuly reserve","fdsf");
           },
           error => {alert("Close!"); console.log(error);}
         );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

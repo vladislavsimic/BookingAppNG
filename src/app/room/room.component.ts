@@ -3,6 +3,9 @@ import {Room} from "./room.model"
 import { Http, Response } from '@angular/http';
 import {HttpRoomService} from "./room.service"
 import { Observable } from "rxjs/Observable";
+import {Accommodation} from "app/accomodation/accommodation.model";
+import {HttpAccommodationService} from "app/accomodation/accommodation.service";
+
 
 @Component({
   selector: 'app-room',
@@ -15,6 +18,7 @@ export class RoomComponent implements OnInit {
   private rooms:Array<Room>;
   private editFlag;
   room:any;
+  private accomodations:Array<Accommodation>;
 
   constructor(private httpRoomService:HttpRoomService) {
   }
@@ -25,6 +29,7 @@ export class RoomComponent implements OnInit {
       (res: any) => {this.rooms = res; console.log(this.rooms)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+    
   }
 
   getNotification(evt) {

@@ -4,10 +4,13 @@
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{acc.Name}} </md-card-title>
-    <md-card-subtitle>{{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}
+    <md-card-subtitle>Location: {{acc.Address}} > {{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}
+    </md-card-subtitle>
+    <md-card-subtitle>
+     Avarge grade : {{acc.AverageGrade}}
     </md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="assets/vila1.jpg">
+  <img md-card-image src="assets/vila1.jpg" (click) = "detailsDialog(acc)"/>
   <md-card-content>
     <p>
     Opis: {{acc.Description}}
@@ -16,11 +19,10 @@
   <md-card-actions>
     <button md-raised-button color="primary" (click) = "editAccNewDialog(acc)">Edit</button>
     <button md-raised-button color="warn" (click) = "delete(acc)">Delete</button>
+    <button md-raised-button color="primary" (click) = "commentDialog(acc)">Comments</button>
   </md-card-actions>
 </md-card>
 
-
-    
 </div>
 
 

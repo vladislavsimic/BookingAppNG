@@ -14,4 +14,5 @@ export class Accommodation{
     AccommodationType_Id:number;
     Place_Id:number;
     Comments:Array<Comment>
+
 }

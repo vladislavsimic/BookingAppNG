@@ -28,9 +28,16 @@ export class AccomodationCommentComponent implements OnInit {
   public comments : Array<Comment>;
   constructor(private httpCommentService: HttpCommentService,
               public dialogRef: MdDialogRef<AccomodationCommentComponent>,
-              private router: Router) { }
+              private router: Router,private thhtAccService : HttpAccommodationService) {
+                this.commentAccomodation = dialogRef._containerInstance.dialogConfig.data;
+               }
 
   ngOnInit() {
+       this.thhtAccService.getAccommodation(this.commentAccomodation.Id).subscribe((res: any) => {
+        this.commentAccomodation = res; console.log(this.commentAccomodation);
+      },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
   }
 
   saveComment(comment: Comment, form: NgForm){
@@ -42,6 +49,9 @@ export class AccomodationCommentComponent implements OnInit {
           },
           error => {alert("Close!"); console.log(error);}
         );
+  }
+  getNotification(evt) {
+      this.ngOnInit();
   }
 
 }

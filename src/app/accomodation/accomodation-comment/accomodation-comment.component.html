@@ -23,7 +23,7 @@
     <md-card-title>Leave comment : </md-card-title>
     </md-card-header>
     <md-card-content>
-    <app-comment-add [AccId]="commentAccomodation.Id"> </app-comment-add>
+    <app-comment-add [AccId]="commentAccomodation.Id" (notifyParent)="getNotification($event)"> </app-comment-add>
     </md-card-content>
   </md-card>
   </div>

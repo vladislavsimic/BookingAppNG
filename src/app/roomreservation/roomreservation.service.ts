@@ -24,6 +24,10 @@ export class HttpRoomReservationService{
         return this.http.get(this.appUrl.RootLocation+'roomReservation/roomReservation/'+Id).map(this.extractData);
     }
 
+    getRoomReservationsForRoom (Id:number):Observable<any>{
+        return this.http.get(this.appUrl.RootLocation+'roomReservation/roomReservationForRoom/'+Id).map(this.extractData);
+    }
+
     postRoomReservations(roomreservation: RoomReservation): Observable<any>  {
         
         const headers: Headers = new Headers();

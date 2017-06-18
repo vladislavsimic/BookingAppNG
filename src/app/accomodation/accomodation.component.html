@@ -4,7 +4,7 @@
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{acc.Name}} </md-card-title>
-    <md-card-subtitle>Location: {{acc.Address}} > {{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}
+    <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">Location: {{acc.Address}} > {{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}</a> 
     </md-card-subtitle>
     <md-card-subtitle>
      Average grade : {{acc.AverageGrade}}

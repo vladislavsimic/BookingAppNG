@@ -8,8 +8,9 @@ import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
 import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
-import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component"
-
+import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
+import{MapModel} from "app/map/map.model";
+import {MapComponent} from "app/map/map.component"
 
 @Component({
   selector: 'app-accomodation',
@@ -27,21 +28,41 @@ export class AccomodationComponent implements OnInit {
   private managerRole:boolean;
   private appUser:boolean;
   private role:string;
-  
-  constructor(private httpAccommodationService:HttpAccommodationService,public dialog:MdDialog) { }
+  mapInfo:MapModel;
+
+  constructor(private httpAccommodationService:HttpAccommodationService,
+  public dialog:MdDialog) { }
 
 
   ngOnInit() {
+    
     this.editFlag=false;
     this.adminRole=false;
     this.managerRole=false;
     this.appUser=false;
     this.createPermisions();
+    
     this.httpAccommodationService.getAccommodations().subscribe(
       (res: any) => {this.accommodations = res; console.log(this.accommodations)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
     
+  }
+
+  locationClick(acc:Accommodation){
+    let config = new MdDialogConfig();
+    config.height='680px';
+    config.width='670px';
+
+    this.mapInfo = new MapModel(acc.Latitude, acc.Longitude, 
+    "",
+    "" , "" , "");
+
+    let dialogRef = this.dialog.open(MapComponent,config);
+    dialogRef.componentInstance.watching=true;
+    dialogRef.componentInstance.adding=false;
+    dialogRef.componentInstance.mapInfo = this.mapInfo;
+    dialogRef.componentInstance.accomodation=acc;
   }
 
   createPermisions(){
@@ -85,9 +106,9 @@ export class AccomodationComponent implements OnInit {
     editAccNewDialog(acc:Accommodation){
       let config = new MdDialogConfig();
       config.data = acc;
-    let dialogRef = this.dialog.open(AccommodationEditComponent,config);
-    dialogRef.componentInstance.eAccommodation = acc;
-    dialogRef.afterClosed().subscribe(result => {
+      let dialogRef = this.dialog.open(AccommodationEditComponent,config);
+      dialogRef.componentInstance.eAccommodation = acc;
+      dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
       this.ngOnInit();
     });

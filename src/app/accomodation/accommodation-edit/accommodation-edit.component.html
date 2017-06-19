@@ -60,7 +60,7 @@
         </md-select>
       <div>
         <section class="example-section">
-      <md-checkbox class="example-margin" [(ngModel)]="eAccommodation.Approved" name ="Approved">Approved</md-checkbox>
+      <md-checkbox class="example-margin" [(ngModel)]="eAccommodation.Approved" name ="Approved"  [disabled]="!adminRol">Approved</md-checkbox>
     </section>
       </div>
         <div *ngIf="f.submitted && !placeId.valid">Place is required</div>

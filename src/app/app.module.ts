@@ -55,6 +55,7 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { SearchComponent } from './search/search.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {FilterService} from "app/search/search.service";
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -143,7 +144,7 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

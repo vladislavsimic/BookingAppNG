@@ -24,30 +24,30 @@
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="Latitude" name="Latitude" [(ngModel)]="eAccommodation.Latitude" #Latitude="ngModel" required />
+          <input mdInput type="text" [readonly] = "true" placeholder="Latitude" name="Latitude" [(ngModel)]="eAccommodation.Latitude" #Latitude="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !Latitude.valid">Latitude is required</div>
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="Longitude" name="Longitude" [(ngModel)]="eAccommodation.Longitude" #Longitude="ngModel" required />
+          <input mdInput type="text" [readonly] = "true" placeholder="Longitude" name="Longitude" [(ngModel)]="eAccommodation.Longitude" #Longitude="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !Longitude.valid">Longitude is required</div>
       </div>
       <div>
-            <button type="button" md-raised-button color="primary" (click)="openMapChangeLocation()">Change Location</button>
+            <button type="button"  md-raised-button color="primary" (click)="openMapChangeLocation()">Change Location</button>
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="ImageURL" name="ImageURL" [(ngModel)]="eAccommodation.ImageURL" #ImageURL="ngModel" required />
+          <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="ImageURL" [(ngModel)]="eAccommodation.ImageURL" #ImageURL="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
       </div>
       <div>
-            <button type="button" md-raised-button color="primary" (click)="openChangeImageDialog()">Change Image</button>
+            <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChangeImageDialog()">Change Image</button>
       </div>
       <div>
-        <md-select [(ngModel)]="eAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
+        <md-select style="margin: 15px;" [(ngModel)]="eAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
         placeholder="AccomodationType" required>
             <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
                 {{accommodationType.Name}}
@@ -56,7 +56,7 @@
         <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
       </div>
       <div>
-        <md-select  [(ngModel)]="eAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
+        <md-select style="margin: 15px;"  [(ngModel)]="eAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
             <md-option *ngFor="let place of places" [value]="place.Id">
                 {{place.Name}}
             </md-option>

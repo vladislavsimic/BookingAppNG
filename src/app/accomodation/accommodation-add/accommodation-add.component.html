@@ -36,7 +36,7 @@
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="ImageURL" name="ImageURL" [(ngModel)]="nAccommodation.ImageURL" #ImageURL="ngModel" required />
+          <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="ImageURL" [(ngModel)]="nAccommodation.ImageURL" #ImageURL="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
       </div>

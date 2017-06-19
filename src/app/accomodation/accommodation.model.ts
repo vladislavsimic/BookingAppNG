@@ -15,5 +15,6 @@ export class Accommodation{
     Place:Place;
     Place_Id:number;
     Comments:Array<Comment>
+    AppUserName:string;
 
 }

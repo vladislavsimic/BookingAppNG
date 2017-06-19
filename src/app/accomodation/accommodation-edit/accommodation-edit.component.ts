@@ -14,6 +14,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
+import {AppComponent} from "app/app.component";
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 
 @Component({
@@ -31,13 +32,17 @@ export class AccommodationEditComponent implements OnInit {
  // @Output() notifyParent: EventEmitter<any> = new EventEmitter();
  public eAccommodation : Accommodation;
  mapInfo:MapModel;
-
+ public adminRol :boolean;
+ public managerRole :boolean;
+ 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               public dialogRef: MdDialogRef<AccommodationEditComponent>,
               private router:Router,
               public dialog:MdDialog) {
+                this.adminRol = AppComponent.adminR;
+                this.managerRole = AppComponent.managerR;
                }
 
   ngOnInit() {
@@ -51,6 +56,7 @@ export class AccommodationEditComponent implements OnInit {
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+      
   }
 
   openChangeImageDialog(){

@@ -56,6 +56,7 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { SearchComponent } from './search/search.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {FilterService} from "app/search/search.service";
 
 
 const Routes=[
@@ -149,7 +150,7 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 <div class="example-card"  *ngFor="let acc of accommodations | paginate: { itemsPerPage: 2, currentPage: p}"  >
-   
-<md-card class="example-card">
+<div *ngIf="acc.Approved == true || adminRole == true  || managerRole == true">
+<md-card class="example-card" >
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{acc.Name}} </md-card-title>
@@ -22,9 +22,9 @@
     <button md-raised-button color="primary" (click) = "commentDialog(acc)">Comments</button>
   </md-card-actions>
 </md-card>
-
 </div>
-<pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+</div>
+<pagination-controls class="pagination" (pageChange)="p = $event"  ></pagination-controls>
 
 
 

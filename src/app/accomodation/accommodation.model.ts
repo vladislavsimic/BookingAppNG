@@ -1,4 +1,4 @@
-
+import {Place} from "app/place/place.model";
 export class Accommodation{
 
     Id:number;
@@ -12,6 +12,8 @@ export class Accommodation{
     Approved:boolean;
     AppUser_Id:number;
     AccommodationType_Id:number;
+    Place:Place;
     Place_Id:number;
     Comments:Array<Comment>
+
 }

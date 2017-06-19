@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Output } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {Accommodation} from "../accommodation.model"
 import {AccomodationType} from 'app/accomodationtype/accomodationtype.model'
 import {Place} from 'app/place/place.model'
@@ -25,8 +25,10 @@ import {RoomReservation} from "app/roomreservation/roomreservation.model"
 export class AccomodationDetailsComponent implements OnInit {
 
  public detAccomodation : Accommodation;
+ public detAccomodationCopy : any;
  public rooms : Array<Room>;
  public nRoomReservation:RoomReservation;
+
  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
@@ -34,10 +36,17 @@ export class AccomodationDetailsComponent implements OnInit {
               private httpRoomReservationService:HttpRoomReservationService,
               public dialogRef: MdDialogRef<AccomodationDetailsComponent>) 
               {
+                this.detAccomodationCopy = dialogRef._containerInstance.dialogConfig.data;
+                
               }
-
+ 
   ngOnInit() {
     
+    this.httpAccommodationService.getAccommodation(this.dialogRef._containerInstance.dialogConfig.data.Id).subscribe(
+      (res: any) => {this.detAccomodationCopy = res; console.log(this.detAccomodationCopy)},
+      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
+   // this.detAccomodationCopy = this.detAccomodation;
   }
    saveRoomReservation(roomRes: RoomReservation, form: NgForm){
        
@@ -49,6 +58,9 @@ export class AccomodationDetailsComponent implements OnInit {
           },
           error => {alert("Close!"); console.log(error);}
         );
+  }
+  getNotification(evt) {
+      this.ngOnInit();
   }
 
 }

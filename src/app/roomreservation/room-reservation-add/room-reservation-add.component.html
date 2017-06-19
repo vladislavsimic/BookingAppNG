@@ -1,17 +1,18 @@
 <div class="container">
-  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoomReservation(f.value,f,roomId)"  novalidate>
-       <div>
-          <input type="hidden" name="Id" [(ngModel)]="roomId" #Id="ngModel"/>
+  <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoomReservation(f.value,f,roomForCheckReserv)"  novalidate>
+     
+      <div>
+          <input type="hidden" name="roomForCheckReserv" [(ngModel)]="roomForCheckReserv" #room="ngModel"/>
       </div>
       <div>
           <label for="startDate">Start date:</label>
-          <input ngui-datetime-picker date-only="true" #StartDate = "ngModel"
+          <input ngui-datetime-picker date-only="false" #StartDate = "ngModel"
            [(ngModel)]='nRoomReservation.StartDate' name="StartDate" required/>
            <div *ngIf="f.submitted && !StartDate.valid">StartDate is required</div>
       </div>
       <div>
           <label for="endDate">End date:</label>
-      <input ngui-datetime-picker  date-only="true" #EndDate = "ngModel" 
+      <input ngui-datetime-picker  date-only="false" #EndDate = "ngModel" 
       [(ngModel)]='nRoomReservation.EndDate' name="EndDate" required/>
       <div *ngIf="f.submitted && !EndDate.valid">EndDate is required</div>
       </div>

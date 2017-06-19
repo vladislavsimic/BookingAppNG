@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {Comment} from "../comment.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpCommentService} from "../comment.service"
@@ -18,12 +18,17 @@ import {HttpAccommodationService} from "app/accomodation/accommodation.service"
 })
 export class CommentAddComponent implements OnInit {
   @Input() AccId:number;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   nComment:any={};
   public accomodations: Array<Accommodation>; 
+  public numbers : Array<number>;
+   
   constructor(private httpCommentService:HttpCommentService,
   private httpAccService:HttpAccommodationService,
   private router: Router) {
+    this.numbers = [1,2,3,4,5];
   }
+  
   
   ngOnInit() {
     this.httpAccService.getAccommodations().subscribe((res: any) => {
@@ -39,6 +44,7 @@ export class CommentAddComponent implements OnInit {
           ()=>{ 
             console.log('Comment successfuly posted');
             this.router.navigate(['/comment']);
+            this.notifyParent.emit("Some message to parrent");
           },
           error => {alert("Close!"); console.log(error);}
         );

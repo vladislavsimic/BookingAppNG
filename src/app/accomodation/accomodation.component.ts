@@ -11,7 +11,7 @@ import { AccomodationDetailsComponent} from "app/accomodation/accomodation-detai
 import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
-
+import {SearchComponent} from "app/search/search.component";
 @Component({
   selector: 'app-accomodation',
   templateUrl: './accomodation.component.html',
@@ -23,20 +23,21 @@ export class AccomodationComponent implements OnInit {
   private accommodations:Array<Accommodation>;
   private editFlag;
   accommodation:Accommodation;
-  selectedOption: string;
+  filtredAcc: Array<Accommodation>;
   private adminRole:boolean;
   private managerRole:boolean;
   private appUser:boolean;
   private role:string;
   mapInfo:MapModel;
   public imageUrl:string;
+  p: number = 1;
+  public count : number;
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               public dialog:MdDialog) { }
 
-
   ngOnInit() {
-    
+     
     this.editFlag=false;
     this.adminRole=false;
     this.managerRole=false;
@@ -65,6 +66,7 @@ export class AccomodationComponent implements OnInit {
           }
         );
     });
+
   }
 
   locationClick(acc:Accommodation){
@@ -117,7 +119,7 @@ export class AccomodationComponent implements OnInit {
   openAccNewDialog(){
     let dialogRef = this.dialog.open(AccommodationAddComponent);
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+     // this.selectedOption = result;
       this.ngOnInit();
     });
   }
@@ -127,7 +129,7 @@ export class AccomodationComponent implements OnInit {
       let dialogRef = this.dialog.open(AccommodationEditComponent,config);
       dialogRef.componentInstance.eAccommodation = acc;
       dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      //this.selectedOption = result;
       this.ngOnInit();
     });
 
@@ -143,8 +145,11 @@ export class AccomodationComponent implements OnInit {
     dialogRef.componentInstance.detAccomodation = acc;
     
     dialogRef.afterClosed().subscribe(result => {
-    this.selectedOption = result;
-    this.ngOnInit();
+   // this.selectedOption = result;
+     if (result != null)
+     {
+     this.ngOnInit();
+     }
   });
  }
 
@@ -157,9 +162,30 @@ export class AccomodationComponent implements OnInit {
     dialogRef.componentInstance.commentAccomodation = acc;
     
     dialogRef.afterClosed().subscribe(result => {
-    this.selectedOption = result;
-    this.ngOnInit();
+    //this.selectedOption = result;
+     if (result != null)
+     {
+     this.ngOnInit();
+     }
   });
+ }
+
+ openSearchDialog(){
+   let config = new MdDialogConfig();
+ //   config.data = acc;
+    config.height = '500px';
+    config.width = '450px'; 
+    let dialogRef = this.dialog.open(SearchComponent,config);
+   // dialogRef.componentInstance.commentAccomodation = acc;
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null)
+      {
+        this.accommodations = result;
+      }
+  //  this.ngOnInit();
+  });
+
  }
 
 }

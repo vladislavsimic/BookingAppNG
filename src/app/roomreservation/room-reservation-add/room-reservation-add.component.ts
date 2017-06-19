@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {RoomReservation} from "../roomreservation.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpRoomReservationService} from "../roomreservation.service"
@@ -19,12 +19,13 @@ import{MdSnackBar} from '@angular/material'
 })
 export class RoomReservationAddComponent implements OnInit {
 
- public nRoomReservation: any={};
-@Input() roomId:number;
- public rooms : Array<Room>;
-  constructor(private httpRoomResService:HttpRoomReservationService,private httpRoomService : HttpRoomService,private router: Router,
-  public snackBar: MdSnackBar) {
-    
+public nRoomReservation: any={};
+@Input() roomForCheckReserv:Room;
+@Output() notifyParent: EventEmitter<any> = new EventEmitter();
+public rooms : Array<Room>;
+constructor(private httpRoomResService:HttpRoomReservationService,private httpRoomService : HttpRoomService,private router: Router,
+public snackBar: MdSnackBar) {
+    this.notifyParent=new EventEmitter();
   }
 
   ngOnInit() {
@@ -35,21 +36,75 @@ export class RoomReservationAddComponent implements OnInit {
       );
   }
 
- saveRoomReservation(roomRes: RoomReservation, form: NgForm,id:number){
-      roomRes.Room_Id = id;
+ saveRoomReservation(roomRes: RoomReservation, form: NgForm,room:Room){
+      roomRes.Room_Id = room.Id;
+      var date = new Date();
+      if (date > roomRes.StartDate)
+      {
+        this.openSnackBar("Start date cant be later then current date","");
+        return;
+      }
+      if (roomRes.EndDate < roomRes.StartDate)
+      {
+        this.openSnackBar("End date must be later or equal then start date","");
+        return;
+      }
+      var g = false;
+
+      g = this.checkRoomReservations(room,roomRes);
+
+      if (g)
+      {
        this.httpRoomResService.postRoomReservations(roomRes).subscribe(
           ()=>{ 
             console.log('RoomRes successfuly posted');
             this.router.navigate(['/room-reservation']);
-            this.openSnackBar("Succesfuly reserve","fdsf");
+            this.openSnackBar("Succesfuly reserve","");
+            
           },
           error => {alert("Close!"); console.log(error);}
         );
+        this.ngOnInit();
+        this.notifyParent.emit('Some value to send to the parent');
+      }
+      else 
+      {
+         this.openSnackBar("Another user is reserved this room in this period","");
+      }
+        
   }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 2500,
     });
+  }
+
+  checkRoomReservations(room:Room,roomRes:RoomReservation):boolean{
+    if (room.RoomReservations.length == 0)
+    {
+      return true;
+    }
+    var res = false;
+     room.RoomReservations.forEach(element => {
+          var sd = element.StartDate.toString();
+          var k = sd.split('T');
+          var sdCom = new Date(k[0]);
+          
+          var ed = element.EndDate.toString();
+          var k = ed.split('T');
+          var edCom = new Date(k[0]);
+                              /// provera da li se datumi rezervacije preklapaju
+        if ((roomRes.StartDate >= sdCom && roomRes.StartDate <= edCom) ||
+                 (roomRes.EndDate >=sdCom && roomRes.EndDate <=edCom))
+        {
+            return res = false;
+        }
+        else 
+        {
+            res = true;
+        }
+      });
+      return res;
   }
 }

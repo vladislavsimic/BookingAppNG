@@ -51,10 +51,12 @@ import { AccomodationDetailsComponent } from './accomodation/accomodation-detail
 import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
-
 import { AgmCoreModule } from '@agm/core';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { SearchComponent } from './search/search.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -126,9 +128,12 @@ const Routes=[
     MapComponent,
     FileSelectDirective,
     FileDropDirective,
-    ImageuploadComponent
+    ImageuploadComponent,
+    SearchComponent
   ],
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent],
+  
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -136,7 +141,7 @@ const Routes=[
     RouterModule.forRoot(Routes),
     NguiDatetimePickerModule,
     MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,NgxPaginationModule,
     //prilikom import-a mape prosleđujemo Google API key koji dobijamo preko google konzole
     AgmCoreModule.forRoot({apiKey: 'AIzaSyAtvp71DTpNaEw59EcmxvFMQOKRyRUiArg'})
    

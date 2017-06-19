@@ -14,7 +14,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
-
+import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 
 @Component({
   selector: 'app-accommodation-add',
@@ -48,6 +48,15 @@ export class AccommodationAddComponent implements OnInit {
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+  }
+
+  openChooseImagesDialog(){
+    let config = new MdDialogConfig();
+    config.height='700px';
+    config.width='700px';
+
+    let dialogRef = this.dialog.open(ImageuploadComponent,config);
+    dialogRef.componentInstance.accommodation=this.nAccommodation;
   }
 
   openMapAdd(){

@@ -24,6 +24,17 @@ export class HttpAccommodationService{
         return this.http.get(this.appUrl.RootLocation+'acc/acc/'+Id).map(this.extractData);
     }
 
+    getImageUrlForAccommodation(id:number):Observable<Response>{
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return this.http.get(this.appUrl.RootLocation+'acc/acc/image/'+id , opts);
+    }
+
     postAccommodation(accommodation: Accommodation): Observable<any>  {
         
         const headers: Headers = new Headers();

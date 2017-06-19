@@ -10,7 +10,7 @@
      Average grade : {{acc.AverageGrade}}
     </md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="assets/vila1.jpg" (click) = "detailsDialog(acc)"/>
+  <img md-card-image src={{acc.ImageURL}} (click) = "detailsDialog(acc)"/>
   <md-card-content>
     <p>
     Opis: {{acc.Description}}

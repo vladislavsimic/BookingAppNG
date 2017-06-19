@@ -29,17 +29,12 @@ export class AccomodationComponent implements OnInit {
   private appUser:boolean;
   private role:string;
   mapInfo:MapModel;
+  public imageUrl:string;
   p: number = 1;
   public count : number;
-  
-  
-  
 
   constructor(private httpAccommodationService:HttpAccommodationService,
-  public dialog:MdDialog) { 
-
-  }
-
+              public dialog:MdDialog) { }
 
   ngOnInit() {
      
@@ -50,11 +45,28 @@ export class AccomodationComponent implements OnInit {
     this.createPermisions();
     
     this.httpAccommodationService.getAccommodations().subscribe(
-      (res: any) => {this.accommodations = res; console.log(this.accommodations)},
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      (res: any) => {
+        this.accommodations = res; 
+        console.log(this.accommodations);
+        this.setImagesForAccommodations();},
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+  setImagesForAccommodations(){
     
-    
+    this.accommodations.forEach(element => {
+        this.httpAccommodationService.getImageUrlForAccommodation(element.Id).subscribe(
+          (result:any)=>{
+            result=result.json();
+            if(result!=undefined){
+              var str=result.replace(/\\/g,"/");
+              element.ImageURL=str;
+            }
+          }
+        );
+    });
+
   }
 
   locationClick(acc:Accommodation){

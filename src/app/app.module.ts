@@ -51,11 +51,13 @@ import { AccomodationDetailsComponent } from './accomodation/accomodation-detail
 import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
-
 import { AgmCoreModule } from '@agm/core';
+import { ImageuploadComponent } from './imageupload/imageupload.component';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { SearchComponent } from './search/search.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {FilterService} from "app/search/search.service";
+
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -125,10 +127,14 @@ const Routes=[
     AccomodationDetailsComponent,
     AccomodationCommentComponent,
     MapComponent,
-    SearchComponent,
-    
+    FileSelectDirective,
+    FileDropDirective,
+    ImageuploadComponent,
+    SearchComponent
   ],
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,SearchComponent],
+  
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent],
+
   imports: [
     BrowserModule,
     FormsModule,

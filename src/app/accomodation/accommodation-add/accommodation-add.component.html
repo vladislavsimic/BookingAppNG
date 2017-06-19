@@ -41,7 +41,10 @@
           <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
       </div>
       <div>
-        <md-select [(ngModel)]="nAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
+            <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChooseImagesDialog()">Choose Image</button>
+      </div>
+      <div>
+        <md-select style="margin: 15px;" [(ngModel)]="nAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
         placeholder="AccomodationType" required>
             <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
                 {{accommodationType.Name}}
@@ -50,7 +53,7 @@
         <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
       </div>
       <div>
-        <md-select  [(ngModel)]="nAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
+        <md-select style="margin: 15px;"  [(ngModel)]="nAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
             <md-option *ngFor="let place of places" [value]="place.Id">
                 {{place.Name}}
             </md-option>

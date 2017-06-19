@@ -1,10 +1,10 @@
-<div class="example-card"  *ngFor="let acc of accommodations"  >
+<div class="example-card"  *ngFor="let acc of accommodations | paginate: { itemsPerPage: 2, currentPage: p}"  >
    
 <md-card class="example-card">
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{acc.Name}} </md-card-title>
-    <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">Location: {{acc.Address}} > {{acc.Place.Name}} > {{acc.Place.Region.Name}} > {{acc.Place.Region.Country.Name}}</a> 
+    <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">Location: {{acc.Address}} </a> 
     </md-card-subtitle>
     <md-card-subtitle>
      Average grade : {{acc.AverageGrade}}
@@ -24,11 +24,12 @@
 </md-card>
 
 </div>
+<pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
 
 
 
 
-
+<!--
 
 <table border="1">
     <thead>
@@ -67,9 +68,19 @@
     <app-accommodation-edit [eAccommodation] = "accommodation" (notifyParent)="getNotification($event)"></app-accommodation-edit>
 </div> -->
 
+
 <span class="done">
     <button md-fab (click) = "openAccNewDialog()" >
     <md-icon>New</md-icon>
+    </button>
+       
+</span>
+
+<span class="search">
+    <button md-fab (click) = "openSearchDialog()" >
+    <md-icon>
+        <div md-card-avatar class="searchImage"></div>
+     </md-icon>
     </button>
        
 </span>

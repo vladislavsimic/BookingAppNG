@@ -69,4 +69,20 @@
   margin: 1em auto;
   text-align: center;
 }
+.search {
+  position: fixed;
+  top: 220px;
+  left: 20px;
+  color: white;
+}
 
+.searchImage {
+  background-image: url("assets/Search.png");
+  background-size: cover;
+  margin: -6px -5px;
+}
+
+.pagination{
+  margin: 2em auto;
+  text-align: center;
+}

@@ -53,6 +53,8 @@ import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { SearchComponent } from './search/search.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -122,9 +124,10 @@ const Routes=[
     AccomodationDetailsComponent,
     AccomodationCommentComponent,
     MapComponent,
+    SearchComponent,
     
   ],
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent],
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,SearchComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -132,7 +135,7 @@ const Routes=[
     RouterModule.forRoot(Routes),
     NguiDatetimePickerModule,
     MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,NgxPaginationModule,
     //prilikom import-a mape prosleđujemo Google API key koji dobijamo preko google konzole
     AgmCoreModule.forRoot({apiKey: 'AIzaSyAtvp71DTpNaEw59EcmxvFMQOKRyRUiArg'})
    

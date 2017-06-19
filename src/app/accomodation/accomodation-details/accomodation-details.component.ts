@@ -25,7 +25,7 @@ import {RoomReservation} from "app/roomreservation/roomreservation.model"
 export class AccomodationDetailsComponent implements OnInit {
 
  public detAccomodation : Accommodation;
-  public detAccomodationCopy : any;
+ public detAccomodationCopy : any;
  public rooms : Array<Room>;
  public nRoomReservation:RoomReservation;
 
@@ -37,6 +37,7 @@ export class AccomodationDetailsComponent implements OnInit {
               public dialogRef: MdDialogRef<AccomodationDetailsComponent>) 
               {
                 this.detAccomodationCopy = dialogRef._containerInstance.dialogConfig.data;
+                
               }
  
   ngOnInit() {

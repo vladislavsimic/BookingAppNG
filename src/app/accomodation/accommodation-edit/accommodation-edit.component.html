@@ -44,6 +44,9 @@
           <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
       </div>
       <div>
+            <button type="button" md-raised-button color="primary" (click)="openChangeImageDialog()">Change Image</button>
+      </div>
+      <div>
         <md-select [(ngModel)]="eAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
         placeholder="AccomodationType" required>
             <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">

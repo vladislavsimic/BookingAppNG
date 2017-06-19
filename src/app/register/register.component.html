@@ -25,6 +25,13 @@
           </md-input-container>
           <div *ngIf="f.submitted && !Email.valid">Email is required</div>
       </div>
+      <div>
+        <md-select style="margin: 15px;" ngModel name="Role" #role="ngModel" placeholder="Role" required>
+            <md-option value="AppUser">User</md-option>
+            <md-option value="Manager">Manager</md-option>
+        </md-select>
+        <div *ngIf="f.submitted && !role.valid">Role is required</div>
+      </div>
         <button md-raised-button color="primary" type="submit">Register</button>
   </form>
 </div>

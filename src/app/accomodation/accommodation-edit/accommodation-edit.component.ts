@@ -24,13 +24,11 @@ import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 })
 export class AccommodationEditComponent implements OnInit {
 
- // @Input() eAccommodation:Accommodation;
   private accommodationForEdit:Accommodation;
   public places: Array<Place>;
   public accommodationTypes:Array<AccomodationType>;
- // @Output() notifyParent: EventEmitter<any> = new EventEmitter();
- public eAccommodation : Accommodation;
- mapInfo:MapModel;
+  public eAccommodation : Accommodation;
+  mapInfo:MapModel;
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,

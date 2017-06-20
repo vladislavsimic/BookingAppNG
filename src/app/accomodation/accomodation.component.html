@@ -1,6 +1,6 @@
 <div class="example-card"  *ngFor="let acc of accommodations | paginate: { itemsPerPage: 2, currentPage: p}"  >
    
-<md-card class="example-card">
+<md-card *ngIf="userManager.Id==acc.AppUser_Id" class="example-card">
   <md-card-header>
     <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{acc.Name}} </md-card-title>

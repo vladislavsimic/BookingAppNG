@@ -137,6 +137,8 @@ export class AccomodationComponent implements OnInit {
   }
   openAccNewDialog(){
     let dialogRef = this.dialog.open(AccommodationAddComponent);
+    dialogRef.componentInstance.userManager=this.userManager;
+
     dialogRef.afterClosed().subscribe(result => {
      // this.selectedOption = result;
       this.ngOnInit();
@@ -145,6 +147,7 @@ export class AccomodationComponent implements OnInit {
     editAccNewDialog(acc:Accommodation){
       let config = new MdDialogConfig();
       config.data = acc;
+      
       let dialogRef = this.dialog.open(AccommodationEditComponent,config);
       dialogRef.componentInstance.eAccommodation = acc;
       dialogRef.afterClosed().subscribe(result => {

@@ -137,6 +137,10 @@ export class AppComponent {
         {
           route: ['/room-reservation'],
           label: "RoomReservation"
+        },
+        {
+          route: ['/managers'],
+          label: "Managers"
         }
     ]
 }

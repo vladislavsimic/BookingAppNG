@@ -21,15 +21,14 @@
           <input type="text" name="PricePerNight" [(ngModel)]="nRoom.PricePerNight" #PricePerNight="ngModel" required />
           <div *ngIf="f.submitted && !PricePerNight.valid">PricePerNight is required</div>
       </div>
-      <div>
+      <!--<div>
         <label for="acc">Accomodation:</label>
         <select  [(ngModel)]="nRoom.Acc_Id" name="Acc_Id" #Acc="ngModel" required>
             <option *ngFor="let acc of accomodations" [value]="acc.Id">
                 {{acc.Name}}
             </option>
         </select>
-        <div *ngIf="f.submitted && !acc.valid">Region is required</div>
-      </div>
+      </div>-->
         <button type="submit">Save</button>
   </form>
 </div>

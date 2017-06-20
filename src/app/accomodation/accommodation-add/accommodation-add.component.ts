@@ -15,6 +15,7 @@ import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
+import {Manager} from "app/managers/manager.model"
 
 @Component({
   selector: 'app-accommodation-add',
@@ -25,6 +26,7 @@ import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 export class AccommodationAddComponent implements OnInit {
  
   nAccommodation:any={};
+  userManager:Manager;
   public accommodationTypes: Array<AccomodationType>;
   public places:Array<Place>;
   private postAccommodation:Accommodation;
@@ -93,7 +95,7 @@ export class AccommodationAddComponent implements OnInit {
        this.postAccommodation.Latitude=accommodation.Latitude;
        this.postAccommodation.Longitude=accommodation.Longitude;
        this.postAccommodation.Place_Id=accommodation.Place_Id;
-       this.postAccommodation.AppUser_Id=1;   /*TODO User from local*/
+       this.postAccommodation.AppUser_Id=this.userManager.Id;
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

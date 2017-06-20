@@ -18,7 +18,7 @@ import {HttpAccommodationService} from "app/accomodation/accommodation.service";
 })
 export class RoomEditComponent implements OnInit {
 
-  @Input() eRoom:Room;
+  public eRoom:Room;
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   public accomodations:Accommodation;
 
@@ -36,10 +36,11 @@ export class RoomEditComponent implements OnInit {
 
   editRoom(room: Room, form: NgForm){
     
+      room.Acc_Id=this.eRoom.Acc_Id;
       this.httpRoomService.editRoom(room).subscribe(
           ()=>{ 
             console.log('Room successfuly edited');
-            this.notifyParent.emit('Some value to send to the parent');
+           // this.notifyParent.emit('Some value to send to the parent');
           },
           error => {alert("Close!"); console.log(error);}
         );

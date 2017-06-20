@@ -1,5 +1,6 @@
 import {RoomReservation} from "app/roomreservation/roomreservation.model";
 import {Accommodation} from "app/accomodation/accommodation.model";
+
 export class Room{
 
     Id:number;

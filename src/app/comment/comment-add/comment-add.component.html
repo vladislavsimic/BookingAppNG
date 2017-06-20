@@ -27,6 +27,6 @@
           <div *ngIf="f.submitted && !AccId.valid">Accomodation is required</div>
       </div>-->
       
-        <button  md-raised-button color="primary" type="submit">Post</button>
+        <button *ngIf="appUserRole==true" md-raised-button color="primary" type="submit">Post</button>
   </form>
 </div>

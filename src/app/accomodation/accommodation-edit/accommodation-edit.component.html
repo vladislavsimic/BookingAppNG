@@ -55,18 +55,20 @@
         </md-select>
         <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
       </div>
+
       <div>
         <md-select style="margin: 15px;"  [(ngModel)]="eAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
             <md-option *ngFor="let place of places" [value]="place.Id">
                 {{place.Name}}
             </md-option>
         </md-select>
-      <div>
-        <section class="example-section">
-      <md-checkbox class="example-margin" [(ngModel)]="eAccommodation.Approved" name ="Approved"  [disabled]="!adminRol">Approved</md-checkbox>
-    </section>
-      </div>
         <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
+      </div>
+
+      <div *ngIf="adminRole==true">
+        <section class="example-section">
+            <md-checkbox class="example-margin" [(ngModel)]="eAccommodation.Approved" name ="Approved">Approved</md-checkbox>
+        </section>
       </div>
         <button md-raised-button color="primary" type="submit">Save</button>
   </form>

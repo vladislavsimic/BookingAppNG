@@ -20,6 +20,10 @@ export class HttpAccommodationService{
         return body || [];
     }
 
+    getUserByUsername(username:string){
+        return this.http.get(this.appUrl.RootLocation+'appUser/appUsers/'+ username).map(this.extractData);
+    }
+
     getAccommodation(Id:number){
         return this.http.get(this.appUrl.RootLocation+'acc/acc/'+Id).map(this.extractData);
     }

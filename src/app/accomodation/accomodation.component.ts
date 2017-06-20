@@ -12,6 +12,9 @@ import {AccomodationCommentComponent} from "app/accomodation/accomodation-commen
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {SearchComponent} from "app/search/search.component";
+import {Manager} from "app/managers/manager.model"
+import {HttpUsersService} from "app/managers/users.service"
+
 @Component({
   selector: 'app-accomodation',
   templateUrl: './accomodation.component.html',
@@ -21,11 +24,13 @@ import {SearchComponent} from "app/search/search.component";
 export class AccomodationComponent implements OnInit {
 
   private accommodations:Array<Accommodation>;
-  private editFlag;
   accommodation:Accommodation;
+  private editFlag;
   filtredAcc: Array<Accommodation>;
   private adminRole:boolean;
   private managerRole:boolean;
+  private managerBanned:boolean;
+  private userManager:Manager;
   private appUser:boolean;
   private role:string;
   mapInfo:MapModel;
@@ -34,7 +39,8 @@ export class AccomodationComponent implements OnInit {
   public count : number;
 
   constructor(private httpAccommodationService:HttpAccommodationService,
-              public dialog:MdDialog) { }
+              public dialog:MdDialog,
+              private httpUsersService:HttpUsersService) { }
 
   ngOnInit() {
      
@@ -42,6 +48,7 @@ export class AccomodationComponent implements OnInit {
     this.adminRole=false;
     this.managerRole=false;
     this.appUser=false;
+    this.managerBanned=false;
     this.createPermisions();
     
     this.httpAccommodationService.getAccommodations().subscribe(
@@ -66,7 +73,6 @@ export class AccomodationComponent implements OnInit {
           }
         );
     });
-
   }
 
   locationClick(acc:Accommodation){
@@ -93,8 +99,21 @@ export class AccomodationComponent implements OnInit {
           this.appUser=true;
       }else if(this.role=="Manager"){
           this.managerRole=true;
+          this.setUserManager();
+          
       }
+  }
 
+  setUserManager(){
+    this.httpUsersService.getUser(localStorage.getItem('username')).subscribe(
+      (res: any) => {
+        this.userManager=res;
+        if(this.userManager.isBanned!=undefined){
+            this.managerBanned=this.userManager.isBanned;
+          }
+        console.log(this.userManager);},
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
   }
 
   getNotification(evt) {

@@ -56,7 +56,8 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { SearchComponent } from './search/search.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { ManagersComponent } from './managers/managers.component';
+import {HttpUsersService} from "app/managers/users.service";
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -89,7 +90,8 @@ const Routes=[
   {path: "comment-add",component:CommentAddComponent},
   {path: "comment-edit",component:CommentEditComponent},
   {path: "home",component:HomeComponent},
-  {path: "map",component:MapComponent}
+  {path: "map",component:MapComponent},
+  {path:"managers",component:ManagersComponent}
 ]
 
 @NgModule({
@@ -129,7 +131,8 @@ const Routes=[
     FileSelectDirective,
     FileDropDirective,
     ImageuploadComponent,
-    SearchComponent
+    SearchComponent,
+    ManagersComponent
   ],
   
   entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent],
@@ -149,7 +152,7 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

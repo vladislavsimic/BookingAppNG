@@ -45,7 +45,7 @@
             <a *ngIf="managerRole==true || appUser==true " md-tab-link [routerLink]="['/room-reservation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Room Reservation</a>
         </div>
         <div class="nav_bar">
-            <a md-tab-link [routerLink]="['/map']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Map</a>
+            <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/managers']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Managers</a>
         </div>
     </nav>
 

@@ -21,6 +21,8 @@ export class AppComponent {
   private adminRole:boolean;
   private managerRole:boolean;
   private appUser:boolean;
+  public static adminR:boolean;
+  public static managerR: boolean;
 
   constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router){
      
@@ -38,10 +40,12 @@ export class AppComponent {
       this.role=localStorage.getItem('role');
       if(this.role=="Admin"){
           this.adminRole=true;
+          AppComponent.adminR = true;
       }else if(this.role=="User"){
           this.appUser=true;
       }else if(this.role=="Manager"){
           this.managerRole=true;
+          AppComponent.managerR = true;
       }
   }
 
@@ -87,6 +91,8 @@ export class AppComponent {
       this.httpAuthService.logout().subscribe(
           response=>{
               localStorage.clear();
+              AppComponent.adminR = false;
+              AppComponent.managerR = false;
               this.ngOnInit();
               this.router.navigate(['/home']);
           },

@@ -58,6 +58,8 @@ import { SearchComponent } from './search/search.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ManagersComponent } from './managers/managers.component';
 import {HttpUsersService} from "app/managers/users.service";
+import {FilterService} from "app/search/search.service";
+
 
 const Routes=[
   {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
@@ -148,7 +150,8 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

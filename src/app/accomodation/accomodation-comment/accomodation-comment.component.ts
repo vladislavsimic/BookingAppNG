@@ -26,7 +26,6 @@ import {Comment} from "app/comment/comment.model";
 export class AccomodationCommentComponent implements OnInit {
   public commentAccomodation:Accommodation;
   public comments : Array<Comment>;
-  public appUserRole:boolean;
 
   constructor(private httpCommentService: HttpCommentService,
               public dialogRef: MdDialogRef<AccomodationCommentComponent>,

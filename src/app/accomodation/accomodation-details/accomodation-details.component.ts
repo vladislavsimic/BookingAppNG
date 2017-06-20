@@ -15,6 +15,8 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 import {Room} from "app/room/room.model";
 import {HttpRoomReservationService} from "app/roomreservation/roomreservation.service"
 import {RoomReservation} from "app/roomreservation/roomreservation.model"
+import {HttpRoomService} from "app/room/room.service"
+import {RoomEditComponent} from "app/room/room-edit/room-edit.component"
 
 @Component({
   selector: 'app-accomodation-details',
@@ -28,27 +30,40 @@ export class AccomodationDetailsComponent implements OnInit {
  public detAccomodationCopy : any;
  public rooms : Array<Room>;
  public nRoomReservation:RoomReservation;
-
+ public managerRole:boolean;
+ public role:string;
  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               private router: Router,
               private httpRoomReservationService:HttpRoomReservationService,
-              public dialogRef: MdDialogRef<AccomodationDetailsComponent>) 
+              public dialogRef: MdDialogRef<AccomodationDetailsComponent>,
+              private httpRoomService:HttpRoomService,
+              public dialog:MdDialog) 
               {
                 this.detAccomodationCopy = dialogRef._containerInstance.dialogConfig.data;
                 
               }
  
   ngOnInit() {
-    
+    this.managerRole=false;
+    this.createPermisions();
+
     this.httpAccommodationService.getAccommodation(this.dialogRef._containerInstance.dialogConfig.data.Id).subscribe(
       (res: any) => {this.detAccomodationCopy = res; console.log(this.detAccomodationCopy)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
    // this.detAccomodationCopy = this.detAccomodation;
   }
-   saveRoomReservation(roomRes: RoomReservation, form: NgForm){
+  
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+    if(this.role=="Manager"){
+      this.managerRole=true;
+    }
+  }
+  
+  saveRoomReservation(roomRes: RoomReservation, form: NgForm){
        
 
        this.httpRoomReservationService.postRoomReservations(roomRes).subscribe(
@@ -61,6 +76,25 @@ export class AccomodationDetailsComponent implements OnInit {
   }
   getNotification(evt) {
       this.ngOnInit();
+  }
+
+  deleteRoom(room:Room){
+    this.httpRoomService.deleteRoom(room.Id).subscribe(
+      ()=>{
+      console.log('Room ' + room.Id + ' successfuly deleted');
+      this.ngOnInit();
+      },
+      error=>{alert("Room ' + room.ID + ' failed delete!"); console.log(error);}
+    );
+  }
+
+  editRoom(room:Room){
+      let dialogRef = this.dialog.open(RoomEditComponent);
+      dialogRef.componentInstance.eRoom=room;
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.ngOnInit();
+    })
   }
 
 }

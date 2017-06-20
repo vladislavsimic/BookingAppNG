@@ -29,6 +29,8 @@ export class AccommodationEditComponent implements OnInit {
   public accommodationTypes:Array<AccomodationType>;
   public eAccommodation : Accommodation;
   mapInfo:MapModel;
+  private role:string;
+  private adminRole:boolean;
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
@@ -39,6 +41,10 @@ export class AccommodationEditComponent implements OnInit {
                }
 
   ngOnInit() {
+
+    this.adminRole=false;
+    this.createPermisions();
+
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
         this.accommodationTypes = res; console.log(this.accommodationTypes);
       },
@@ -49,6 +55,13 @@ export class AccommodationEditComponent implements OnInit {
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+  }
+
+  createPermisions(){
+    this.role=localStorage.getItem('role');
+    if(this.role=="Admin"){
+      this.adminRole=true;
+    }
   }
 
   openChangeImageDialog(){
@@ -92,13 +105,17 @@ export class AccommodationEditComponent implements OnInit {
       this.accommodationForEdit.Address=accommodation.Address;
       this.accommodationForEdit.AccommodationType_Id=accommodation.AccommodationType_Id;
       this.accommodationForEdit.AppUser_Id=this.eAccommodation.AppUser_Id;
-      this.accommodationForEdit.AverageGrade=accommodation.AverageGrade;
+      this.accommodationForEdit.AverageGrade=this.eAccommodation.AverageGrade;
       this.accommodationForEdit.Description=accommodation.Description;
       this.accommodationForEdit.ImageURL=accommodation.ImageURL;
       this.accommodationForEdit.Latitude=accommodation.Latitude;
       this.accommodationForEdit.Longitude=accommodation.Longitude;
       this.accommodationForEdit.Place_Id=accommodation.Place_Id;
-      this.accommodationForEdit.Approved=accommodation.Approved;
+      if(this.adminRole==true){
+        this.accommodationForEdit.Approved=accommodation.Approved;
+      }else{
+        this.accommodationForEdit.Approved=this.eAccommodation.Approved;
+      }
 
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 

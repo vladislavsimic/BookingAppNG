@@ -14,6 +14,8 @@ import {MapComponent} from "app/map/map.component"
 import {SearchComponent} from "app/search/search.component";
 import {Manager} from "app/managers/manager.model"
 import {HttpUsersService} from "app/managers/users.service"
+import {RoomAddComponent} from "app/room/room-add/room-add.component"
+
 
 @Component({
   selector: 'app-accomodation',
@@ -27,16 +29,17 @@ export class AccomodationComponent implements OnInit {
   accommodation:Accommodation;
   private editFlag;
   filtredAcc: Array<Accommodation>;
+  mapInfo:MapModel;
+  public imageUrl:string;
+  p: number = 1;
+  public count : number;
+  private userUndefined:boolean;
   private adminRole:boolean;
   private managerRole:boolean;
   private managerBanned:boolean;
   private userManager:Manager;
   private appUser:boolean;
   private role:string;
-  mapInfo:MapModel;
-  public imageUrl:string;
-  p: number = 1;
-  public count : number;
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               public dialog:MdDialog,
@@ -48,6 +51,7 @@ export class AccomodationComponent implements OnInit {
     this.adminRole=false;
     this.managerRole=false;
     this.appUser=false;
+    this.userUndefined=true;
     this.managerBanned=false;
     this.createPermisions();
     
@@ -95,10 +99,13 @@ export class AccomodationComponent implements OnInit {
       this.role=localStorage.getItem('role');
       if(this.role=="Admin"){
           this.adminRole=true;
+          this.userUndefined=false;
       }else if(this.role=="User"){
           this.appUser=true;
+          this.userUndefined=false;
       }else if(this.role=="Manager"){
           this.managerRole=true;
+          this.userUndefined=false;
           this.setUserManager();
           
       }
@@ -135,6 +142,7 @@ export class AccomodationComponent implements OnInit {
       error=>{alert("Accommodation ' + accommodation.Name + ' failed delete!"); console.log(error);}
     );
   }
+
   openAccNewDialog(){
     let dialogRef = this.dialog.open(AccommodationAddComponent);
     dialogRef.componentInstance.userManager=this.userManager;
@@ -144,10 +152,11 @@ export class AccomodationComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  
     editAccNewDialog(acc:Accommodation){
       let config = new MdDialogConfig();
       config.data = acc;
-      
+
       let dialogRef = this.dialog.open(AccommodationEditComponent,config);
       dialogRef.componentInstance.eAccommodation = acc;
       dialogRef.afterClosed().subscribe(result => {
@@ -155,6 +164,16 @@ export class AccomodationComponent implements OnInit {
       this.ngOnInit();
     });
 
+  }
+
+  addRoomDialog(accommodation:Accommodation){
+      
+      let dialogRef = this.dialog.open(RoomAddComponent);
+      dialogRef.componentInstance.accommodation=accommodation;
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.ngOnInit();
+    });
   }
 
 
@@ -182,7 +201,7 @@ export class AccomodationComponent implements OnInit {
     config.width = '850px';
     let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
     dialogRef.componentInstance.commentAccomodation = acc;
-    
+
     dialogRef.afterClosed().subscribe(result => {
     //this.selectedOption = result;
      if (result != null)

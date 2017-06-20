@@ -72,25 +72,21 @@ const Routes=[
   {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
-  {path: "comment",component:CommentComponent},
+  {path: "comment",component:CommentComponent,canActivate: [AdminGuard]},
   {path: "region",component:RegionComponent, canActivate: [AdminGuard]},
-  {path: "room-reservation",component:RoomReservationComponent},
+  {path: "room-reservation",component:RoomReservationComponent,canActivate: [AdminGuard]},
   {path: "region-add",component:RegionAddComponent, canActivate: [AdminGuard]},
   {path: "region-edit",component:RegionEditComponent, canActivate: [AdminGuard]},
-  {path: "room-reservation",component:RoomReservationComponent},
-  {path: "room",component:RoomComponent},
+  {path: "room",component:RoomComponent,canActivate: [AdminGuard]},
   {path: "register",component:RegisterComponent},
   {path: "login",component:LoginComponent},
-  {path: "room-add",component:RoomAddComponent},
-  {path: "room-edit",component:RoomEditComponent},
-  {path: "room-reservation-add",component:RoomReservationAddComponent},
-  {path: "room-reservation-edit",component:RoomReservationEditComponent},
-  {path: "room-reservation-add",component:RoomReservationAddComponent},
-  {path: "room-reservation-edit",component:RoomReservationEditComponent},
-  {path: "comment-add",component:CommentAddComponent},
-  {path: "comment-edit",component:CommentEditComponent},
+  {path: "room-add",component:RoomAddComponent,canActivate: [AdminGuard]},
+  {path: "room-edit",component:RoomEditComponent,canActivate: [AdminGuard]},
+  {path: "room-reservation-add",component:RoomReservationAddComponent,canActivate: [AdminGuard]},
+  {path: "room-reservation-edit",component:RoomReservationEditComponent,canActivate: [AdminGuard]},
+  {path: "comment-add",component:CommentAddComponent,canActivate: [AdminGuard]},
+  {path: "comment-edit",component:CommentEditComponent,canActivate: [AdminGuard]},
   {path: "home",component:HomeComponent},
-  {path: "map",component:MapComponent},
   {path:"managers",component:ManagersComponent}
 ]
 
@@ -135,7 +131,7 @@ const Routes=[
     ManagersComponent
   ],
   
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent],
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
 
   imports: [
     BrowserModule,

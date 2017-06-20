@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="userRole==true || managerRole==true" class="container">
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoomReservation(f.value,f,roomForCheckReserv)"  novalidate>
      
       <div>

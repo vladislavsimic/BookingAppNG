@@ -19,26 +19,23 @@ import {HttpAccommodationService} from "app/accomodation/accommodation.service";
 export class RoomAddComponent implements OnInit {
 
   nRoom:any={};
-  public accomodations:Array<Accommodation>;
+  public accommodation:Accommodation;
 
   constructor(private httpRoomService:HttpRoomService,private router: Router,
   private httpAccService: HttpAccommodationService) {
   }
 
   ngOnInit() {
-     this.httpAccService.getAccommodations().subscribe((res: any) => {
-        this.accomodations = res; console.log(this.accomodations);
-      },
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );
   }
 
   saveRoom(room: Room, form: NgForm){
-            
-       this.httpRoomService.postRoom(room).subscribe(
+      
+      room.Acc_Id=this.accommodation.Id;
+
+      this.httpRoomService.postRoom(room).subscribe(
           ()=>{ 
             console.log('Room successfuly posted');
-            this.router.navigate(['/room']);
+            this.ngOnInit();
           },
           error => {alert("Close!"); console.log(error);}
         );

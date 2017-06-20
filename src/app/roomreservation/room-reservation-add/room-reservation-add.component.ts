@@ -23,17 +23,38 @@ public nRoomReservation: any={};
 @Input() roomForCheckReserv:Room;
 @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 public rooms : Array<Room>;
-constructor(private httpRoomResService:HttpRoomReservationService,private httpRoomService : HttpRoomService,private router: Router,
-public snackBar: MdSnackBar) {
+public role:string;
+public managerRole:boolean;
+public userRole:boolean;
+
+
+constructor(private httpRoomResService:HttpRoomReservationService,
+            private httpRoomService : HttpRoomService,private router: Router,
+            public snackBar: MdSnackBar) {
     this.notifyParent=new EventEmitter();
   }
 
   ngOnInit() {
+
+    this.userRole=false;
+    this.managerRole=false;
+    this.createPermisions();
+
      this.httpRoomService.getRooms().subscribe((res: any) => {
         this.rooms = res; console.log(this.rooms);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+  }
+
+   createPermisions(){
+      this.role=localStorage.getItem('role');
+      if(this.role=="User"){
+          this.userRole=true;
+      }else if(this.role=="Manager"){
+          this.managerRole=true;
+          
+      }
   }
 
  saveRoomReservation(roomRes: RoomReservation, form: NgForm,room:Room){

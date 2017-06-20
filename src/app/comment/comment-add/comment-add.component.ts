@@ -17,25 +17,38 @@ import {HttpAccommodationService} from "app/accomodation/accommodation.service"
   providers: [HttpCommentService]
 })
 export class CommentAddComponent implements OnInit {
+  
   @Input() AccId:number;
+  public appUserRole:boolean;
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   nComment:any={};
   public accomodations: Array<Accommodation>; 
   public numbers : Array<number>;
-   
+  private role:string;
+
   constructor(private httpCommentService:HttpCommentService,
-  private httpAccService:HttpAccommodationService,
-  private router: Router) {
+              private httpAccService:HttpAccommodationService,
+              private router: Router) {
+    
     this.numbers = [1,2,3,4,5];
   }
   
   
   ngOnInit() {
+    this.appUserRole=false;
+    this.createPermisions();
     this.httpAccService.getAccommodations().subscribe((res: any) => {
         this.accomodations = res; console.log(this.accomodations);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
+  }
+
+  createPermisions(){
+      this.role=localStorage.getItem('role');
+      if(this.role=="User"){
+          this.appUserRole=true;
+      }
   }
 
   saveComment(comment: Comment, form: NgForm,accId:number){

@@ -66,4 +66,15 @@ export class HttpAccommodationService{
 
         return this.http.put(this.appUrl.RootLocation+'acc/acc/'+accommodation.Id, accommodation, opts);
     }
+
+     approveAccommodation(accomodation_id: number) {
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+        return this.http.put(this.appUrl.RootLocation + 'acc/approve/' + accomodation_id, opts);
+
+    }
 }

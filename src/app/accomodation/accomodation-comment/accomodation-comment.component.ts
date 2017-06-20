@@ -46,7 +46,7 @@ export class AccomodationCommentComponent implements OnInit {
        this.httpCommentService.postComment(comment).subscribe(
           ()=>{ 
             console.log('Comment successfuly posted');
-            this.router.navigate(['/comment']);
+          //  this.router.navigate(['/comment']);
           },
           error => {alert("Close!"); console.log(error);}
         );

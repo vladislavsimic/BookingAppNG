@@ -1,10 +1,12 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,Input,NgZone } from '@angular/core';
 import { HttpAuthenticationService } from 'app/login/userAuthentication.service';
 import { Http, Headers, Response } from '@angular/http';
-import { MdDialog } from '@angular/material';
+import { MdDialog,MdSnackBar } from '@angular/material';
 import {LoginComponent} from "app/login/login.component"
 import {RegisterComponent} from "app/register/register.component"
 import {Router, ActivatedRoute} from '@angular/router';
+import { NotificationService } from './appservice/notification.service';
+import {AppUrl} from "app/appservice/AppUrl.services"
 
 @Component({
   selector: 'app-root',
@@ -23,10 +25,13 @@ export class AppComponent {
   private appUser:boolean;
   public static adminR:boolean;
   public static managerR: boolean;
+  zone: NgZone;
 
-  constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router){
-     
-  }
+  constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router,
+             private notificationService: NotificationService,
+             public snackBar: MdSnackBar,
+              private appUrl:AppUrl){
+     }
 
   ngOnInit(){
       this.adminRole=false;
@@ -34,6 +39,12 @@ export class AppComponent {
       this.managerRole=false;
       this.createPermision();
       this.checkForUser();
+       if (this.role == "Admin") {
+            this.notificationService.adminNotReceived.subscribe(e => this.notify(e));
+        } else if (this.role == "Manager") {
+            this.notificationService.managerNotRecieved.subscribe(e => this.notify(e));
+        }
+        this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
   createPermision(){
@@ -56,8 +67,9 @@ export class AppComponent {
             if (result == undefined){
                 return;
             }
-              this.ngOnInit();
-              this.router.navigate(['/home']);
+            location.reload();
+              //this.ngOnInit();
+              //this.router.navigate(['/home']);
 
         },
             error => { alert("Close!"); console.log(error); }
@@ -98,6 +110,26 @@ export class AppComponent {
           },
           error=>{console.log(error); alert("Logout failed!");}
       );
+  }
+  notify(data: any) {
+        this.zone.run(() => {
+            if (this.role == "Admin")
+             {
+               //this.openSnackBar("You have "+ data +" accommodation(s) for approve","");
+               this.snackBar.open("You have "+ data +" accommodation(s) for approve", "", { duration: 2500,});
+            } else if(this.role == "Manager")
+            {
+                 //this.openSnackBar("Your accommodation "+ data + " is approved ","");
+                 this.snackBar.open("Your accommodation "+ data + " is approved ", "", { duration: 5000,});
+            }
+        });
+
+    }
+
+    openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2500,
+    });
   }
 
   routeForLink = [
@@ -143,4 +175,5 @@ export class AppComponent {
           label: "Managers"
         }
     ]
+     
 }

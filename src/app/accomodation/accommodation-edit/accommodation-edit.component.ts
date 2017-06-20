@@ -123,11 +123,24 @@ export class AccommodationEditComponent implements OnInit {
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 
             console.log('Accommodation successfuly edited');
+
             //this.notifyParent.emit('Some value to send to the parent');
             this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );
+        if(this.adminRole==true){
+          if (accommodation.Approved == true)
+          {
+            this.httpAccommodationService.approveAccommodation(accommodation.Id).subscribe(
+              ()=>{
+                 console.log('Approve changed.');
+              },
+              error => {alert("Close!"); console.log(error);}
+
+            );
+          }
+        }
        
   }
 

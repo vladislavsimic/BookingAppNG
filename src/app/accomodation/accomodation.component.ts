@@ -204,10 +204,9 @@ export class AccomodationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     //this.selectedOption = result;
-     if (result != null)
-     {
+    
      this.ngOnInit();
-     }
+     
   });
  }
 

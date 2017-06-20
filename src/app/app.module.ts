@@ -13,7 +13,6 @@ import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.s
 import {HttpAccommodationService} from "./accomodation/accommodation.service"
 import {HttpRegisterService} from "./register/register.service"
 import {HttpAuthenticationService} from "./login/userAuthentication.service"
-
 import { AppComponent } from './app.component';
 import { CountryComponent } from './country/country.component';
 import { CountryAddComponent } from './country/country-add/country-add.component';
@@ -59,6 +58,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ManagersComponent } from './managers/managers.component';
 import {HttpUsersService} from "app/managers/users.service";
 import {FilterService} from "app/search/search.service";
+import {NotificationService} from "app/appservice/notification.service"
 
 
 const Routes=[
@@ -150,7 +150,7 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService,NotificationService],
 
   bootstrap: [AppComponent]
 })

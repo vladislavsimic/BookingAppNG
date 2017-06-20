@@ -1,7 +1,7 @@
 <md-toolbar   color="warn">
   
   <span >Booking App</span>
-   
+
   <span class="example-spacer"></span>
     <div class="divlog" *ngIf="!isLoggedIn">
         <button class="example-icon" md-raised-button color="primary" (click)="openLoginDialog()"> Login</button>
@@ -48,5 +48,5 @@
             <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/managers']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Managers</a>
         </div>
     </nav>
-
+ 
  <router-outlet></router-outlet>

@@ -5,7 +5,7 @@ import {HttpRoomService} from "./room.service"
 import { Observable } from "rxjs/Observable";
 import {Accommodation} from "app/accomodation/accommodation.model";
 import {HttpAccommodationService} from "app/accomodation/accommodation.service";
-
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-room',
@@ -20,7 +20,8 @@ export class RoomComponent implements OnInit {
   room:any;
   private accomodations:Array<Accommodation>;
 
-  constructor(private httpRoomService:HttpRoomService) {
+  constructor(private httpRoomService:HttpRoomService,
+              private snackBar:MdSnackBar) {
   }
 
   ngOnInit() {
@@ -46,6 +47,7 @@ export class RoomComponent implements OnInit {
     this.httpRoomService.deleteRoom(room.Id).subscribe(
       ()=>{
       console.log('Room ' + room.Id + ' successfuly deleted');
+      this.snackBar.open("Room " + room.RoomNumber + " successfuly deleted", "", { duration: 2500,});
       this.ngOnInit();
       },
       error=>{alert("Room ' + room.ID + ' failed delete!"); console.log(error);}

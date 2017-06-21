@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-region-edit',
@@ -25,7 +26,8 @@ export class RegionEditComponent implements OnInit {
 
   constructor(private httpCountryService:HttpCountryService,
               private httpRegionService:HttpRegionService,
-              private router:Router) {
+              private router:Router,
+              private snackBar:MdSnackBar) {
                 this.notifyParent=new EventEmitter();
                }
 
@@ -47,6 +49,7 @@ export class RegionEditComponent implements OnInit {
       this.httpRegionService.editRegion(this.regionForEdit).subscribe(
           ()=>{ 
             console.log('Region successfuly edited');
+            this.snackBar.open("Region successfuly edited", "", { duration: 2500,});
             this.notifyParent.emit('Some value to send to the parent');
           },
           error => {alert("Close!"); console.log(error);}

@@ -9,6 +9,7 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import {Accommodation} from "app/accomodation/accommodation.model";
 import {HttpAccommodationService} from "app/accomodation/accommodation.service";
+import {MdSnackBar,MdDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-room-edit',
@@ -22,7 +23,12 @@ export class RoomEditComponent implements OnInit {
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   public accomodations:Accommodation;
 
-  constructor(private httpRoomService:HttpRoomService,private router: Router,private httpAccService: HttpAccommodationService) {
+  constructor(private httpRoomService:HttpRoomService,
+              private router: Router,
+              private httpAccService: HttpAccommodationService,
+              private snackBar:MdSnackBar,
+              public dialogRef: MdDialogRef<RoomEditComponent>
+              ) {
     this.notifyParent=new EventEmitter();
    }
 
@@ -35,12 +41,14 @@ export class RoomEditComponent implements OnInit {
   }
 
   editRoom(room: Room, form: NgForm){
-    
+      room.Id=this.eRoom.Id;
+      room.RoomReservations=this.eRoom.RoomReservations;
       room.Acc_Id=this.eRoom.Acc_Id;
       this.httpRoomService.editRoom(room).subscribe(
           ()=>{ 
             console.log('Room successfuly edited');
-           // this.notifyParent.emit('Some value to send to the parent');
+            this.snackBar.open("Room successfuly edited", "", { duration: 2500,});
+            this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );

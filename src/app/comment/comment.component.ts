@@ -3,6 +3,7 @@ import {Comment} from "./comment.model"
 import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import {HttpCommentService} from "./comment.service";
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-comment',
@@ -17,7 +18,8 @@ export class CommentComponent implements OnInit {
   private editFlag;
   comment:any;
 
-constructor(private httpCommentService:HttpCommentService) { }
+constructor(private httpCommentService:HttpCommentService,
+            private snackBar:MdSnackBar) { }
 
   ngOnInit() {
     this.editFlag=false;
@@ -40,8 +42,9 @@ constructor(private httpCommentService:HttpCommentService) { }
 
     this.httpCommentService.deleteComment(comment.Id).subscribe(
       ()=>{
-      console.log('Comment ' + comment.Id + ' successfuly deleted');
-      this.ngOnInit();
+        console.log('Comment ' + comment.Id + ' successfuly deleted');
+        this.snackBar.open("Comment " + comment.Id + " successfuly deleted", "", { duration: 2500,});
+        this.ngOnInit();
       },
       error=>{alert("Comment ' + comment.ID + ' failed delete!"); console.log(error);}
     );

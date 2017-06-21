@@ -1,3 +1,5 @@
+<pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+
 <div *ngIf="userUndefined==true || appUser==true">
     <div class="example-card"  *ngFor="let acc of accommodations | paginate: { itemsPerPage: 2, currentPage: p}"  >
       <div *ngIf="acc.Approved==true">

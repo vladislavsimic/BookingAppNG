@@ -3,6 +3,7 @@ import {Country} from "./country.model"
 import { Http, Response } from '@angular/http';
 import {HttpCountryService} from "./country.service"
 import { Observable } from "rxjs/Observable";
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-country',
@@ -18,10 +19,10 @@ export class CountryComponent implements OnInit {
   private role:string;
   country:any;
 
-  constructor(private httpCountryService:HttpCountryService) {
+  constructor(private httpCountryService:HttpCountryService,
+              private snackBar:MdSnackBar) {
   }
     
-  
   ngOnInit() {
     this.editFlag = false;
     this.adminRole=false;
@@ -53,6 +54,7 @@ export class CountryComponent implements OnInit {
     this.httpCountryService.deleteCountry(country.Id).subscribe(
       ()=>{
       console.log('Country ' + country.Name + ' successfuly deleted');
+      this.snackBar.open("Country " + country.Name + " successfuly deleted", "", { duration: 2500,});
       this.ngOnInit();
       },
       error=>{alert("Country ' + country.Name + ' failed delete!"); console.log(error);}

@@ -4,7 +4,7 @@ import {Region} from "../region/region.model"
 import { Http, Response } from '@angular/http';
 import {HttpAccommodationService} from "./accommodation.service"
 import { Observable } from "rxjs/Observable";
-import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogRef,MdDialogConfig,MdSnackBar} from '@angular/material';
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
 import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
@@ -43,7 +43,8 @@ export class AccomodationComponent implements OnInit {
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               public dialog:MdDialog,
-              private httpUsersService:HttpUsersService) { }
+              private httpUsersService:HttpUsersService,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
      
@@ -55,13 +56,23 @@ export class AccomodationComponent implements OnInit {
     this.managerBanned=false;
     this.createPermisions();
     
-    this.httpAccommodationService.getAccommodations().subscribe(
-      (res: any) => {
-        this.accommodations = res; 
-        console.log(this.accommodations);
-        this.setImagesForAccommodations();},
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+    if(this.managerRole){
+        this.httpAccommodationService.getManagerAccommodations(localStorage.getItem('username')).subscribe(
+          (res: any) => {
+            this.accommodations = res; 
+            console.log(this.accommodations);
+            this.setImagesForAccommodations();},
+            error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+        );
+    }else{
+        this.httpAccommodationService.getAccommodations().subscribe(
+          (res: any) => {
+            this.accommodations = res; 
+            console.log(this.accommodations);
+            this.setImagesForAccommodations();},
+            error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+        );
+    }
   }
 
   setImagesForAccommodations(){
@@ -136,8 +147,9 @@ export class AccomodationComponent implements OnInit {
 
     this.httpAccommodationService.deleteAccommodation(accommodation.Id).subscribe(
       ()=>{
-      console.log('Accommodation ' + accommodation.Name + ' successfuly deleted');
-      this.ngOnInit();
+        console.log('Accommodation ' + accommodation.Name + ' successfuly deleted');
+        this.snackBar.open("Accommodation " + accommodation.Name + " successfuly deleted", "", { duration: 2500,});
+        this.ngOnInit();
       },
       error=>{alert("Accommodation ' + accommodation.Name + ' failed delete!"); console.log(error);}
     );
@@ -148,7 +160,6 @@ export class AccomodationComponent implements OnInit {
     dialogRef.componentInstance.userManager=this.userManager;
 
     dialogRef.afterClosed().subscribe(result => {
-     // this.selectedOption = result;
       this.ngOnInit();
     });
   }
@@ -160,7 +171,6 @@ export class AccomodationComponent implements OnInit {
       let dialogRef = this.dialog.open(AccommodationEditComponent,config);
       dialogRef.componentInstance.eAccommodation = acc;
       dialogRef.afterClosed().subscribe(result => {
-      //this.selectedOption = result;
       this.ngOnInit();
     });
 
@@ -186,7 +196,7 @@ export class AccomodationComponent implements OnInit {
     dialogRef.componentInstance.detAccomodation = acc;
     
     dialogRef.afterClosed().subscribe(result => {
-   // this.selectedOption = result;
+     
      if (result != null)
      {
      this.ngOnInit();
@@ -199,35 +209,31 @@ export class AccomodationComponent implements OnInit {
     config.data = acc;
     config.height = '700px';
     config.width = '850px';
+    
     let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
     dialogRef.componentInstance.commentAccomodation = acc;
-
+    dialogRef.componentInstance.managerRole=this.managerRole;
     dialogRef.afterClosed().subscribe(result => {
-    //this.selectedOption = result;
     
-     this.ngOnInit();
+    this.ngOnInit();
      
   });
  }
 
  openSearchDialog(){
    let config = new MdDialogConfig();
- //   config.data = acc;
     config.height = '500px';
     config.width = '450px'; 
     let dialogRef = this.dialog.open(SearchComponent,config);
-   // dialogRef.componentInstance.commentAccomodation = acc;
     
     dialogRef.afterClosed().subscribe(result => {
       if (result != null)
       {
         this.accommodations = result;
       }
-  //  this.ngOnInit();
   });
 
  }
-
 }
 
 

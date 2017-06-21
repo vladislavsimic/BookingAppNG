@@ -11,7 +11,7 @@ import {FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
-import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogRef,MdDialogConfig,MdSnackBar} from '@angular/material';
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
@@ -37,7 +37,8 @@ export class AccommodationAddComponent implements OnInit {
               private router: Router,
               private httpPlaceService:HttpPlaceService,
               public dialogRef: MdDialogRef<AccommodationAddComponent>,
-              public dialog:MdDialog) { }
+              public dialog:MdDialog,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
@@ -76,7 +77,8 @@ export class AccommodationAddComponent implements OnInit {
     dialogRef.componentInstance.watching=false;
 
     dialogRef.afterClosed().subscribe((res) => {
-            console.log("Successfuly checked coordinates.");
+            console.log("Successfuly checked coordinates.")
+            this.snackBar.open("Successfuly checked coordinates.", "", { duration: 2500,});
             if (res == undefined) {
                 return;
             }
@@ -100,6 +102,7 @@ export class AccommodationAddComponent implements OnInit {
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 
             console.log('Accommodation successfuly posted');
+            this.snackBar.open("Accommodation successfuly posted.", "", { duration: 2500,});
             this.router.navigate(['/accomodation']);
             this.dialogRef.close();
           },

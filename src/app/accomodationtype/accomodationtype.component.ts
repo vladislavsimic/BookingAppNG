@@ -4,6 +4,8 @@ import { Http, Response } from '@angular/http';
 import {HttpAccomodationTypeService} from "./accomodationtype.service"
 import {HttpRegionService} from "../region/region.service"
 import { Observable } from "rxjs/Observable";
+import {MdSnackBar} from "@angular/material"
+
 
 @Component({
   selector: 'app-accomodationtype',
@@ -19,7 +21,8 @@ export class AccomodationtypeComponent implements OnInit {
   private role:string;
   accomodationType:any;
 
-  constructor(private httpAccomodationTypeService:HttpAccomodationTypeService) { }
+  constructor(private httpAccomodationTypeService:HttpAccomodationTypeService,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
     this.editFlag=false;
@@ -51,8 +54,9 @@ export class AccomodationtypeComponent implements OnInit {
 
     this.httpAccomodationTypeService.deleteAccomodationType(accomodationType.Id).subscribe(
       ()=>{
-      console.log('AccomodationType ' + accomodationType.Name + ' successfuly deleted');
-      this.ngOnInit();
+        console.log('AccomodationType ' + accomodationType.Name + ' successfuly deleted');
+        this.snackBar.open("AccomodationType " + accomodationType.Name + " successfuly deleted", "", { duration: 2500,});
+        this.ngOnInit();
       },
       error=>{alert("AccomodationType ' + accomodationType.Name + ' failed delete!"); console.log(error);}
     );

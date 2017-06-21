@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-accomodationtype-add',
@@ -18,7 +19,9 @@ export class AccomodationtypeAddComponent implements OnInit {
   
   nAccomodationType:any={};
 
-  constructor(private httpAccomodationTypeService:HttpAccomodationTypeService,private router: Router) { }
+  constructor(private httpAccomodationTypeService:HttpAccomodationTypeService,
+              private router: Router,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
   }
@@ -28,6 +31,7 @@ export class AccomodationtypeAddComponent implements OnInit {
        this.httpAccomodationTypeService.postAccomodationType(accomodationType).subscribe(
           ()=>{ 
             console.log('AccomodationType successfuly posted');
+            this.snackBar.open("AccomodationType successfuly posted", "", { duration: 2500,});
             this.router.navigate(['/accomodation-type']);
           },
           error => {alert("Close!"); console.log(error);}

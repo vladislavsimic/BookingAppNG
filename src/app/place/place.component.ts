@@ -4,6 +4,7 @@ import {Region} from "../region/region.model"
 import { Http, Response } from '@angular/http';
 import {HttpPlaceService} from "./place.service"
 import { Observable } from "rxjs/Observable";
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-place',
@@ -19,7 +20,8 @@ export class PlaceComponent implements OnInit {
   private role:string;
   place:any;
 
-  constructor(private httpPlaceService:HttpPlaceService) {
+  constructor(private httpPlaceService:HttpPlaceService,
+              private snackBar:MdSnackBar) {
   }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class PlaceComponent implements OnInit {
     this.httpPlaceService.deletePlace(place.Id).subscribe(
       ()=>{
       console.log('Place ' + place.Name + ' successfuly deleted');
+      this.snackBar.open("Place " + place.Name + " successfuly deleted", "", { duration: 2500,});
       this.ngOnInit();
       },
       error=>{alert("Place ' + place.Name + ' failed delete!"); console.log(error);}

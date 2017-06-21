@@ -15,6 +15,10 @@ export class HttpAccommodationService{
         return this.http.get(this.appUrl.RootLocation+"acc/accs").map(this.extractData);        
     }
 
+    getManagerAccommodations(username:string): Observable<any>{
+        return this.http.get(this.appUrl.RootLocation+"acc/accsmanager/"+username).map(this.extractData);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || [];

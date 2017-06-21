@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
-import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogRef, MdDialogConfig,MdSnackBar} from '@angular/material';
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {AppComponent} from "app/app.component";
@@ -38,7 +38,8 @@ export class AccommodationEditComponent implements OnInit {
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               public dialogRef: MdDialogRef<AccommodationEditComponent>,
               private router:Router,
-              public dialog:MdDialog) {
+              public dialog:MdDialog,
+              private snackBar:MdSnackBar) {
                
                }
 
@@ -91,7 +92,9 @@ export class AccommodationEditComponent implements OnInit {
     dialogRef.componentInstance.watching=false;
 
     dialogRef.afterClosed().subscribe((res) => {
-            console.log("Successfuly checked coordinates.");
+            console.log("Successfully checked coordinates.");
+            this.snackBar.open("Successfully checked coordinates.", "", { duration: 2500,});
+
             if (res == undefined) {
                 return;
             }
@@ -122,9 +125,8 @@ export class AccommodationEditComponent implements OnInit {
 
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 
-            console.log('Accommodation successfuly edited');
-
-            //this.notifyParent.emit('Some value to send to the parent');
+            console.log('Accommodation successfully edited');
+            this.snackBar.open("Accommodation successfully edited", "", { duration: 2500,});
             this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}

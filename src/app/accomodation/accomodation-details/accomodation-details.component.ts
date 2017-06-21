@@ -11,7 +11,7 @@ import {FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef,MdSnackBar} from '@angular/material';
 import {Room} from "app/room/room.model";
 import {HttpRoomReservationService} from "app/roomreservation/roomreservation.service"
 import {RoomReservation} from "app/roomreservation/roomreservation.model"
@@ -39,7 +39,8 @@ export class AccomodationDetailsComponent implements OnInit {
               private httpRoomReservationService:HttpRoomReservationService,
               public dialogRef: MdDialogRef<AccomodationDetailsComponent>,
               private httpRoomService:HttpRoomService,
-              public dialog:MdDialog) 
+              public dialog:MdDialog,
+              private snackBar:MdSnackBar) 
               {
                 this.detAccomodationCopy = dialogRef._containerInstance.dialogConfig.data;
                 
@@ -64,12 +65,11 @@ export class AccomodationDetailsComponent implements OnInit {
   }
   
   saveRoomReservation(roomRes: RoomReservation, form: NgForm){
-       
-
+    
        this.httpRoomReservationService.postRoomReservations(roomRes).subscribe(
           ()=>{ 
-            console.log('RoomRes successfuly posted');
-            //this.router.navigate(['/room-reservation']);
+            console.log('RoomRes successfully posted');
+            this.snackBar.open("Room reservation successfully posted", "", { duration: 2500,});
           },
           error => {alert("Close!"); console.log(error);}
         );
@@ -81,8 +81,9 @@ export class AccomodationDetailsComponent implements OnInit {
   deleteRoom(room:Room){
     this.httpRoomService.deleteRoom(room.Id).subscribe(
       ()=>{
-      console.log('Room ' + room.Id + ' successfuly deleted');
-      this.ngOnInit();
+        console.log('Room ' + room.Id + ' successfuly deleted');
+        this.snackBar.open("Room " + room.Id + " successfuly deleted", "", { duration: 2500,});
+        this.ngOnInit();
       },
       error=>{alert("Room ' + room.ID + ' failed delete!"); console.log(error);}
     );
@@ -93,6 +94,7 @@ export class AccomodationDetailsComponent implements OnInit {
       dialogRef.componentInstance.eRoom=room;
 
       dialogRef.afterClosed().subscribe(result => {
+        console.log('Room ' + room.Id + ' successfuly edited.');
         this.ngOnInit();
     })
   }

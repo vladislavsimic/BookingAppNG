@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-place-edit',
@@ -23,8 +24,10 @@ export class PlaceEditComponent implements OnInit {
   public regions: Array<Region>;
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private httpPlaceService:HttpPlaceService,private httpRegionService:HttpRegionService
-      ,private router:Router) { 
+  constructor(private httpPlaceService:HttpPlaceService,
+              private httpRegionService:HttpRegionService,
+              private router:Router,
+              private snackBar:MdSnackBar) { 
     this.notifyParent=new EventEmitter();
   }
 
@@ -46,6 +49,7 @@ export class PlaceEditComponent implements OnInit {
       this.httpPlaceService.editPlace(this.placeForEdit).subscribe(
           ()=>{ 
             console.log('Place successfuly edited');
+            this.snackBar.open("Place successfuly edited", "", { duration: 2500,});
             this.notifyParent.emit('Some value to send to the parent');
           },
           error => {alert("Close!"); console.log(error);}

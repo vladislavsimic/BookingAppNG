@@ -9,6 +9,7 @@ import {FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-region-add',
@@ -24,7 +25,8 @@ export class RegionAddComponent implements OnInit {
 
   constructor(private httpCountryService:HttpCountryService,
               private httpRegionService:HttpRegionService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
     this.httpCountryService.getCountries().subscribe((res: any) => {
@@ -42,6 +44,7 @@ export class RegionAddComponent implements OnInit {
        this.httpRegionService.postRegion(this.postRegion).subscribe(
           ()=>{ 
             console.log('Region successfuly posted');
+            this.snackBar.open("Region successfuly posted", "", { duration: 2500,});
             this.router.navigate(['/region']);
           },
           error => {alert("Close!"); console.log(error);}

@@ -9,6 +9,8 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import {Accommodation} from "app/accomodation/accommodation.model";
 import {HttpAccommodationService} from "app/accomodation/accommodation.service";
+import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-room-add',
@@ -21,8 +23,11 @@ export class RoomAddComponent implements OnInit {
   nRoom:any={};
   public accommodation:Accommodation;
 
-  constructor(private httpRoomService:HttpRoomService,private router: Router,
-  private httpAccService: HttpAccommodationService) {
+  constructor(private httpRoomService:HttpRoomService,
+              private router: Router,
+              private httpAccService: HttpAccommodationService,
+              public dialogRef: MdDialogRef<RoomAddComponent>,
+              private snackBar:MdSnackBar) {
   }
 
   ngOnInit() {
@@ -35,7 +40,9 @@ export class RoomAddComponent implements OnInit {
       this.httpRoomService.postRoom(room).subscribe(
           ()=>{ 
             console.log('Room successfuly posted');
-            this.ngOnInit();
+            this.snackBar.open("Room successfuly posted", "", { duration: 2500,});
+            this.router.navigate(['/accomodation']);
+            this.dialogRef.close();
           },
           error => {alert("Close!"); console.log(error);}
         );

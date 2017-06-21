@@ -1,34 +1,30 @@
-<div class="container">
-  <h1>Add Room</h1>
+<div class="addDialog">
+  <h1 md-dialog-title>Add Room</h1>
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveRoom(f.value,f)"  novalidate>
       <div>
-          <label for="RoomNumber">Room number:</label>
-          <input type="text" name="RoomNumber" [(ngModel)]="nRoom.RoomNumber" #RoomNumber="ngModel" required />
+          <md-input-container>
+          <input mdInput type="number" placeholder="Room Number" name="RoomNumber" [(ngModel)]="nRoom.RoomNumber" #RoomNumber="ngModel" required />
+          </md-input-container>
           <div *ngIf="f.submitted && !RoomNumber.valid">RoomNumber is required</div>
       </div>
       <div>
-          <label for="BedCount">Bed count:</label>
-          <input type="text" name="BedCount" [(ngModel)]="nRoom.BedCount" #BedCount="ngModel" required />
+          <md-input-container>
+          <input mdInput type="number" placeholder="Bed Count" name="BedCount" [(ngModel)]="nRoom.BedCount" #BedCount="ngModel" required />
+          </md-input-container>
           <div *ngIf="f.submitted && !BedCount.valid">BedCount is required</div>
       </div>
       <div>
-          <label for="Description">Description:</label>
-          <input type="text" name="Description" [(ngModel)]="nRoom.Description" #Description="ngModel" required  />
+        <md-input-container>
+          <input mdInput type="text" placeholder="Description" name="Description" [(ngModel)]="nRoom.Description" #Description="ngModel" required  />
+        </md-input-container>
           <div *ngIf="f.submitted && !Description.valid">Description is required</div>
       </div>
       <div>
-          <label for="PricePerNight">Price per night:</label>
-          <input type="text" name="PricePerNight" [(ngModel)]="nRoom.PricePerNight" #PricePerNight="ngModel" required />
+           <md-input-container>
+          <input mdInput type="number" placeholder="Price Per Night" name="PricePerNight" [(ngModel)]="nRoom.PricePerNight" #PricePerNight="ngModel" required />
+           </md-input-container>
           <div *ngIf="f.submitted && !PricePerNight.valid">PricePerNight is required</div>
       </div>
-      <!--<div>
-        <label for="acc">Accomodation:</label>
-        <select  [(ngModel)]="nRoom.Acc_Id" name="Acc_Id" #Acc="ngModel" required>
-            <option *ngFor="let acc of accomodations" [value]="acc.Id">
-                {{acc.Name}}
-            </option>
-        </select>
-      </div>-->
-        <button type="submit">Save</button>
+        <button md-raised-button color="primary" type="submit">Save</button>
   </form>
 </div>

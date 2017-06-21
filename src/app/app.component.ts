@@ -68,9 +68,6 @@ export class AppComponent {
                 return;
             }
             location.reload();
-              //this.ngOnInit();
-              //this.router.navigate(['/home']);
-
         },
             error => { alert("Close!"); console.log(error); }
         );

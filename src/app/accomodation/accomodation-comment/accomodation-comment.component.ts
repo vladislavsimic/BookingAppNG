@@ -11,7 +11,7 @@ import {FormsModule } from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef,MdSnackBar} from '@angular/material';
 import {Room} from "app/room/room.model";
 import {HttpCommentService} from "app/comment/comment.service"
 import {RoomReservation} from "app/roomreservation/roomreservation.model"
@@ -26,10 +26,12 @@ import {Comment} from "app/comment/comment.model";
 export class AccomodationCommentComponent implements OnInit {
   public commentAccomodation:Accommodation;
   public comments : Array<Comment>;
+  public managerRole:boolean;
 
   constructor(private httpCommentService: HttpCommentService,
               public dialogRef: MdDialogRef<AccomodationCommentComponent>,
-              private router: Router,private thhtAccService : HttpAccommodationService) {
+              private router: Router,private thhtAccService : HttpAccommodationService,
+              private snackBar:MdSnackBar) {
                 this.commentAccomodation = dialogRef._containerInstance.dialogConfig.data;
                }
 
@@ -45,14 +47,25 @@ export class AccomodationCommentComponent implements OnInit {
             
        this.httpCommentService.postComment(comment).subscribe(
           ()=>{ 
-            console.log('Comment successfuly posted');
-          //  this.router.navigate(['/comment']);
+            console.log('Comment successfully posted');
           },
           error => {alert("Close!"); console.log(error);}
         );
   }
+  
   getNotification(evt) {
       this.ngOnInit();
+  }
+
+  deleteComment(comment){
+    this.httpCommentService.deleteComment(comment.Id).subscribe(
+      ()=>{
+        console.log('Comment ' + comment.Id + ' successfully deleted');
+        this.snackBar.open("Comment" + comment.Id +  " successfully deleted", "", { duration: 2500,});
+        this.ngOnInit();
+      },
+      error=>{alert("Comment " + comment.Id + " failed delete!"); console.log(error);}
+    );
   }
 
 }

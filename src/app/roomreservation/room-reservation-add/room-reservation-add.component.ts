@@ -10,7 +10,9 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 import {Room} from "app/room/room.model";
-import{MdSnackBar} from '@angular/material'
+import{MdSnackBar} from '@angular/material';
+
+
 @Component({
   selector: 'app-room-reservation-add',
   templateUrl: './room-reservation-add.component.html',
@@ -81,6 +83,7 @@ constructor(private httpRoomResService:HttpRoomReservationService,
        this.httpRoomResService.postRoomReservations(roomRes).subscribe(
           ()=>{ 
             console.log('RoomRes successfuly posted');
+            this.snackBar.open("Room Reservation successfuly posted", "", { duration: 2500,});
             this.router.navigate(['/room-reservation']);
             this.openSnackBar("Succesfuly reserve","");
             

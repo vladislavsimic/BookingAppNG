@@ -10,6 +10,7 @@ import {NgForm} from '@angular/forms';
 import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-room-reservation-edit',
@@ -24,7 +25,10 @@ export class RoomReservationEditComponent implements OnInit {
 
    public rooms : Array<Room>;
 
-  constructor(private httpRoomResService:HttpRoomReservationService,private httRoomService : HttpRoomService,private router: Router) {
+  constructor(private httpRoomResService:HttpRoomReservationService,
+              private httRoomService : HttpRoomService,
+              private router: Router,
+              private snackBar:MdSnackBar) {
     this.notifyParent=new EventEmitter();
    }
 
@@ -41,6 +45,7 @@ export class RoomReservationEditComponent implements OnInit {
       this.httpRoomResService.editRoomReservation(roomRes).subscribe(
           ()=>{ 
             console.log('RoomRes successfuly edited');
+            this.snackBar.open("Room Reservation successfuly edited", "", { duration: 2500,});
             this.notifyParent.emit('Some value to send to the parent');
           },
           error => {alert("Close!"); console.log(error);}

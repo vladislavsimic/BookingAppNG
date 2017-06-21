@@ -5,5 +5,4 @@ export class Comment {
     Text:string;
     Accommodation:Accommodation;
     Acc_Id:number;
-
 }

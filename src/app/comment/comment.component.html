@@ -17,8 +17,8 @@
     </tr>
     
 </table>
-<a [routerLink]="['/comment-add']">Add Comment</a>
-<router-outlet></router-outlet>
+<!--<a [routerLink]="['/comment-add']">Add Comment</a>
+<router-outlet></router-outlet>-->
 <div *ngIf="editFlag==true">
     <app-comment-edit [eComment] = "comment" (notifyParent)="getNotification($event)"></app-comment-edit>
 </div>

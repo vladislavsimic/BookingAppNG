@@ -9,6 +9,9 @@ import {AppUrl} from "app/appservice/AppUrl.services"
 import {Router, ActivatedRoute} from '@angular/router';
 import {Accommodation} from "app/accomodation/accommodation.model"
 import {HttpAccommodationService} from "app/accomodation/accommodation.service"
+import {User} from "app/register/user.model"
+import {HttpUsersService} from "app/managers/users.service"
+import {MdSnackBar} from "@angular/material"
 
 @Component({
   selector: 'app-comment-add',
@@ -28,7 +31,9 @@ export class CommentAddComponent implements OnInit {
 
   constructor(private httpCommentService:HttpCommentService,
               private httpAccService:HttpAccommodationService,
-              private router: Router) {
+              private router: Router,
+              private httpUsersService:HttpUsersService,
+              private snackBar:MdSnackBar) {
     
     this.numbers = [1,2,3,4,5];
   }
@@ -48,15 +53,17 @@ export class CommentAddComponent implements OnInit {
       this.role=localStorage.getItem('role');
       if(this.role=="User"){
           this.appUserRole=true;
+          
       }
   }
 
   saveComment(comment: Comment, form: NgForm,accId:number){
-       comment.Acc_Id = accId;  
+       comment.Acc_Id = accId;
+       
        this.httpCommentService.postComment(comment).subscribe(
           ()=>{ 
             console.log('Comment successfuly posted');
-            this.router.navigate(['/comment']);
+            this.snackBar.open("Comment successfuly posted", "", { duration: 2500,});
             this.notifyParent.emit("Some message to parrent");
           },
           error => {alert("Close!"); console.log(error);}

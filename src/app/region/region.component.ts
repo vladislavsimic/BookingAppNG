@@ -4,6 +4,7 @@ import {Region} from "./region.model"
 import { Http, Response } from '@angular/http';
 import {HttpRegionService} from "./region.service"
 import { Observable } from "rxjs/Observable";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-region',
@@ -19,7 +20,8 @@ export class RegionComponent implements OnInit {
   private adminRole:boolean;
   private role:string;
 
-  constructor(private httpRegionService:HttpRegionService) { }
+  constructor(private httpRegionService:HttpRegionService,
+              private snackBar:MdSnackBar) { }
 
   ngOnInit() {
     this.editFlag=false;
@@ -52,6 +54,7 @@ export class RegionComponent implements OnInit {
     this.httpRegionService.deleteRegion(region.Id).subscribe(
       ()=>{
       console.log('Region ' + region.Name + ' successfuly deleted');
+      this.snackBar.open("Region " + region.Name + " successfuly deleted", "", { duration: 2500,});
       this.ngOnInit();
       },
       error=>{alert("Region ' + region.Name + ' failed delete!"); console.log(error);}

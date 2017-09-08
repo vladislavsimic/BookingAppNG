@@ -15,6 +15,21 @@ export class HttpCommentService{
         return this.http.get(this.appUrl.RootLocation+"comment/comments").map(this.extractData);        
     }
 
+    getRequestOptions(){
+        
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        let access_token=localStorage.getItem('id_token');
+        let token = `Bearer ${access_token}`;
+        headers.append('Authorization', token);
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return opts;
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || [];
@@ -25,30 +40,14 @@ export class HttpCommentService{
     }
 
     postComment(comment: Comment): Observable<any>  {
-        
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.post(this.appUrl.RootLocation+'comment/comment', comment , opts);
+        return this.http.post(this.appUrl.RootLocation+'comment/comment', comment , this.getRequestOptions());
     }
 
-    deleteComment(Id:number){
+    deleteComment(Id:number) {
         return this.http.delete(this.appUrl.RootLocation + 'comment/comment/'+ Id);
     }
 
-    editComment(comment:Comment){
-
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.put(this.appUrl.RootLocation+'comment/comment/'+comment.Id, comment , opts);
+    editComment(comment:Comment) {
+        return this.http.put(this.appUrl.RootLocation+'comment/comment/'+comment.Id, comment , this.getRequestOptions());
     }
 }

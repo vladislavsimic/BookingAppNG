@@ -11,6 +11,21 @@ export class HttpRoomReservationService{
     constructor (private http: Http,private appUrl:AppUrl){
     }
 
+    getRequestOptions(){
+        
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        let access_token=localStorage.getItem('id_token');
+        let token = `Bearer ${access_token}`;
+        headers.append('Authorization', token);
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return opts;
+    }
+
     getRoomsReservations(): Observable<any> {
         return this.http.get(this.appUrl.RootLocation+"roomReservation/roomReservations").map(this.extractData);        
     }
@@ -29,31 +44,15 @@ export class HttpRoomReservationService{
     }
 
     postRoomReservations(roomreservation: RoomReservation): Observable<any>  {
-        
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.post(this.appUrl.RootLocation+'roomReservation/roomReservation', roomreservation , opts);
+        return this.http.post(this.appUrl.RootLocation+'roomReservation/roomReservation', roomreservation , this.getRequestOptions());
     }
 
     deleteRoomReservation(Id:number){
-        return this.http.delete(this.appUrl.RootLocation + 'roomReservation/roomReservation/'+ Id);
+        return this.http.delete(this.appUrl.RootLocation + 'roomReservation/roomReservation/'+ Id,this.getRequestOptions());
     }
 
     editRoomReservation(roomreservation:RoomReservation){
-
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
         return this.http.put(this.appUrl.RootLocation+'roomReservation/roomReservation/'+
-        roomreservation.Id, roomreservation , opts);
+        roomreservation.Id, roomreservation , this.getRequestOptions());
     }
 }

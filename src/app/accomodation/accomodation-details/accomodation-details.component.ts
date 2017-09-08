@@ -42,19 +42,17 @@ export class AccomodationDetailsComponent implements OnInit {
               public dialog:MdDialog,
               private snackBar:MdSnackBar) 
               {
-                this.detAccomodationCopy = dialogRef._containerInstance.dialogConfig.data;
-                
+               // this.detAccomodationCopy = this.detAccomodation;
               }
  
   ngOnInit() {
     this.managerRole=false;
     this.createPermisions();
 
-    this.httpAccommodationService.getAccommodation(this.dialogRef._containerInstance.dialogConfig.data.Id).subscribe(
+    this.httpAccommodationService.getAccommodation(this.detAccomodation.Id).subscribe(
       (res: any) => {this.detAccomodationCopy = res; console.log(this.detAccomodationCopy)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
-   // this.detAccomodationCopy = this.detAccomodation;
   }
   
   createPermisions(){
@@ -74,6 +72,7 @@ export class AccomodationDetailsComponent implements OnInit {
           error => {alert("Close!"); console.log(error);}
         );
   }
+  
   getNotification(evt) {
       this.ngOnInit();
   }

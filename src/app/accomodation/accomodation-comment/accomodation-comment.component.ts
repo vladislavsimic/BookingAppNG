@@ -31,9 +31,9 @@ export class AccomodationCommentComponent implements OnInit {
   constructor(private httpCommentService: HttpCommentService,
               public dialogRef: MdDialogRef<AccomodationCommentComponent>,
               private router: Router,private thhtAccService : HttpAccommodationService,
-              private snackBar:MdSnackBar) {
-                this.commentAccomodation = dialogRef._containerInstance.dialogConfig.data;
-               }
+              private snackBar:MdSnackBar) 
+              {
+              }
 
   ngOnInit() {
        this.thhtAccService.getAccommodation(this.commentAccomodation.Id).subscribe((res: any) => {

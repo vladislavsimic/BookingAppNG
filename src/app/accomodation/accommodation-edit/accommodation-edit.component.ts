@@ -118,12 +118,27 @@ export class AccommodationEditComponent implements OnInit {
       this.accommodationForEdit.Longitude=accommodation.Longitude;
       this.accommodationForEdit.Place_Id=accommodation.Place_Id;
       if(this.adminRole==true){
-        this.accommodationForEdit.Approved=accommodation.Approved;
+        if (accommodation.Approved == true)
+          {
+            this.httpAccommodationService.approveAccommodation(this.eAccommodation.Id).subscribe(
+              ()=>{
+                 console.log('Approve changed to true.');
+              },
+              error => {alert("Close change approve!"); console.log(error);}
+
+            );
+          }else{
+            this.httpAccommodationService.banAccommodation(this.eAccommodation.Id).subscribe(
+              ()=>{
+                 console.log('Approve changed to false.');
+              },
+              error => {alert("Close change approve!"); console.log(error);}
+
+            );
+          }
       }else{
         this.accommodationForEdit.Approved=this.eAccommodation.Approved;
-      }
-
-      this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
+        this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
           ()=>{ 
             console.log('Accommodation successfully edited');
             this.snackBar.open("Accommodation successfully edited", "", { duration: 2500,});
@@ -131,19 +146,7 @@ export class AccommodationEditComponent implements OnInit {
           },
           error => {alert("Close!"); console.log(error);}
         );
-        if(this.adminRole==true){
-          if (accommodation.Approved == true)
-          {
-            this.httpAccommodationService.approveAccommodation(accommodation.Id).subscribe(
-              ()=>{
-                 console.log('Approve changed.');
-              },
-              error => {alert("Close!"); console.log(error);}
-
-            );
-          }
-        }
-       
+      }
   }
 
 }

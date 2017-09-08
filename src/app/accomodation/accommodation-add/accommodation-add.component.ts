@@ -106,7 +106,8 @@ export class AccommodationAddComponent implements OnInit {
             this.router.navigate(['/accomodation']);
             this.dialogRef.close();
           },
-          error => {alert("Close!"); console.log(error);}
+          error => {alert("Close!"); console.log(error);
+          }
         );
        
   }

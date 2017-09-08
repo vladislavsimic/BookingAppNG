@@ -11,8 +11,19 @@ export class HttpAccomodationTypeService{
     constructor (private http: Http,private appUrl:AppUrl){
     }
 
-    getAccomodationTypes(): Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"accomodationType/accTypes").map(this.extractData);        
+    getRequestOptions(){
+        
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        let access_token=localStorage.getItem('id_token');
+        let token = `Bearer ${access_token}`;
+        headers.append('Authorization', token);
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return opts;
     }
 
     private extractData(res: Response) {
@@ -20,35 +31,23 @@ export class HttpAccomodationTypeService{
         return body || [];
     }
 
-    getAccomodationType(Id:number){
+    getAccomodationTypes(): Observable<any> {
+        return this.http.get(this.appUrl.RootLocation+"accomodationType/accTypes").map(this.extractData);        
+    }
+
+    getAccomodationType(Id:number) {
         return this.http.get(this.appUrl.RootLocation+'accomodationType/accType/'+Id).map(this.extractData);
     }
 
     postAccomodationType(accomodationType: AccomodationType): Observable<any>  {
-        
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.post(this.appUrl.RootLocation+'accomodationType/accType', accomodationType , opts);
+        return this.http.post(this.appUrl.RootLocation+'accomodationType/accType', accomodationType , this.getRequestOptions());
     }
 
-    deleteAccomodationType(Id:number){
-        return this.http.delete(this.appUrl.RootLocation + 'accomodationType/accType/'+ Id);
+    deleteAccomodationType(Id:number) {
+        return this.http.delete(this.appUrl.RootLocation + 'accomodationType/accType/'+ Id, this.getRequestOptions());
     }
 
-    editAccomodationType(accomodationType:AccomodationType){
-
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.put(this.appUrl.RootLocation+'accomodationType/accType/'+accomodationType.Id, accomodationType, opts);
+    editAccomodationType(accomodationType:AccomodationType) {
+        return this.http.put(this.appUrl.RootLocation+'accomodationType/accType/'+accomodationType.Id, accomodationType, this.getRequestOptions());
     }
 }

@@ -58,7 +58,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ManagersComponent } from './managers/managers.component';
 import {HttpUsersService} from "app/managers/users.service";
 import {FilterService} from "app/search/search.service";
-import {NotificationService} from "app/appservice/notification.service"
 
 
 const Routes=[
@@ -150,7 +149,7 @@ const Routes=[
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
   HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService,NotificationService],
+  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService],
 
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,11 @@
 export class Manager{
-    Id:number;    
-    Username:string;
-    Role:string;
-    isBanned:boolean;
+    category: string;
+    email: string;
+    firstName: string;
+    id: string;
+    isActive: boolean;
+    lastName: string;
+    profilePictureUrl: string;
+    role: string;
+    username: string;
 }

@@ -28,15 +28,19 @@ export class HttpUsersService{
     }
 
     getManagers(): Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"appUser/managers", this.getRequestOptions()).map(this.extractData);
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/agents", this.getRequestOptions()).map(this.extractData);
     }
 
-    getUser(username:string):Observable<any> {
+    /*getUser(username:string):Observable<any> {
         return this.http.get(this.appUrl.RootLocation+"appUser/manager/"+username).map(this.extractData);
+    }*/
+
+    unblockManager(id:string) {
+        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/" + id + "/unblock", null, this.getRequestOptions());
     }
 
-    saveManager(manager:Manager) {
-        return this.http.put(this.appUrl.RootLocation+"appUser/appUser/" + manager.Id, manager , this.getRequestOptions());
+    blockManager(id:string) {
+        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/" + id + "/block", null, this.getRequestOptions());
     }
 
     private extractData(res: Response) {

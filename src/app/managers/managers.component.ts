@@ -30,14 +30,25 @@ export class ManagersComponent implements OnInit {
 
   saveManager(manager:Manager){
     console.log(manager);
-    this.httpUsersService.saveManager(manager).subscribe(
-      (res: any) => { 
-        console.log("Manager banned.");
-        this.snackBar.open("Manager banned.", "", { duration: 2500,});
-      },
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+    if(manager.isActive==true){
+      this.httpUsersService.unblockManager(manager.id).subscribe(
+        (res: any) => { 
+          console.log("Manager unblocked.");
+          this.snackBar.open("Manager unblocked.", "", { duration: 2500,});
+        },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
+    }
+    else{
+      this.httpUsersService.blockManager(manager.id).subscribe(
+        (res: any) => { 
+          console.log("Manager blocked.");
+          this.snackBar.open("Manager blocked.", "", { duration: 2500,});
+        },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
+    }
+    
 
   }
-
 }

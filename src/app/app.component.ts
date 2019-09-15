@@ -1,11 +1,10 @@
-import { Component,OnInit,Input,NgZone } from '@angular/core';
+import { Component,OnInit,Input } from '@angular/core';
 import { HttpAuthenticationService } from 'app/login/userAuthentication.service';
 import { Http, Headers, Response } from '@angular/http';
 import { MdDialog,MdSnackBar } from '@angular/material';
 import {LoginComponent} from "app/login/login.component"
 import {RegisterComponent} from "app/register/register.component"
 import {Router, ActivatedRoute} from '@angular/router';
-import { NotificationService } from './appservice/notification.service';
 import {AppUrl} from "app/appservice/AppUrl.services"
 
 @Component({
@@ -25,10 +24,9 @@ export class AppComponent {
   private appUser:boolean;
   public static adminR:boolean;
   public static managerR: boolean;
-  zone: NgZone;
+  //zone: NgZone;
 
   constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router,
-             private notificationService: NotificationService,
              public snackBar: MdSnackBar,
               private appUrl:AppUrl){
      }
@@ -44,7 +42,7 @@ export class AppComponent {
     //     } else if (this.role == "Manager") {
     //         this.notificationService.managerNotRecieved.subscribe(e => this.notify(e));
     //     }
-        this.zone = new NgZone({ enableLongStackTrace: false });
+        //this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
   createPermision(){
@@ -109,7 +107,7 @@ export class AppComponent {
     //       error=>{console.log(error); alert("Logout failed!");}
     //   );
   }
-  notify(data: any) {
+  /*notify(data: any) {
         this.zone.run(() => {
             if (this.role == "Admin")
              {
@@ -122,7 +120,7 @@ export class AppComponent {
             }
         });
 
-    }
+  }*/
 
     openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {

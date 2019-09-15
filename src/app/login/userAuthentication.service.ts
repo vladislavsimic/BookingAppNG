@@ -17,16 +17,16 @@ export class HttpAuthenticationService{
     }
 
     login(username:string,password:string){
-        return this.http.post(this.appUrl.RootLocation+'oauth/token',`username=${username}&password=${password}&grant_type=password`)
+        return this.http.post(this.appUrl.RootLocation + this.appUrl.MainBackend + 'auth/login/', { usernameOrEmail: username, password: password })
     }
 
-    logout(){
-        const headers: Headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
+    // logout(){
+    //     const headers: Headers = new Headers();
+    //     headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+    //     const opts: RequestOptions = new RequestOptions();
+    //     opts.headers = headers;
 
-        return this.http.post(this.appUrl.RootLocation + 'Account/Logout', null,opts);
-    }
+    //     return this.http.post(this.appUrl.RootLocation + 'Account/Logout', null,opts);
+    // }
 
 }

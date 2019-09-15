@@ -2,9 +2,9 @@
 export class User{
 
     Id:number;
-    Username:string;
-    Password:string;
-    ConfirmPassword:string;
-    Email:string;
-    Role:string;
+    username:string;
+    password:string;
+    firstName:string;
+    lastName:string;
+    email:string;
 }

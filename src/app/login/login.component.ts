@@ -21,12 +21,12 @@ export class LoginComponent implements OnInit {
 
   login(user:any,form:NgForm){
 
-    this.httpAuthenticationService.login(user.username,user.password).subscribe(
+    this.httpAuthenticationService.login(user.usernameOrEmail, user.password).subscribe(
 
       response=>{
-        localStorage.setItem('id_token',response.json().access_token);
-        localStorage.setItem('role',response.headers.get('Role'));
-        localStorage.setItem('username',user.username);
+        localStorage.setItem('id_token',response.json().accessToken);
+        localStorage.setItem('role',response.json().role);
+        localStorage.setItem('username',response.json().role);
         console.log(response.json());                    
         this.dialogRef.close("success");
       },

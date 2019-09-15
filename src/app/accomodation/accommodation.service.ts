@@ -16,9 +16,9 @@ export class HttpAccommodationService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
-        let access_token=localStorage.getItem('id_token');
-        let token = `Bearer ${access_token}`;
-        headers.append('Authorization', token);
+        // let access_token=localStorage.getItem('id_token');
+        // let token = `Bearer ${access_token}`;
+        // headers.append('Authorization', token);
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
@@ -32,7 +32,7 @@ export class HttpAccommodationService{
     }
 
     getAccommodations(): Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"acc/accs").map(this.extractData);        
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "properties").map(this.extractData);        
     }
 
     getManagerAccommodations(username:string): Observable<any>{

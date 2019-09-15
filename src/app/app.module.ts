@@ -36,8 +36,8 @@ import { PlaceAddComponent } from './place/place-add/place-add.component';
 import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
 import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component';
-import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
-import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
+// import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
+// import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
 import { RegionAddComponent } from './region/region-add/region-add.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -46,8 +46,8 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 import { HomeComponent } from './home/home.component';
 import {AdminGuard} from './adminGuard';
 import {ManagerGuard} from './managerGuard';
-import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
-import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
+// import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
+// import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
@@ -69,8 +69,8 @@ const Routes=[
   {path: "place-add",component:PlaceAddComponent, canActivate: [AdminGuard]},
   {path: "place-edit",component:PlaceEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation",component:AccomodationComponent},
-  {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
-  {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
+  // {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
+  // {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
   {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
@@ -116,15 +116,15 @@ const Routes=[
     PlaceEditComponent,
     AccomodationtypeAddComponent,
     AccomodationtypeEditComponent,
-    AccommodationAddComponent,
-    AccommodationEditComponent,
+    // AccommodationAddComponent,
+    // AccommodationEditComponent,
     RegionAddComponent,
     RegionEditComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AccomodationDetailsComponent,
-    AccomodationCommentComponent,
+    // AccomodationDetailsComponent,
+    // AccomodationCommentComponent,
     MapComponent,
     FileSelectDirective,
     FileDropDirective,
@@ -133,7 +133,7 @@ const Routes=[
     ManagersComponent
   ],
   
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent,ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
+  entryComponents: [/*AccomodationDetailsComponent,AccomodationCommentComponent,*/ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
 
   imports: [
     BrowserModule,

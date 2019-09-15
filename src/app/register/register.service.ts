@@ -11,7 +11,7 @@ export class HttpRegisterService{
     constructor (private http: Http,private appUrl:AppUrl){
     }
 
-    registerUser( user:any):Observable<any> {
+    registerUser( user:User):Observable<any> {
     
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
@@ -20,7 +20,7 @@ export class HttpRegisterService{
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
 
-        return this.http.post(this.appUrl.RootLocation+'account/Register', user , opts);
+        return this.http.post(this.appUrl.RootLocation + this.appUrl.MainBackend + 'auth/register', user , opts);
                     
     }
 }

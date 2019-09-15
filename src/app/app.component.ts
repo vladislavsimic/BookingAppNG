@@ -39,22 +39,22 @@ export class AppComponent {
       this.managerRole=false;
       this.createPermision();
       this.checkForUser();
-       if (this.role == "Admin") {
-            this.notificationService.adminNotReceived.subscribe(e => this.notify(e));
-        } else if (this.role == "Manager") {
-            this.notificationService.managerNotRecieved.subscribe(e => this.notify(e));
-        }
+    //    if (this.role == "Admin") {
+    //         this.notificationService.adminNotReceived.subscribe(e => this.notify(e));
+    //     } else if (this.role == "Manager") {
+    //         this.notificationService.managerNotRecieved.subscribe(e => this.notify(e));
+    //     }
         this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
   createPermision(){
       this.role=localStorage.getItem('role');
-      if(this.role=="Admin"){
+      if(this.role=="ADMIN"){
           this.adminRole=true;
           AppComponent.adminR = true;
-      }else if(this.role=="User"){
+      }else if(this.role=="USER"){
           this.appUser=true;
-      }else if(this.role=="Manager"){
+      }else if(this.role=="AGENT"){
           this.managerRole=true;
           AppComponent.managerR = true;
       }
@@ -88,8 +88,9 @@ export class AppComponent {
     }
 
   checkForUser(){
-      this.username=localStorage.getItem('username');
-      if(this.username==null || this.username==undefined){
+    //   this.username=localStorage.getItem('username');
+      this.role=localStorage.getItem('role');
+      if(this.role==null || this.role==undefined){
           this.isLoggedIn=false;
           return;
       }
@@ -97,16 +98,16 @@ export class AppComponent {
   }
 
   logout(){
-      this.httpAuthService.logout().subscribe(
-          response=>{
-              localStorage.clear();
-              AppComponent.adminR = false;
-              AppComponent.managerR = false;
-              this.ngOnInit();
-              this.router.navigate(['/home']);
-          },
-          error=>{console.log(error); alert("Logout failed!");}
-      );
+    //   this.httpAuthService.logout().subscribe(
+    //       response=>{
+        localStorage.clear();
+        AppComponent.adminR = false;
+        AppComponent.managerR = false;
+        this.ngOnInit();
+        this.router.navigate(['/home']);
+    //       },
+    //       error=>{console.log(error); alert("Logout failed!");}
+    //   );
   }
   notify(data: any) {
         this.zone.run(() => {

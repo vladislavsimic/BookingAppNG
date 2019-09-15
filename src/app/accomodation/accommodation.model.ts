@@ -1,20 +1,33 @@
 import {Place} from "app/place/place.model";
+
 export class Accommodation{
 
     Id:number;
-    Name:string;
-    Description:string;
-    Address:string;
-    AverageGrade:number;
-    Latitude:number;
-    Longitude:number;
-    ImageURL:string;
-    Approved:boolean;
-    AppUser_Id:number;
-    AccommodationType_Id:number;
-    Place:Place;
-    Place_Id:number;
-    Comments:Array<Comment>
-    AppUserName:string;
+    name:string;
+    description:string;
+    address:Address;
+    agentId:string;
 
+    autumnPrice: number;
+    category: string;
+    createdAt: Date;
+    imageUrls: string[];
+    numberOfCancellationDays: number;
+    numberOfPeople: number;
+    propertyServices: string[];
+    springPrice: number;
+    stars: number;
+    summerPrice: number;
+    type: string;
+    winterPrice: number;
+}
+
+export class Address{
+
+    Id:string;
+    city: string;
+    country: string;
+    latitude:  number;
+    longitude: number;
+    street: string;
 }

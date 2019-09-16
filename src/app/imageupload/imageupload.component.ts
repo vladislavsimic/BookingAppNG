@@ -30,7 +30,7 @@ export class ImageuploadComponent implements OnInit {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
             console.log(item.file.name);
             console.log(response);
-            this.accommodation.ImageURL=item.file.name;
+            //this.accommodation.ImageURL=item.file.name;
             this.snackBar.open(response, "", {
                                 duration: 2000,
     });

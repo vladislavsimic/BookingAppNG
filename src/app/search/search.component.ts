@@ -4,10 +4,10 @@ import { Http, Response } from '@angular/http';
 import {HttpAccommodationService} from "app/accomodation/accommodation.service"
 import { Observable } from "rxjs/Observable";
 import {MdDialog, MdDialogRef,MdDialogConfig} from '@angular/material';
-import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
-import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
-import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
-import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
+//import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component";
+//import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
+//import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
+//import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
 import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {Room} from "app/room/room.model";

@@ -11,6 +11,7 @@ import {SearchComponent} from "app/search/search.component";
 import {Manager} from "app/managers/manager.model"
 import {HttpUsersService} from "app/managers/users.service"
 import {RoomAddComponent} from "app/room/room-add/room-add.component"
+import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component"
 
 
 @Component({
@@ -152,14 +153,14 @@ export class AccomodationComponent implements OnInit {
   //   );
   // }
 
-  // openAccNewDialog(){
-  //   let dialogRef = this.dialog.open(AccommodationAddComponent);
-  //   dialogRef.componentInstance.userManager=this.userManager;
+  openAccNewDialog(){
+    let dialogRef = this.dialog.open(AccommodationAddComponent);
+    dialogRef.componentInstance.userManager=this.userManager;
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.ngOnInit();
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
   
   //   editAccNewDialog(acc:Accommodation){
   //     let config = new MdDialogConfig();

@@ -52,7 +52,7 @@ export class HttpAccommodationService{
     }
 
     postAccommodation(accommodation: Accommodation): Observable<any>  {
-        return this.http.post(this.appUrl.RootLocation+'acc/acc', accommodation , this.getRequestOptions());
+        return this.http.post(this.appUrl.RootLocation + this.appUrl.MainBackend + 'properties', accommodation , this.getRequestOptions());
     }
 
     deleteAccommodation(Id:number){

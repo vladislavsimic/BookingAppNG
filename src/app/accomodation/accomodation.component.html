@@ -77,16 +77,16 @@
 </div>
 </div>
 
-<pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+<pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>-->
 
-<span *ngIf="managerRole==true && managerBanned==false " class="done">
+<span class="done">
     <button md-fab (click) = "openAccNewDialog()" >
     <md-icon>New</md-icon>
     </button>
        
 </span>
 
-<span class="search">
+<!-- <span class="search">
     <button md-fab (click) = "openSearchDialog()" >
     <md-icon>
         <div md-card-avatar class="searchImage"></div>

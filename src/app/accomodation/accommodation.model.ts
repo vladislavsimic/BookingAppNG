@@ -18,8 +18,13 @@ export class Accommodation{
     springPrice: number;
     stars: number;
     summerPrice: number;
-    type: string;
+    type: Type;
     winterPrice: number;
+}
+
+export class Type {
+    Id:string;
+    name: string;
 }
 
 export class Address{

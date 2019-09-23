@@ -3,43 +3,85 @@
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveAccommodation(f.value,f)"  novalidate>
       <div>
           <md-input-container>
-          <input mdInput type="text" placeholder="Name" name="name" [(ngModel)]="nAccommodation.name" #Name="ngModel" required />
+          <input mdInput type="text" placeholder="Name" name="name" [(ngModel)]="nAccommodation.name" #name="ngModel" required />
           </md-input-container>
           <div *ngIf="f.submitted && !name.valid">Name is required</div>
       </div>
       <div>
-          <md-input-container>
-          <input  mdInput placeholder="Description" type="text" name="description" [(ngModel)]="nAccommodation.description" #description="ngModel" required />
-          </md-input-container>
-          <div *ngIf="f.submitted && !description.valid">Description is required</div>
-      </div>
+        <md-input-container>
+        <input  mdInput placeholder="Description" type="text" name="description" [(ngModel)]="nAccommodation.description" #description="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !description.valid">Description is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Autumn Price" type="number" name="autumnPrice" [(ngModel)]="nAccommodation.autumnPrice" #autumnPrice="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !autumnPrice.valid">Autumn Price is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Summer Price" type="number" name="summerPrice" [(ngModel)]="nAccommodation.summerPrice" #summerPrice="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !summerPrice.valid">Summer Price is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Spring Price" type="number" name="springPrice" [(ngModel)]="nAccommodation.springPrice" #springPrice="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !springPrice.valid">Spring Price is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Winter Price" type="number" name="winterPrice" [(ngModel)]="nAccommodation.winterPrice" #winterPrice="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !winterPrice.valid">Winter Price is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Stars" type="number" name="stars" [(ngModel)]="nAccommodation.stars" #stars="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !stars.valid">Stars is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Number Of Cancellation Days" type="number" name="numberOfCancellationDays" [(ngModel)]="nAccommodation.numberOfCancellationDays" #numberOfCancellationDays="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !numberOfCancellationDays.valid">Number Of Cancellation Days is required</div>
+    </div>
+    <div>
+        <md-input-container>
+        <input  mdInput placeholder="Number Of People" type="number" name="numberOfPeople" [(ngModel)]="nAccommodation.numberOfPeople" #numberOfPeople="ngModel" required />
+        </md-input-container>
+        <div *ngIf="f.submitted && !numberOfPeople.valid">Number Of People is required</div>
+    </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="City" name="city" [(ngModel)]="nAccommodation.address.city" #city="ngModel" required />
+          <input mdInput type="text" placeholder="City" name="city" [(ngModel)]="nAccommodation.city" #city="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !city.valid">City is required</div>
       </div>
       <div>
         <md-input-container>
-         <input mdInput type="text" placeholder="Street" name="street" [(ngModel)]="nAccommodation.address.street" #street="ngModel" required />
+         <input mdInput type="text" placeholder="Street" name="street" [(ngModel)]="nAccommodation.street" #street="ngModel" required />
         </md-input-container>
          <div *ngIf="f.submitted && !street.valid">Street is required</div>
      </div>
      <div>
         <md-input-container>
-         <input mdInput type="text" placeholder="Country" name="country" [(ngModel)]="nAccommodation.address.country" #country="ngModel" required />
+         <input mdInput type="text" placeholder="Country" name="country" [(ngModel)]="nAccommodation.country" #country="ngModel" required />
         </md-input-container>
          <div *ngIf="f.submitted && !country.valid">Country is required</div>
      </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="Latitude" [readonly] = "true" name="latitude" [(ngModel)]="nAccommodation.address.latitude" #latitude="ngModel" required />
+          <input mdInput type="text" placeholder="Latitude" [readonly] = "true" name="latitude" [(ngModel)]="nAccommodation.latitude" #latitude="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !latitude.valid">Latitude is required</div>
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" placeholder="longitude" [readonly] = "true" name="longitude" [(ngModel)]="nAccommodation.address.longitude" #longitude="ngModel" required />
+          <input mdInput type="text" placeholder="Longitude" [readonly] = "true" name="longitude" [(ngModel)]="nAccommodation.longitude" #longitude="ngModel" required />
          </md-input-container>
           <div *ngIf="f.submitted && !longitude.valid">Longitude is required</div>
       </div>
@@ -48,31 +90,23 @@
       </div>
       <div>
          <md-input-container>
-          <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="ImageURL" [(ngModel)]="nAccommodation.ImageURL" #ImageURL="ngModel" required />
+          <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="imageUrls" [(ngModel)]="nAccommodation.imageUrls" #imageUrls="ngModel" required />
          </md-input-container>
-          <div *ngIf="f.submitted && !ImageURL.valid">ImageURL is required</div>
+          <div *ngIf="f.submitted && !imageUrls.valid">ImageURL is required</div>
       </div>
       <div>
             <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChooseImagesDialog()">Choose Image</button>
       </div>
       <div>
-        <md-select style="margin: 15px;" [(ngModel)]="nAccommodation.AccommodationType_Id" name="AccommodationType_Id"  #AccommodationTypeId="ngModel" 
+        <md-select style="margin: 15px;" [(ngModel)]="nAccommodation.accomodationTypeId" name="accomodationTypeId"  #accomodationTypeId="ngModel" 
         placeholder="AccomodationType" required>
             <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
-                {{accommodationType.Name}}
+                {{accommodationType.name}}
             </md-option>
         </md-select>
-        <div *ngIf="f.submitted && !AccommodationTypeId.valid">Accommodation Type is required</div>
+        <div *ngIf="f.submitted && !accomodationTypeId.valid">Accommodation Type is required</div>
       </div>
-      <div>
-        <md-select style="margin: 15px;"  [(ngModel)]="nAccommodation.Place_Id" name="Place_Id" #placeId="ngModel" placeholder="Place" required>
-            <md-option *ngFor="let place of places" [value]="place.Id">
-                {{place.Name}}
-            </md-option>
-        </md-select>
-        <div *ngIf="f.submitted && !placeId.valid">Place is required</div>
-      </div>
-        <button md-raised-button color="primary" type="submit">Save</button>
+    <button md-raised-button color="primary" type="submit">Save</button>
   </form>
 </div>
 

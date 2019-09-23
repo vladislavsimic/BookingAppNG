@@ -1,5 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
-import {RoomReservation} from "../roomreservation.model"
+import {Reservation} from "../roomreservation.model"
 import {Room} from "app/room/room.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpRoomService} from "app/room/room.service";
@@ -20,7 +20,7 @@ import {MdSnackBar} from "@angular/material";
 })
 export class RoomReservationEditComponent implements OnInit {
 
-  @Input() eRoomReservation:RoomReservation;
+  @Input() eRoomReservation:Reservation;
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
    public rooms : Array<Room>;
@@ -40,7 +40,7 @@ export class RoomReservationEditComponent implements OnInit {
       );
   }
 
-  editRoomReservation(roomRes: RoomReservation, form: NgForm){
+  editRoomReservation(roomRes: Reservation, form: NgForm){
     
       this.httpRoomResService.editRoomReservation(roomRes).subscribe(
           ()=>{ 

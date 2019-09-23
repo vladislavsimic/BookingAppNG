@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RoomReservation} from "./roomreservation.model"
+import {Reservation} from "./roomreservation.model"
 import { Http, Response } from '@angular/http';
 import {HttpRoomReservationService} from "./roomreservation.service"
 import { Observable } from "rxjs/Observable";
@@ -13,7 +13,7 @@ import {MdSnackBar} from "@angular/material";
 export class RoomReservationComponent implements OnInit {
 
 
-  private roomReservations:Array<RoomReservation>;
+  private roomReservations:Array<Reservation>;
   private editFlag;
   roomreservation:any;
 
@@ -32,12 +32,12 @@ export class RoomReservationComponent implements OnInit {
       this.ngOnInit();
   }
 
-  editClick(roomRes:RoomReservation){
+  editClick(roomRes:Reservation){
     this.editFlag=true;
     this.roomreservation=roomRes;
   }
 
-  delete(roomRes:RoomReservation){
+  delete(roomRes:Reservation){
 
     this.httpRoomResService.deleteRoomReservation(roomRes.Id).subscribe(
       ()=>{

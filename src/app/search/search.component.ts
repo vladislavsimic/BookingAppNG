@@ -37,7 +37,9 @@ export class SearchComponent implements OnInit {
   private places : Array<Place>;
   private regions : Array<Region>;
   private countries : Array<Country>;
+
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  
   checkedPlace = false;
   checkedBedCount = false;
   checkedMinPrice = false;
@@ -60,8 +62,6 @@ export class SearchComponent implements OnInit {
     this.nSearch.MaxPrice = 500;
     this.nSearch.MinRate = 1;
     this.nSearch.MaxRate = 5;
-    this.nSearch.BedCount = "2";
-    this.nSearch.Place = "";
    /* this.httpAccommodationService.getAccommodations().subscribe(
       (res: any) => {this.accommodations = res; console.log(this.accommodations)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}

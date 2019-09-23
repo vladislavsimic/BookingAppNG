@@ -31,9 +31,9 @@ export class HttpUsersService{
         return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/agents", this.getRequestOptions()).map(this.extractData);
     }
 
-    /*getUser(username:string):Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"appUser/manager/"+username).map(this.extractData);
-    }*/
+    getUser():Observable<any> {
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/me").map(this.extractData);
+    }
 
     unblockManager(id:string) {
         return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend + "users/" + id + "/unblock", null, this.getRequestOptions());

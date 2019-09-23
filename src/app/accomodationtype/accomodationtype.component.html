@@ -7,7 +7,7 @@
     </thead>
     <tr *ngFor="let accomodationType of accomodationTypes">
         <td>{{accomodationType.Id}}</td>
-        <td>{{accomodationType.Name}}</td>
+        <td>{{accomodationType.name}}</td>
         <td *ngIf="adminRole==true"><button (click)="editClick(accomodationType)">Edit</button></td>
         <td *ngIf="adminRole==true"><button (click)="delete(accomodationType)">Delete</button></td>
     </tr>

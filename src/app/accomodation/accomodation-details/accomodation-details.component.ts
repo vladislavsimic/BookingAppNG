@@ -56,46 +56,46 @@ export class AccomodationDetailsComponent implements OnInit {
   }
   
   createPermisions(){
-    this.role=localStorage.getItem('role');
-    if(this.role=="Manager"){
+    this.role = localStorage.getItem('role');
+    if(this.role == "AGENT"){
       this.managerRole=true;
     }
   }
   
-  saveRoomReservation(roomRes: RoomReservation, form: NgForm){
+  // saveRoomReservation(roomRes: RoomReservation, form: NgForm){
     
-       this.httpRoomReservationService.postRoomReservations(roomRes).subscribe(
-          ()=>{ 
-            console.log('RoomRes successfully posted');
-            this.snackBar.open("Room reservation successfully posted", "", { duration: 2500,});
-          },
-          error => {alert("Close!"); console.log(error);}
-        );
-  }
+  //      this.httpRoomReservationService.postRoomReservations(roomRes).subscribe(
+  //         ()=>{ 
+  //           console.log('RoomRes successfully posted');
+  //           this.snackBar.open("Room reservation successfully posted", "", { duration: 2500,});
+  //         },
+  //         error => {alert("Close!"); console.log(error);}
+  //       );
+  // }
   
   getNotification(evt) {
       this.ngOnInit();
   }
 
-  deleteRoom(room:Room){
-    this.httpRoomService.deleteRoom(room.Id).subscribe(
-      ()=>{
-        console.log('Room ' + room.Id + ' successfuly deleted');
-        this.snackBar.open("Room " + room.Id + " successfuly deleted", "", { duration: 2500,});
-        this.ngOnInit();
-      },
-      error=>{alert("Room ' + room.ID + ' failed delete!"); console.log(error);}
-    );
-  }
+  // deleteRoom(room:Room){
+  //   this.httpRoomService.deleteRoom(room.Id).subscribe(
+  //     ()=>{
+  //       console.log('Room ' + room.Id + ' successfuly deleted');
+  //       this.snackBar.open("Room " + room.Id + " successfuly deleted", "", { duration: 2500,});
+  //       this.ngOnInit();
+  //     },
+  //     error=>{alert("Room ' + room.ID + ' failed delete!"); console.log(error);}
+  //   );
+  // }
 
-  editRoom(room:Room){
-      let dialogRef = this.dialog.open(RoomEditComponent);
-      dialogRef.componentInstance.eRoom=room;
+  // editRoom(room:Room){
+  //     let dialogRef = this.dialog.open(RoomEditComponent);
+  //     dialogRef.componentInstance.eRoom=room;
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('Room ' + room.Id + ' successfuly edited.');
-        this.ngOnInit();
-    })
-  }
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('Room ' + room.Id + ' successfuly edited.');
+  //       this.ngOnInit();
+  //   })
+  // }
 
 }

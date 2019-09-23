@@ -32,22 +32,22 @@ export class HttpAccomodationTypeService{
     }
 
     getAccomodationTypes(): Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"accomodationType/accTypes").map(this.extractData);        
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend+"types").map(this.extractData);        
     }
 
     getAccomodationType(Id:number) {
-        return this.http.get(this.appUrl.RootLocation+'accomodationType/accType/'+Id).map(this.extractData);
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend+'types/'+Id).map(this.extractData);
     }
 
     postAccomodationType(accomodationType: AccomodationType): Observable<any>  {
-        return this.http.post(this.appUrl.RootLocation+'accomodationType/accType', accomodationType , this.getRequestOptions());
+        return this.http.post(this.appUrl.RootLocation + this.appUrl.MainBackend+'types', accomodationType , this.getRequestOptions());
     }
 
     deleteAccomodationType(Id:number) {
-        return this.http.delete(this.appUrl.RootLocation + 'accomodationType/accType/'+ Id, this.getRequestOptions());
+        return this.http.delete(this.appUrl.RootLocation + this.appUrl.MainBackend+'types/'+ Id, this.getRequestOptions());
     }
 
     editAccomodationType(accomodationType:AccomodationType) {
-        return this.http.put(this.appUrl.RootLocation+'accomodationType/accType/'+accomodationType.Id, accomodationType, this.getRequestOptions());
+        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend+'types/'+accomodationType.Id, accomodationType, this.getRequestOptions());
     }
 }

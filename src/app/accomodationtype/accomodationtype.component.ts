@@ -36,7 +36,7 @@ export class AccomodationtypeComponent implements OnInit {
 
   createPermisions(){
     this.role=localStorage.getItem('role');
-      if(this.role=="Admin"){
+      if(this.role=="ADMIN"){
           this.adminRole=true;
       }
   }
@@ -54,8 +54,8 @@ export class AccomodationtypeComponent implements OnInit {
 
     this.httpAccomodationTypeService.deleteAccomodationType(accomodationType.Id).subscribe(
       ()=>{
-        console.log('AccomodationType ' + accomodationType.Name + ' successfuly deleted');
-        this.snackBar.open("AccomodationType " + accomodationType.Name + " successfuly deleted", "", { duration: 2500,});
+        console.log('AccomodationType ' + accomodationType.name + ' successfuly deleted');
+        this.snackBar.open("AccomodationType " + accomodationType.name + " successfuly deleted", "", { duration: 2500,});
         this.ngOnInit();
       },
       error=>{alert("AccomodationType ' + accomodationType.Name + ' failed delete!"); console.log(error);}

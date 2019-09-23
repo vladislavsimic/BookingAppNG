@@ -1,4 +1,4 @@
-import {Place} from "app/place/place.model";
+import {AccomodationType} from "app/accomodationtype/accomodationtype.model"
 
 export class Accommodation{
 
@@ -18,13 +18,8 @@ export class Accommodation{
     springPrice: number;
     stars: number;
     summerPrice: number;
-    type: Type;
+    type: AccomodationType;
     winterPrice: number;
-}
-
-export class Type {
-    Id:string;
-    name: string;
 }
 
 export class Address{

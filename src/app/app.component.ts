@@ -24,7 +24,6 @@ export class AppComponent {
   private appUser:boolean;
   public static adminR:boolean;
   public static managerR: boolean;
-  //zone: NgZone;
 
   constructor(private httpAuthService:HttpAuthenticationService,public dialog: MdDialog,private router:Router,
              public snackBar: MdSnackBar,
@@ -37,12 +36,6 @@ export class AppComponent {
       this.managerRole=false;
       this.createPermision();
       this.checkForUser();
-    //    if (this.role == "Admin") {
-    //         this.notificationService.adminNotReceived.subscribe(e => this.notify(e));
-    //     } else if (this.role == "Manager") {
-    //         this.notificationService.managerNotRecieved.subscribe(e => this.notify(e));
-    //     }
-        //this.zone = new NgZone({ enableLongStackTrace: false });
   }
 
   createPermision(){
@@ -86,7 +79,6 @@ export class AppComponent {
     }
 
   checkForUser(){
-    //   this.username=localStorage.getItem('username');
       this.role=localStorage.getItem('role');
       if(this.role==null || this.role==undefined){
           this.isLoggedIn=false;
@@ -107,20 +99,6 @@ export class AppComponent {
     //       error=>{console.log(error); alert("Logout failed!");}
     //   );
   }
-  /*notify(data: any) {
-        this.zone.run(() => {
-            if (this.role == "Admin")
-             {
-               //this.openSnackBar("You have "+ data +" accommodation(s) for approve","");
-               this.snackBar.open("You have "+ data +" accommodation(s) for approve", "", { duration: 2500,});
-            } else if(this.role == "Manager")
-            {
-                 //this.openSnackBar("Your accommodation "+ data + " is approved ","");
-                 this.snackBar.open("Your accommodation "+ data + " is approved ", "", { duration: 5000,});
-            }
-        });
-
-  }*/
 
     openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -133,18 +111,6 @@ export class AppComponent {
             route:['/home'],
             label: "Home"
 
-        },
-        {
-            route: ['/country'],
-            label: "Country"
-        },
-        {
-            route: ['/region'],
-            label: "Region"
-        },
-        {
-            route: ['/place'],
-            label: "Place"
         },
         {
             route: ['/accomodation'],

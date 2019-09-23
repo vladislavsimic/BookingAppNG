@@ -20,15 +20,6 @@
 
     <nav md-tab-nav-bar >
         <a md-tab-link  [routerLink]="['/home']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Home</a>
-        <div class="nav_bar" >
-            <a md-tab-link *ngIf="adminRole==true"  [routerLink]="['/country']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Country</a>
-        </div>
-        <div class="nav_bar">
-            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/place']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Place</a>
-        </div>
-        <div class="nav_bar">
-            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/region']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Region</a>
-        </div>
         <div class="nav_bar">
             <a md-tab-link [routerLink]="['/accomodation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation</a>
         </div>

@@ -12,6 +12,9 @@ import {Manager} from "app/managers/manager.model"
 import {HttpUsersService} from "app/managers/users.service"
 import {RoomAddComponent} from "app/room/room-add/room-add.component"
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component"
+import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
+import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
+import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
 
 
 @Component({
@@ -28,12 +31,11 @@ export class AccomodationComponent implements OnInit {
   filtredAcc: Array<Accommodation>;
   mapInfo:MapModel;
   public imageUrl:string;
-  p: number = 1;
   public count : number;
   private userUndefined:boolean;
   private adminRole:boolean;
   private managerRole:boolean;
-  private managerBanned:boolean;
+  private managerActive:boolean;
   private userManager:Manager;
   private appUser:boolean;
   private role:string;
@@ -45,32 +47,22 @@ export class AccomodationComponent implements OnInit {
 
   ngOnInit() {
      
-    this.editFlag=false;
-    this.adminRole=false;
-    this.managerRole=false;
-    this.appUser=false;
-    this.userUndefined=true;
-    this.managerBanned=false;
+    this.editFlag = false;
+    this.adminRole = false;
+    this.managerRole = false;
+    this.appUser = false;
+    this.userUndefined = true;
+    this.managerActive = false;
     this.createPermisions();
-    
-    // if(this.managerRole){
-    //     this.httpAccommodationService.getManagerAccommodations(localStorage.getItem('username')).subscribe(
-    //       (res: any) => {
-    //         this.accommodations = res; 
-    //         console.log(this.accommodations);
-    //         this.setImagesForAccommodations();},
-    //         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    //     );
-    // }else{
-        this.httpAccommodationService.getAccommodations().subscribe(
-          (res: any) => {
-            this.accommodations = res; 
-            console.log(this.accommodations);
-          },
-            // this.setImagesForAccommodations();},
-            error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-        );
-    // }
+
+    this.httpAccommodationService.getAccommodations().subscribe(
+      (res: any) => {
+        this.accommodations = res; 
+        console.log(this.accommodations);
+      },
+        // this.setImagesForAccommodations();},
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
   }
 
   // setImagesForAccommodations(){
@@ -106,31 +98,30 @@ export class AccomodationComponent implements OnInit {
 
   createPermisions(){
       this.role=localStorage.getItem('role');
-      if(this.role=="Admin"){
-          this.adminRole=true;
-          this.userUndefined=false;
-      }else if(this.role=="User"){
+      if(this.role == "ADMIN"){
+          this.adminRole = true;
+          this.userUndefined = false;
+      }else if(this.role == "USER"){
           this.appUser=true;
-          this.userUndefined=false;
-      }else if(this.role=="Manager"){
-          this.managerRole=true;
-          this.userUndefined=false;
-          // this.setUserManager();
-          
+          this.userUndefined = false;
+      }else if(this.role == "AGENT"){
+          this.managerRole = true;
+          this.userUndefined = false;
+          this.setUserManager();
       }
   }
 
-  // setUserManager(){
-  //   this.httpUsersService.getUser(localStorage.getItem('username')).subscribe(
-  //     (res: any) => {
-  //       this.userManager=res;
-  //       if(this.userManager.isBanned!=undefined){
-  //           this.managerBanned=this.userManager.isBanned;
-  //         }
-  //       console.log(this.userManager);},
-  //       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-  //   );
-  // }
+  setUserManager(){
+    this.httpUsersService.getUser().subscribe(
+      (res: any) => {
+        this.userManager = res;
+        if(this.userManager.isActive != undefined){
+            this.managerActive = this.userManager.isActive;
+          }
+        console.log(this.userManager);},
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
+  }
 
   getNotification(evt) {
       this.ngOnInit();
@@ -141,20 +132,25 @@ export class AccomodationComponent implements OnInit {
     this.accommodation=accommodation;
   }
 
-  // delete(accommodation:Accommodation){
+  delete(accommodation:Accommodation){
 
-  //   this.httpAccommodationService.deleteAccommodation(accommodation.Id).subscribe(
-  //     ()=>{
-  //       console.log('Accommodation ' + accommodation.Name + ' successfuly deleted');
-  //       this.snackBar.open("Accommodation " + accommodation.Name + " successfuly deleted", "", { duration: 2500,});
-  //       this.ngOnInit();
-  //     },
-  //     error=>{alert("Accommodation ' + accommodation.Name + ' failed delete!"); console.log(error);}
-  //   );
-  // }
+    this.httpAccommodationService.deleteAccommodation(accommodation.Id).subscribe(
+      ()=>{
+        console.log('Accommodation ' + accommodation.name + ' successfuly deleted');
+        this.snackBar.open("Accommodation " + accommodation.name + " successfuly deleted", "", { duration: 2500,});
+        this.ngOnInit();
+      },
+      error=>{alert("Accommodation ' + accommodation.Name + ' failed delete!"); console.log(error);}
+    );
+  }
 
   openAccNewDialog(){
-    let dialogRef = this.dialog.open(AccommodationAddComponent);
+
+    let config = new MdDialogConfig();
+    config.height='700px';
+    config.width='700px';
+
+    let dialogRef = this.dialog.open(AccommodationAddComponent, config);
     dialogRef.componentInstance.userManager=this.userManager;
 
     dialogRef.afterClosed().subscribe(result => {
@@ -162,17 +158,17 @@ export class AccomodationComponent implements OnInit {
     });
   }
   
-  //   editAccNewDialog(acc:Accommodation){
-  //     let config = new MdDialogConfig();
-  //     config.data = acc;
+  editAccNewDialog(acc:Accommodation){
+      let config = new MdDialogConfig();
+      config.data = acc;
 
-  //     let dialogRef = this.dialog.open(AccommodationEditComponent,config);
-  //     dialogRef.componentInstance.eAccommodation = acc;
-  //     dialogRef.afterClosed().subscribe(result => {
-  //     this.ngOnInit();
-  //   });
+      let dialogRef = this.dialog.open(AccommodationEditComponent,config);
+      dialogRef.componentInstance.eAccommodation = acc;
+      dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
 
-  // }
+  }
 
   // addRoomDialog(accommodation:Accommodation){
       
@@ -185,53 +181,51 @@ export class AccomodationComponent implements OnInit {
   // }
 
 
-//   detailsDialog(acc:Accommodation){
-//     let config = new MdDialogConfig();
-//     config.data = acc;
-//     config.height = '700px';
-//     config.width = '850px';
-//     // let dialogRef = this.dialog.open(AccomodationDetailsComponent,config);
-//     // dialogRef.componentInstance.detAccomodation = acc;
+  detailsDialog(acc:Accommodation){
+    let config = new MdDialogConfig();
+    config.data = acc;
+    config.height = '700px';
+    config.width = '850px';
+    let dialogRef = this.dialog.open(AccomodationDetailsComponent,config);
+    dialogRef.componentInstance.detAccomodation = acc;
     
-//     // dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
      
-//      if (result != null)
-//      {
-//      this.ngOnInit();
-//      }
-//   });
-//  }
+     if (result != null)
+     {
+      this.ngOnInit();
+     }
+  });
+ }
 
-//  commentDialog(acc:Accommodation){
-//     let config = new MdDialogConfig();
-//     config.data = acc;
-//     config.height = '700px';
-//     config.width = '850px';
+ reservationsDialog(acc:Accommodation){
+    let config = new MdDialogConfig();
+    config.data = acc;
+    config.height = '700px';
+    config.width = '850px';
     
-//     let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
-//     dialogRef.componentInstance.commentAccomodation = acc;
-//     dialogRef.componentInstance.managerRole=this.managerRole;
-//     dialogRef.afterClosed().subscribe(result => {
-    
-//     this.ngOnInit();
-     
-//   });
-//  }
+    let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
+    dialogRef.componentInstance.commentAccomodation = acc;
+    dialogRef.componentInstance.managerRole = this.managerRole;
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+  });
+ }
 
-//  openSearchDialog(){
-//    let config = new MdDialogConfig();
-//     config.height = '500px';
-//     config.width = '450px'; 
-//     let dialogRef = this.dialog.open(SearchComponent,config);
+ openSearchDialog(){
+   let config = new MdDialogConfig();
+    config.height = '500px';
+    config.width = '450px'; 
+    let dialogRef = this.dialog.open(SearchComponent,config);
     
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result != null)
-//       {
-//         this.accommodations = result;
-//       }
-//   });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null)
+      {
+        this.accommodations = result;
+      }
+  });
 
-//  }
+ }
 }
 
 

@@ -30,13 +30,14 @@ export class AccomodationCommentComponent implements OnInit {
 
   constructor(private httpCommentService: HttpCommentService,
               public dialogRef: MdDialogRef<AccomodationCommentComponent>,
-              private router: Router,private thhtAccService : HttpAccommodationService,
+              private router: Router,
+              private accService : HttpAccommodationService,
               private snackBar:MdSnackBar) 
               {
               }
 
   ngOnInit() {
-       this.thhtAccService.getAccommodation(this.commentAccomodation.Id).subscribe((res: any) => {
+       this.accService.getAccommodation(this.commentAccomodation.Id).subscribe((res: any) => {
         this.commentAccomodation = res; console.log(this.commentAccomodation);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}

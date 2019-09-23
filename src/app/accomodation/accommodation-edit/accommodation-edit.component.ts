@@ -1,7 +1,8 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {Accommodation} from "../accommodation.model"
+import {Address} from "../accommodation.model"
+import {AccomodationType} from "app/accomodationtype/accomodationtype.model"
 import {Place} from 'app/place/place.model'
-import {AccomodationType} from 'app/accomodationtype/accomodationtype.model'
 import { Http, Headers, Response } from '@angular/http';
 import {HttpPlaceService} from 'app/place/place.service'
 import {HttpAccommodationService} from 'app/accomodation/accommodation.service'
@@ -30,8 +31,6 @@ export class AccommodationEditComponent implements OnInit {
   public accommodationTypes:Array<AccomodationType>;
   public eAccommodation : Accommodation;
   mapInfo:MapModel;
-  private role:string;
-  private adminRole:boolean;
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
@@ -45,108 +44,81 @@ export class AccommodationEditComponent implements OnInit {
 
   ngOnInit() {
 
-    this.adminRole=false;
-    this.createPermisions();
-
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
         this.accommodationTypes = res; console.log(this.accommodationTypes);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );
-      this.httpPlaceService.getPlaces().subscribe((res: any) => {
-        this.places = res; console.log(this.places);
-      },
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );
-      
+      );      
   }
 
-  createPermisions(){
-    this.role=localStorage.getItem('role');
-    if(this.role=="Admin"){
-      this.adminRole=true;
-    }
+  openChangeImageDialog(){
+    let config = new MdDialogConfig();
+    config.height='700px';
+    config.width='700px';
+
+    let dialogRef = this.dialog.open(ImageuploadComponent,config);
+    dialogRef.componentInstance.accommodation=this.eAccommodation;
   }
 
-//   openChangeImageDialog(){
-//     let config = new MdDialogConfig();
-//     config.height='700px';
-//     config.width='700px';
+  openMapChangeLocation(){
+    let config = new MdDialogConfig();
+    config.height='700px';
+    config.width='700px';
 
-//     let dialogRef = this.dialog.open(ImageuploadComponent,config);
-//     dialogRef.componentInstance.accommodation=this.eAccommodation;
-//   }
+    this.mapInfo = new MapModel(this.eAccommodation.address.latitude,this.eAccommodation.address.longitude, 
+    "",
+    "" , "" , "");
 
-//   openMapChangeLocation(){
-//     let config = new MdDialogConfig();
-//     config.height='700px';
-//     config.width='700px';
+    let dialogRef = this.dialog.open(MapComponent);
+    dialogRef.componentInstance.mapInfo = this.mapInfo;
+    dialogRef.componentInstance.adding=true;
+    dialogRef.componentInstance.watching=false;
 
-//     this.mapInfo = new MapModel(this.eAccommodation.Latitude,this.eAccommodation.Longitude, 
-//     "",
-//     "" , "" , "");
+    dialogRef.afterClosed().subscribe((res) => {
+            console.log("Successfully checked coordinates.");
+            this.snackBar.open("Successfully checked coordinates.", "", { duration: 2500,});
 
-//     let dialogRef = this.dialog.open(MapComponent);
-//     dialogRef.componentInstance.mapInfo = this.mapInfo;
-//     dialogRef.componentInstance.adding=true;
-//     dialogRef.componentInstance.watching=false;
+            if (res == undefined) {
+                return;
+            }
+            this.eAccommodation.address.latitude = res.latitude;
+            this.eAccommodation.address.longitude = res.longitude;
+        });
+  }
 
-//     dialogRef.afterClosed().subscribe((res) => {
-//             console.log("Successfully checked coordinates.");
-//             this.snackBar.open("Successfully checked coordinates.", "", { duration: 2500,});
-
-//             if (res == undefined) {
-//                 return;
-//             }
-//             this.eAccommodation.Latitude = res.latitude;
-//             this.eAccommodation.Longitude = res.longitude;
-//         });
-//   }
-
-//   editAccommodation(accommodation: Accommodation, form: NgForm){
+  editAccommodation(accommodation: any, form: NgForm){
     
-//       this.accommodationForEdit=new Accommodation();
-//       this.accommodationForEdit.Id=this.eAccommodation.Id;
-//       this.accommodationForEdit.Name=accommodation.Name;
-//       this.accommodationForEdit.Address=accommodation.Address;
-//       this.accommodationForEdit.AccommodationType_Id=accommodation.AccommodationType_Id;
-//       this.accommodationForEdit.AppUser_Id=this.eAccommodation.AppUser_Id;
-//       this.accommodationForEdit.AverageGrade=this.eAccommodation.AverageGrade;
-//       this.accommodationForEdit.Description=accommodation.Description;
-//       this.accommodationForEdit.ImageURL=accommodation.ImageURL;
-//       this.accommodationForEdit.Latitude=accommodation.Latitude;
-//       this.accommodationForEdit.Longitude=accommodation.Longitude;
-//       this.accommodationForEdit.Place_Id=accommodation.Place_Id;
-//       if(this.adminRole==true){
-//         if (accommodation.Approved == true)
-//           {
-//             this.httpAccommodationService.approveAccommodation(this.eAccommodation.Id).subscribe(
-//               ()=>{
-//                  console.log('Approve changed to true.');
-//               },
-//               error => {alert("Close change approve!"); console.log(error);}
+      this.accommodationForEdit=new Accommodation();
+      this.accommodationForEdit.address = new Address();
+      this.accommodationForEdit.type = new AccomodationType();
 
-//             );
-//           }else{
-//             this.httpAccommodationService.banAccommodation(this.eAccommodation.Id).subscribe(
-//               ()=>{
-//                  console.log('Approve changed to false.');
-//               },
-//               error => {alert("Close change approve!"); console.log(error);}
+      this.accommodationForEdit.Id=this.eAccommodation.Id;
 
-//             );
-//           }
-//       }else{
-//         this.accommodationForEdit.Approved=this.eAccommodation.Approved;
-//         this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
-//           ()=>{ 
-//             console.log('Accommodation successfully edited');
-//             this.snackBar.open("Accommodation successfully edited", "", { duration: 2500,});
-//             this.dialogRef.close();
-//           },
-//           error => {alert("Close!"); console.log(error);}
-//         );
-//       }
-//   }
+      this.accommodationForEdit.name = accommodation.name;
+      this.accommodationForEdit.description = accommodation.description;
+      this.accommodationForEdit.autumnPrice = accommodation.autumnPrice;
+      this.accommodationForEdit.springPrice = accommodation.springPrice;
+      this.accommodationForEdit.winterPrice = accommodation.winterPrice;
+      this.accommodationForEdit.summerPrice = accommodation.summerPrice;
+      this.accommodationForEdit.stars = accommodation.stars;
+      this.accommodationForEdit.numberOfCancellationDays = accommodation.numberOfCancellationDays;
+      this.accommodationForEdit.numberOfPeople = accommodation.numberOfPeople;
+      this.accommodationForEdit.address.city = accommodation.city;
+      this.accommodationForEdit.address.country = accommodation.country;
+      this.accommodationForEdit.address.latitude = accommodation.latitude;
+      this.accommodationForEdit.address.longitude = accommodation.longitude;
+      this.accommodationForEdit.address.street = accommodation.street;
+      this.accommodationForEdit.type.Id = accommodation.accomodationTypeId;
+      this.accommodationForEdit.imageUrls = accommodation.imageUrls;
 
+      
+      this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
+        ()=>{ 
+          console.log('Accommodation successfully edited');
+          this.snackBar.open("Accommodation successfully edited", "", { duration: 2500,});
+          this.dialogRef.close();
+        },
+        error => {alert("Close!"); console.log(error);}
+      );
+  }
 }

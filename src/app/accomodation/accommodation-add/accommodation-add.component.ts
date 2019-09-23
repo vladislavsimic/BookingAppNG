@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Accommodation} from "../accommodation.model"
+import {Accommodation, Address} from "../accommodation.model"
 import {AccomodationType} from 'app/accomodationtype/accomodationtype.model'
 import {Place} from 'app/place/place.model'
 import {Http, Headers, Response } from '@angular/http';
@@ -41,16 +41,20 @@ export class AccommodationAddComponent implements OnInit {
               private snackBar:MdSnackBar) { }
 
   ngOnInit() {
+    // this.accommodationTypes = [
+    //    {Id:1, name:"acc type 1"},
+    //    {Id:2, name:"acc type 2"},
+    //   ];
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
         this.accommodationTypes = res; console.log(this.accommodationTypes);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
-      this.httpPlaceService.getPlaces().subscribe((res: any) => {
-        this.places = res; console.log(this.places);
-      },
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );
+    //   this.httpPlaceService.getPlaces().subscribe((res: any) => {
+    //     this.places = res; console.log(this.places);
+    //   },
+    //     error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    //   );
   }
 
   openChooseImagesDialog(){
@@ -82,21 +86,33 @@ export class AccommodationAddComponent implements OnInit {
             if (res == undefined) {
                 return;
             }
-            this.nAccommodation.Latitude = res.latitude;
-            this.nAccommodation.Longitude = res.longitude;
+            this.nAccommodation.latitude = res.latitude;
+            this.nAccommodation.longitude = res.longitude;
         });
   }
 
-  saveAccommodation(accommodation: Accommodation, form: NgForm){
+  saveAccommodation(accommodation: any, form: NgForm){
+
        this.postAccommodation=new Accommodation();
-       this.postAccommodation.name=accommodation.name;
-       this.postAccommodation.type.Id=accommodation.type.Id;
-       this.postAccommodation.address.city=accommodation.address.city;
-       this.postAccommodation.address.country=accommodation.address.country;
-       this.postAccommodation.description=accommodation.description;
-       this.postAccommodation.imageUrls=accommodation.imageUrls;
-       this.postAccommodation.address.latitude=accommodation.address.latitude;
-       this.postAccommodation.address.longitude=accommodation.address.longitude;
+       this.postAccommodation.address = new Address();
+       this.postAccommodation.type = new AccomodationType();
+
+       this.postAccommodation.name = accommodation.name;
+       this.postAccommodation.description = accommodation.description;
+       this.postAccommodation.autumnPrice = accommodation.autumnPrice;
+       this.postAccommodation.springPrice = accommodation.springPrice;
+       this.postAccommodation.winterPrice = accommodation.winterPrice;
+       this.postAccommodation.summerPrice = accommodation.summerPrice;
+       this.postAccommodation.stars = accommodation.stars;
+       this.postAccommodation.numberOfCancellationDays = accommodation.numberOfCancellationDays;
+       this.postAccommodation.numberOfPeople = accommodation.numberOfPeople;
+       this.postAccommodation.address.city = accommodation.city;
+       this.postAccommodation.address.country = accommodation.country;
+       this.postAccommodation.address.latitude = accommodation.latitude;
+       this.postAccommodation.address.longitude = accommodation.longitude;
+       this.postAccommodation.address.street = accommodation.street;
+       this.postAccommodation.type.Id = accommodation.accomodationTypeId;
+       this.postAccommodation.imageUrls = accommodation.imageUrls;
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

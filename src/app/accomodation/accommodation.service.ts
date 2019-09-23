@@ -44,7 +44,7 @@ export class HttpAccommodationService{
     }
 
     getAccommodation(Id:number){
-        return this.http.get(this.appUrl.RootLocation+'acc/acc/'+Id).map(this.extractData);
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend +'properties/' + Id).map(this.extractData);
     }
 
     getImageUrlForAccommodation(id:number):Observable<Response> {
@@ -56,11 +56,11 @@ export class HttpAccommodationService{
     }
 
     deleteAccommodation(Id:number){
-        return this.http.delete(this.appUrl.RootLocation + 'acc/acc/'+ Id,this.getRequestOptions());
+        return this.http.delete(this.appUrl.RootLocation + this.appUrl.MainBackend + 'properties/'+ Id, this.getRequestOptions());
     }
 
     editAccommodation(accommodation:Accommodation) {
-        return this.http.put(this.appUrl.RootLocation+'acc/acc/'+accommodation.Id, accommodation, this.getRequestOptions());
+        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend + 'properties/' + accommodation.Id, accommodation, this.getRequestOptions());
     }
 
      approveAccommodation(accomodation_id: number) {

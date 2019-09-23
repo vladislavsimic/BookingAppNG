@@ -14,16 +14,11 @@ import {HttpAccommodationService} from "./accomodation/accommodation.service"
 import {HttpRegisterService} from "./register/register.service"
 import {HttpAuthenticationService} from "./login/userAuthentication.service"
 import { AppComponent } from './app.component';
-import { CountryComponent } from './country/country.component';
-import { CountryAddComponent } from './country/country-add/country-add.component';
-import { PlaceComponent } from './place/place.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 import { AccomodationtypeComponent } from './accomodationtype/accomodationtype.component';
 import { CommentComponent } from './comment/comment.component';
-import { RegionComponent } from './region/region.component';
 import { RoomReservationComponent } from './roomreservation/roomreservation.component';
 import { RoomComponent } from './room/room.component';
-import { CountryEditComponent } from './country/country-edit/country-edit.component';
 import { RoomAddComponent } from './room/room-add/room-add.component';
 import { RoomEditComponent } from './room/room-edit/room-edit.component';
 import { RoomReservationAddComponent } from './roomreservation/room-reservation-add/room-reservation-add.component';
@@ -32,13 +27,10 @@ import {HttpRoomReservationService}  from './roomreservation/roomreservation.ser
 import { CommentAddComponent } from './comment/comment-add/comment-add.component';
 import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule} from '@angular/material/';
-import { PlaceAddComponent } from './place/place-add/place-add.component';
-import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import { AccomodationtypeAddComponent } from './accomodationtype/accomodationtype-add/accomodationtype-add.component';
 import { AccomodationtypeEditComponent } from './accomodationtype/accomodationtype-edit/accomodationtype-edit.component';
-// import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
-// import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
-import { RegionAddComponent } from './region/region-add/region-add.component';
+import { AccommodationAddComponent } from './accomodation/accommodation-add/accommodation-add.component';
+import { AccommodationEditComponent } from './accomodation/accommodation-edit/accommodation-edit.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegionEditComponent } from './region/region-edit/region-edit.component'
@@ -46,8 +38,8 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 import { HomeComponent } from './home/home.component';
 import {AdminGuard} from './adminGuard';
 import {ManagerGuard} from './managerGuard';
-// import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
-// import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
+import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
+import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
@@ -61,22 +53,14 @@ import {FilterService} from "app/search/search.service";
 
 
 const Routes=[
-  {path: "country",component:CountryComponent, canActivate: [AdminGuard]},
-  {path: "country-add",component:CountryAddComponent, canActivate: [AdminGuard]},
-  {path: "country-edit",component:CountryEditComponent, canActivate: [AdminGuard]},
-  {path: "place",component:PlaceComponent, canActivate: [AdminGuard]},
-  {path: "place-add",component:PlaceAddComponent, canActivate: [AdminGuard]},
-  {path: "place-edit",component:PlaceEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation",component:AccomodationComponent},
-  // {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
-  // {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
+  {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
+  {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
   {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
   {path: "comment",component:CommentComponent,canActivate: [AdminGuard]},
-  {path: "region",component:RegionComponent, canActivate: [AdminGuard]},
   {path: "room-reservation",component:RoomReservationComponent,canActivate: [AdminGuard]},
-  {path: "region-add",component:RegionAddComponent, canActivate: [AdminGuard]},
   {path: "region-edit",component:RegionEditComponent, canActivate: [AdminGuard]},
   {path: "room",component:RoomComponent,canActivate: [AdminGuard]},
   {path: "register",component:RegisterComponent},
@@ -94,16 +78,11 @@ const Routes=[
 @NgModule({
   declarations: [
     AppComponent,
-    CountryComponent,
-    CountryAddComponent,
-    PlaceComponent,
     AccomodationComponent,
     AccomodationtypeComponent,
     CommentComponent,
-    RegionComponent,
     RoomReservationComponent,
     RoomComponent,
-    CountryEditComponent,
     RoomAddComponent,
     RoomEditComponent,
     RoomReservationComponent,
@@ -111,19 +90,16 @@ const Routes=[
     RoomReservationEditComponent,
     CommentAddComponent,
     CommentEditComponent,
-    PlaceAddComponent,
-    PlaceEditComponent,
     AccomodationtypeAddComponent,
     AccomodationtypeEditComponent,
-    // AccommodationAddComponent,
-    // AccommodationEditComponent,
-    RegionAddComponent,
+    AccommodationAddComponent,
+    AccommodationEditComponent,
     RegionEditComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    // AccomodationDetailsComponent,
-    // AccomodationCommentComponent,
+    AccomodationDetailsComponent,
+    AccomodationCommentComponent,
     MapComponent,
     FileSelectDirective,
     FileDropDirective,
@@ -132,7 +108,7 @@ const Routes=[
     ManagersComponent
   ],
   
-  entryComponents: [/*AccomodationDetailsComponent,AccomodationCommentComponent,*/ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
+  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
 
   imports: [
     BrowserModule,

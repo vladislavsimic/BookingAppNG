@@ -1,5 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
-import {RoomReservation} from "../roomreservation.model"
+import {Reservation} from "../roomreservation.model"
 import { Http, Headers, Response } from '@angular/http';
 import {HttpRoomReservationService} from "../roomreservation.service"
 import {HttpRoomService} from "app/room/room.service";
@@ -59,11 +59,11 @@ constructor(private httpRoomResService:HttpRoomReservationService,
       }
   }
 
- saveRoomReservation(roomRes: RoomReservation, form: NgForm,room:Room){
-      roomRes.Room_Id = room.Id;
+ saveRoomReservation(roomRes: Reservation, form: NgForm,room:Room){
+      roomRes.Id = room.Id;
       var date = new Date();
-      var startDate = new Date(roomRes.StartDate);
-      var endDate = new Date(roomRes.EndDate);
+      var startDate = new Date(roomRes.startDate);
+      var endDate = new Date(roomRes.endDate);
       if (date > startDate)
       {
         this.openSnackBar("Start date cant be later then current date","");
@@ -106,7 +106,7 @@ constructor(private httpRoomResService:HttpRoomReservationService,
     });
   }
 
-  checkRoomReservations(room:Room,roomRes:RoomReservation):boolean{
+  checkRoomReservations(room:Room,roomRes:Reservation):boolean{
     if (room.RoomReservations.length == 0)
     {
       return true;
@@ -120,8 +120,8 @@ constructor(private httpRoomResService:HttpRoomReservationService,
           var ed = element.EndDate.toString();
           var k = ed.split('T');
           var edCom = new Date(k[0]);
-          var StartDate = new Date(roomRes.StartDate);
-          var EndDate = new Date(roomRes.EndDate);
+          var StartDate = new Date(roomRes.startDate);
+          var EndDate = new Date(roomRes.endDate);
                               /// provera da li se datumi rezervacije preklapaju
         if ((StartDate >= sdCom && StartDate <= edCom) ||
                  (EndDate >=sdCom && EndDate <=edCom))

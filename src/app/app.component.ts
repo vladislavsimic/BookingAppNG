@@ -122,7 +122,7 @@ export class AppComponent {
         },
         {
           route: ['/comment'],
-          label: "Comment"
+          label: "Comments"
         },
         {
           route: ['/room'],
@@ -130,7 +130,7 @@ export class AppComponent {
         },
         {
           route: ['/room-reservation'],
-          label: "RoomReservation"
+          label: "Reservations"
         },
         {
           route: ['/managers'],

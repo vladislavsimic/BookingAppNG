@@ -57,31 +57,31 @@
       </div>
         <div>
            <md-input-container>
-            <input mdInput type="text" placeholder="City" name="city" [(ngModel)]="eAccommodation.city" #city="ngModel" required />
+            <input mdInput type="text" placeholder="City" name="city" [(ngModel)]="eAccommodation.address.city" #city="ngModel" required />
            </md-input-container>
             <div *ngIf="f.submitted && !city.valid">City is required</div>
         </div>
         <div>
           <md-input-container>
-           <input mdInput type="text" placeholder="Street" name="street" [(ngModel)]="eAccommodation.street" #street="ngModel" required />
+           <input mdInput type="text" placeholder="Street" name="street" [(ngModel)]="eAccommodation.address.street" #street="ngModel" required />
           </md-input-container>
            <div *ngIf="f.submitted && !street.valid">Street is required</div>
        </div>
        <div>
           <md-input-container>
-           <input mdInput type="text" placeholder="Country" name="country" [(ngModel)]="eAccommodation.country" #country="ngModel" required />
+           <input mdInput type="text" placeholder="Country" name="country" [(ngModel)]="eAccommodation.address.country" #country="ngModel" required />
           </md-input-container>
            <div *ngIf="f.submitted && !country.valid">Country is required</div>
        </div>
         <div>
            <md-input-container>
-            <input mdInput type="text" placeholder="Latitude" [readonly] = "true" name="latitude" [(ngModel)]="eAccommodation.latitude" #latitude="ngModel" required />
+            <input mdInput type="text" placeholder="Latitude" [readonly] = "true" name="latitude" [(ngModel)]="eAccommodation.address.latitude" #latitude="ngModel" required />
            </md-input-container>
             <div *ngIf="f.submitted && !latitude.valid">Latitude is required</div>
         </div>
         <div>
            <md-input-container>
-            <input mdInput type="text" placeholder="Longitude" [readonly] = "true" name="longitude" [(ngModel)]="eAccommodation.longitude" #longitude="ngModel" required />
+            <input mdInput type="text" placeholder="Longitude" [readonly] = "true" name="longitude" [(ngModel)]="eAccommodation.address.longitude" #longitude="ngModel" required />
            </md-input-container>
             <div *ngIf="f.submitted && !longitude.valid">Longitude is required</div>
         </div>
@@ -100,7 +100,7 @@
         <div>
           <md-select style="margin: 15px;" [(ngModel)]="eAccommodation.accomodationTypeId" name="accomodationTypeId"  #accomodationTypeId="ngModel" 
           placeholder="AccomodationType" required>
-              <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
+              <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.id">
                   {{accommodationType.name}}
               </md-option>
           </md-select>

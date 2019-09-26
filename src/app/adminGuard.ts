@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate{
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         this.role=localStorage.getItem('role');
 
-        if(this.role=="Admin"){
+        if(this.role=="ADMIN"){
             return true;
         }
         

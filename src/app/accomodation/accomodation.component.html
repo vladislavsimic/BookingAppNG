@@ -1,6 +1,6 @@
 <div>
   <div  class="example-card"  *ngFor="let acc of accommodations"  >
-    <md-card *ngIf="(managerRole == true) && (acc.agentId == userManager.Id)" class="example-card">
+    <md-card *ngIf="(adminRole == true) || (managerRole == true && acc.agentId == userManagerId)" class="example-card">
       <md-card-header>
         <div md-card-avatar class="example-header-image"></div>
         <md-card-title>{{acc.name}} </md-card-title>

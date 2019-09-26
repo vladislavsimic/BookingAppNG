@@ -12,7 +12,7 @@ export class ManagerGuard implements CanActivate{
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         this.role=localStorage.getItem('role');
 
-        if(this.role=="Manager"){
+        if(this.role=="AGENT"){
             return true;
         }
         

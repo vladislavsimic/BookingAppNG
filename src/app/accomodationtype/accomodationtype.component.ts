@@ -52,7 +52,7 @@ export class AccomodationtypeComponent implements OnInit {
 
   delete(accomodationType:AccomodationType){
 
-    this.httpAccomodationTypeService.deleteAccomodationType(accomodationType.Id).subscribe(
+    this.httpAccomodationTypeService.deleteAccomodationType(accomodationType.id).subscribe(
       ()=>{
         console.log('AccomodationType ' + accomodationType.name + ' successfuly deleted');
         this.snackBar.open("AccomodationType " + accomodationType.name + " successfuly deleted", "", { duration: 2500,});

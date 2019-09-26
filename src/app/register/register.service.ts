@@ -11,7 +11,7 @@ export class HttpRegisterService{
     constructor (private http: Http,private appUrl:AppUrl){
     }
 
-    registerUser( user:User):Observable<any> {
+    registerUser(user:any):Observable<any> {
     
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');

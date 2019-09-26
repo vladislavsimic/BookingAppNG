@@ -100,7 +100,7 @@
       <div>
         <md-select style="margin: 15px;" [(ngModel)]="nAccommodation.accomodationTypeId" name="accomodationTypeId"  #accomodationTypeId="ngModel" 
         placeholder="AccomodationType" required>
-            <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.Id">
+            <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.id">
                 {{accommodationType.name}}
             </md-option>
         </md-select>

@@ -5,7 +5,7 @@ export class Reservation{
 
     Id:number;
 
-    reservationStatus;
+    reservationStatus:string;
     price : number;
     property : Accommodation;
     user: User;

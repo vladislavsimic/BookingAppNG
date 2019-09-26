@@ -30,7 +30,7 @@ export class AccomodationtypeEditComponent implements OnInit {
   ngOnInit() {  }
 
   editAccomodationType(accomodationType: AccomodationType, form: NgForm){
-    
+    accomodationType.id = this.eAccomodationType.id;
       this.httpAccomodationTypeService.editAccomodationType(accomodationType).subscribe(
           ()=>{ 
             console.log('AccomodationType successfuly edited');

@@ -35,7 +35,7 @@ export class RoomAddComponent implements OnInit {
 
   saveRoom(room: Room, form: NgForm){
       
-      room.Acc_Id=this.accommodation.Id;
+      room.Acc_Id=this.accommodation.id;
 
       this.httpRoomService.postRoom(room).subscribe(
           ()=>{ 

@@ -2,7 +2,6 @@ import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import {Accommodation} from "../accommodation.model"
 import {Address} from "../accommodation.model"
 import {AccomodationType} from "app/accomodationtype/accomodationtype.model"
-import {Place} from 'app/place/place.model'
 import { Http, Headers, Response } from '@angular/http';
 import {HttpPlaceService} from 'app/place/place.service'
 import {HttpAccommodationService} from 'app/accomodation/accommodation.service'
@@ -27,7 +26,6 @@ import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 export class AccommodationEditComponent implements OnInit {
 
   private accommodationForEdit:Accommodation;
-  public places: Array<Place>;
   public accommodationTypes:Array<AccomodationType>;
   public eAccommodation : Accommodation;
   mapInfo:MapModel;
@@ -90,9 +88,8 @@ export class AccommodationEditComponent implements OnInit {
     
       this.accommodationForEdit=new Accommodation();
       this.accommodationForEdit.address = new Address();
-      this.accommodationForEdit.type = new AccomodationType();
 
-      this.accommodationForEdit.Id=this.eAccommodation.Id;
+      this.accommodationForEdit.id=this.eAccommodation.id;
 
       this.accommodationForEdit.name = accommodation.name;
       this.accommodationForEdit.description = accommodation.description;
@@ -108,10 +105,10 @@ export class AccommodationEditComponent implements OnInit {
       this.accommodationForEdit.address.latitude = accommodation.latitude;
       this.accommodationForEdit.address.longitude = accommodation.longitude;
       this.accommodationForEdit.address.street = accommodation.street;
-      this.accommodationForEdit.type.Id = accommodation.accomodationTypeId;
       this.accommodationForEdit.imageUrls = accommodation.imageUrls;
+      this.accommodationForEdit.typeId = this.eAccommodation.typeId;
+      this.accommodationForEdit.category = this.eAccommodation.category;
 
-      
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
         ()=>{ 
           console.log('Accommodation successfully edited');

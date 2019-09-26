@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {RoomReservation} from "./roomreservation.model"
+import {Reservation} from "./roomreservation.model"
 import {AppUrl} from "app/appservice/AppUrl.services"
 
 @Injectable()
@@ -43,7 +43,7 @@ export class HttpRoomReservationService{
         return this.http.get(this.appUrl.RootLocation+'roomReservation/roomReservationForRoom/'+Id).map(this.extractData);
     }
 
-    postRoomReservations(roomreservation: RoomReservation): Observable<any>  {
+    postRoomReservations(roomreservation: Reservation): Observable<any>  {
         return this.http.post(this.appUrl.RootLocation+'roomReservation/roomReservation', roomreservation , this.getRequestOptions());
     }
 
@@ -51,7 +51,7 @@ export class HttpRoomReservationService{
         return this.http.delete(this.appUrl.RootLocation + 'roomReservation/roomReservation/'+ Id,this.getRequestOptions());
     }
 
-    editRoomReservation(roomreservation:RoomReservation){
+    editRoomReservation(roomreservation:Reservation){
         return this.http.put(this.appUrl.RootLocation+'roomReservation/roomReservation/'+
         roomreservation.Id, roomreservation , this.getRequestOptions());
     }

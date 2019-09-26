@@ -14,7 +14,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {MdDialog, MdDialogRef,MdSnackBar} from '@angular/material';
 import {Room} from "app/room/room.model";
 import {HttpCommentService} from "app/comment/comment.service"
-import {RoomReservation} from "app/roomreservation/roomreservation.model"
+import {Reservation} from "app/roomreservation/roomreservation.model"
 import {Comment} from "app/comment/comment.model";
 
 @Component({
@@ -37,7 +37,7 @@ export class AccomodationCommentComponent implements OnInit {
               }
 
   ngOnInit() {
-       this.accService.getAccommodation(this.commentAccomodation.Id).subscribe((res: any) => {
+       this.accService.getAccommodation(this.commentAccomodation.id).subscribe((res: any) => {
         this.commentAccomodation = res; console.log(this.commentAccomodation);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}

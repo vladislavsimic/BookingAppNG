@@ -2,7 +2,7 @@ import {AccomodationType} from "app/accomodationtype/accomodationtype.model"
 
 export class Accommodation{
 
-    Id:number;
+    id:number;
     name:string;
     description:string;
     address:Address;
@@ -18,7 +18,7 @@ export class Accommodation{
     springPrice: number;
     stars: number;
     summerPrice: number;
-    type: AccomodationType;
+    typeId: string;
     winterPrice: number;
 }
 

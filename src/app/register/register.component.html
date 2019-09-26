@@ -3,25 +3,25 @@
   <form type="form" #f="ngForm" (ngSubmit)="registerUser(f.value,f)"  novalidate>
       <div>
           <md-input-container>
-          <input mdInput type="text" placeholder="Username" name="username" [(ngModel)]="nUser.username" #Username="ngModel" required />
+          <input mdInput type="text" placeholder="Username" name="username" [(ngModel)]="nUser.username" #username="ngModel" required />
           </md-input-container>
           <div *ngIf="f.submitted && !username.valid">Username is required</div>
       </div>
       <div>
           <md-input-container>
-          <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="nUser.password" #Password="ngModel" required />
+          <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="nUser.password" #password="ngModel" required />
           </md-input-container>
           <div *ngIf="f.submitted && !password.valid">Password is required</div>
       </div>
       <div>
         <md-input-container>
-        <input mdInput type="text" placeholder="First name" name="firstName" [(ngModel)]="nUser.firstName" #Username="ngModel" required />
+        <input mdInput type="text" placeholder="First name" name="firstName" [(ngModel)]="nUser.firstName" #firstName="ngModel" required />
         </md-input-container>
         <div *ngIf="f.submitted && !firstName.valid">FirstName is required</div>
     </div>
     <div>
         <md-input-container>
-        <input mdInput type="text" placeholder="Last name" name="lastName" [(ngModel)]="nUser.lastName" #Username="ngModel" required />
+        <input mdInput type="text" placeholder="Last name" name="lastName" [(ngModel)]="nUser.lastName" #lastName="ngModel" required />
         </md-input-container>
         <div *ngIf="f.submitted && !lastName.valid">LastName is required</div>
     </div>
@@ -33,7 +33,7 @@
       </div> -->
       <div>
           <md-input-container>
-          <input  mdInput type="email" placeholder="Email" name="email" [(ngModel)]="nUser.email" #Email="ngModel" required />
+          <input  mdInput type="email" placeholder="Email" name="email" [(ngModel)]="nUser.email" #email="ngModel" required />
           </md-input-container>
           <div *ngIf="f.submitted && !email.valid">Email is required</div>
       </div>

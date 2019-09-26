@@ -48,6 +48,6 @@ export class HttpAccomodationTypeService{
     }
 
     editAccomodationType(accomodationType:AccomodationType) {
-        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend+'types/'+accomodationType.Id, accomodationType, this.getRequestOptions());
+        return this.http.put(this.appUrl.RootLocation + this.appUrl.MainBackend+'types/'+accomodationType.id, accomodationType, this.getRequestOptions());
     }
 }

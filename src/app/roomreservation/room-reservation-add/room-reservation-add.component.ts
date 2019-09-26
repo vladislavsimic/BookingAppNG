@@ -113,11 +113,11 @@ constructor(private httpRoomResService:HttpRoomReservationService,
     }
     var res = false;
      room.RoomReservations.forEach(element => {
-          var sd = element.StartDate.toString();
+          var sd = element.startDate.toString();
           var k = sd.split('T');
           var sdCom = new Date(k[0]);
           
-          var ed = element.EndDate.toString();
+          var ed = element.endDate.toString();
           var k = ed.split('T');
           var edCom = new Date(k[0]);
           var StartDate = new Date(roomRes.startDate);

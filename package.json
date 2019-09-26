@@ -26,6 +26,7 @@
     "@angular/router": "^4.0.0",
     "@ngui/datetime-picker": "^0.16.2",
     "core-js": "^2.4.1",
+    "jwt-decode": "^2.2.0",
     "ng2-datetime": "^1.4.0",
     "ng2-file-upload": "^1.2.1",
     "ngx-pagination": "^3.0.0",

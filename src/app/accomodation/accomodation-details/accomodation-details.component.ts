@@ -14,7 +14,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {MdDialog, MdDialogRef,MdSnackBar} from '@angular/material';
 import {Room} from "app/room/room.model";
 import {HttpRoomReservationService} from "app/roomreservation/roomreservation.service"
-import {RoomReservation} from "app/roomreservation/roomreservation.model"
+import {Reservation} from "app/roomreservation/roomreservation.model"
 import {HttpRoomService} from "app/room/room.service"
 import {RoomEditComponent} from "app/room/room-edit/room-edit.component"
 
@@ -29,7 +29,7 @@ export class AccomodationDetailsComponent implements OnInit {
  public detAccomodation : Accommodation;
  public detAccomodationCopy : any;
  public rooms : Array<Room>;
- public nRoomReservation:RoomReservation;
+ public nRoomReservation:Reservation;
  public managerRole:boolean;
  public role:string;
  
@@ -49,7 +49,7 @@ export class AccomodationDetailsComponent implements OnInit {
     this.managerRole=false;
     this.createPermisions();
 
-    this.httpAccommodationService.getAccommodation(this.detAccomodation.Id).subscribe(
+    this.httpAccommodationService.getAccommodation(this.detAccomodation.id).subscribe(
       (res: any) => {this.detAccomodationCopy = res; console.log(this.detAccomodationCopy)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );

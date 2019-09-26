@@ -1,6 +1,5 @@
 
 export class AccomodationType{
-
-    Id:number;
+    id:number;
     name:string;
 }

@@ -16,6 +16,7 @@ import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 import {Manager} from "app/managers/manager.model"
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-accommodation-add',
@@ -26,7 +27,7 @@ import {Manager} from "app/managers/manager.model"
 export class AccommodationAddComponent implements OnInit {
  
   nAccommodation:any={};
-  userManager:Manager;
+  private managerId : string;
   public accommodationTypes: Array<AccomodationType>;
   public places:Array<Place>;
   private postAccommodation:Accommodation;
@@ -45,6 +46,9 @@ export class AccommodationAddComponent implements OnInit {
     //    {Id:1, name:"acc type 1"},
     //    {Id:2, name:"acc type 2"},
     //   ];
+    var decodedToken = jwt_decode(localStorage.getItem("id_token"));
+    this.managerId = decodedToken.sub;
+
     this.httpAccommodationTypeService.getAccomodationTypes().subscribe((res: any) => {
         this.accommodationTypes = res; console.log(this.accommodationTypes);
       },
@@ -95,7 +99,6 @@ export class AccommodationAddComponent implements OnInit {
 
        this.postAccommodation=new Accommodation();
        this.postAccommodation.address = new Address();
-       this.postAccommodation.type = new AccomodationType();
 
        this.postAccommodation.name = accommodation.name;
        this.postAccommodation.description = accommodation.description;
@@ -111,8 +114,9 @@ export class AccommodationAddComponent implements OnInit {
        this.postAccommodation.address.latitude = accommodation.latitude;
        this.postAccommodation.address.longitude = accommodation.longitude;
        this.postAccommodation.address.street = accommodation.street;
-       this.postAccommodation.type.Id = accommodation.accomodationTypeId;
+       this.postAccommodation.typeId = accommodation.accomodationTypeId;
        this.postAccommodation.imageUrls = accommodation.imageUrls;
+       this.postAccommodation.agentId = this.managerId;
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

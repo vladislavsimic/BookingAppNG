@@ -16,9 +16,9 @@ export class HttpAccommodationService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
-        // let access_token=localStorage.getItem('id_token');
-        // let token = `Bearer ${access_token}`;
-        // headers.append('Authorization', token);
+        let access_token=localStorage.getItem('id_token');
+        let token = `Bearer ${access_token}`;
+        headers.append('Authorization', token);
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
@@ -60,7 +60,7 @@ export class HttpAccommodationService{
     }
 
     editAccommodation(accommodation:Accommodation) {
-        return this.http.patch(this.appUrl.RootLocation + this.appUrl.MainBackend + 'properties/' + accommodation.Id, accommodation, this.getRequestOptions());
+        return this.http.put(this.appUrl.RootLocation + this.appUrl.MainBackend + 'properties/' + accommodation.id, accommodation, this.getRequestOptions());
     }
 
      approveAccommodation(accomodation_id: number) {

@@ -1,4 +1,4 @@
-import {RoomReservation} from "app/roomreservation/roomreservation.model";
+import {Reservation} from "app/roomreservation/roomreservation.model";
 import {Accommodation} from "app/accomodation/accommodation.model";
 
 export class Room{
@@ -10,5 +10,5 @@ export class Room{
     PricePerNight:number;
     Accommodation:Accommodation
     Acc_Id:number;
-    RoomReservations:Array<RoomReservation>;
+    RoomReservations:Array<Reservation>;
 }

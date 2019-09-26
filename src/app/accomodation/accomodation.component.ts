@@ -15,7 +15,7 @@ import {AccommodationAddComponent} from "app/accomodation/accommodation-add/acco
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
 import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
 import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
-
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-accomodation',
@@ -36,7 +36,7 @@ export class AccomodationComponent implements OnInit {
   private adminRole:boolean;
   private managerRole:boolean;
   private managerActive:boolean;
-  private userManager:Manager;
+  private userManagerId:string;
   private appUser:boolean;
   private role:string;
 
@@ -107,21 +107,24 @@ export class AccomodationComponent implements OnInit {
       }else if(this.role == "AGENT"){
           this.managerRole = true;
           this.userUndefined = false;
-          this.setUserManager();
+          this.managerActive = true;
+          var decodedToken = jwt_decode(localStorage.getItem("id_token"));
+          this.userManagerId = decodedToken.sub;
+          // this.setUserManager();
       }
   }
 
-  setUserManager(){
-    this.httpUsersService.getUser().subscribe(
-      (res: any) => {
-        this.userManager = res;
-        if(this.userManager.isActive != undefined){
-            this.managerActive = this.userManager.isActive;
-          }
-        console.log(this.userManager);},
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
-  }
+  // setUserManager(){
+  //   this.httpUsersService.getUser().subscribe(
+  //     (res: any) => {
+  //       this.userManager = res;
+  //       if(this.userManager.isActive != undefined){
+  //           this.managerActive = this.userManager.isActive;
+  //         }
+  //       console.log(this.userManager);},
+  //       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+  //   );
+  // }
 
   getNotification(evt) {
       this.ngOnInit();
@@ -134,7 +137,7 @@ export class AccomodationComponent implements OnInit {
 
   delete(accommodation:Accommodation){
 
-    this.httpAccommodationService.deleteAccommodation(accommodation.Id).subscribe(
+    this.httpAccommodationService.deleteAccommodation(accommodation.id).subscribe(
       ()=>{
         console.log('Accommodation ' + accommodation.name + ' successfuly deleted');
         this.snackBar.open("Accommodation " + accommodation.name + " successfuly deleted", "", { duration: 2500,});
@@ -151,7 +154,7 @@ export class AccomodationComponent implements OnInit {
     config.width='700px';
 
     let dialogRef = this.dialog.open(AccommodationAddComponent, config);
-    dialogRef.componentInstance.userManager=this.userManager;
+    // dialogRef.componentInstance.userManager=this.userManager;
 
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
@@ -161,6 +164,8 @@ export class AccomodationComponent implements OnInit {
   editAccNewDialog(acc:Accommodation){
       let config = new MdDialogConfig();
       config.data = acc;
+      config.height='700px';
+      config.width='700px';
 
       let dialogRef = this.dialog.open(AccommodationEditComponent,config);
       dialogRef.componentInstance.eAccommodation = acc;

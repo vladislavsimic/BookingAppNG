@@ -95,7 +95,7 @@
             <div *ngIf="f.submitted && !imageUrls.valid">ImageURL is required</div>
         </div>
         <div>
-              <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChooseImagesDialog()">Choose Image</button>
+              <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChangeImageDialog()">Choose Image</button>
         </div>
         <div>
           <md-select style="margin: 15px;" [(ngModel)]="eAccommodation.accomodationTypeId" name="accomodationTypeId"  #accomodationTypeId="ngModel" 

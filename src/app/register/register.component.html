@@ -37,6 +37,45 @@
           </md-input-container>
           <div *ngIf="f.submitted && !email.valid">Email is required</div>
       </div>
+      <div *ngIf="addManager == true">
+        <md-input-container>
+         <input mdInput type="text" placeholder="PIB" name="pib" [(ngModel)]="nUser.pib" #pib="ngModel" required />
+        </md-input-container>
+         <div *ngIf="f.submitted && !pib.valid">PIB is required</div>
+     </div>
+      <div *ngIf="addManager == true">
+        <md-input-container>
+         <input mdInput type="text" placeholder="City" name="city" [(ngModel)]="nUser.city" #city="ngModel" required />
+        </md-input-container>
+         <div *ngIf="f.submitted && !city.valid">City is required</div>
+     </div>
+     <div *ngIf="addManager == true">
+       <md-input-container>
+        <input mdInput type="text" placeholder="Street" name="street" [(ngModel)]="nUser.street" #street="ngModel" required />
+       </md-input-container>
+        <div *ngIf="f.submitted && !street.valid">Street is required</div>
+    </div>
+    <div *ngIf="addManager == true">
+       <md-input-container>
+        <input mdInput type="text" placeholder="Country" name="country" [(ngModel)]="nUser.country" #country="ngModel" required />
+       </md-input-container>
+        <div *ngIf="f.submitted && !country.valid">Country is required</div>
+    </div>
+     <div *ngIf="addManager == true">
+        <md-input-container>
+         <input mdInput type="text" placeholder="Latitude" [readonly] = "true" name="latitude" [(ngModel)]="nUser.latitude" #latitude="ngModel" required />
+        </md-input-container>
+         <div *ngIf="f.submitted && !latitude.valid">Latitude is required</div>
+     </div>
+     <div *ngIf="addManager == true">
+        <md-input-container>
+         <input mdInput type="text" placeholder="Longitude" [readonly] = "true" name="longitude" [(ngModel)]="nUser.longitude" #longitude="ngModel" required />
+        </md-input-container>
+         <div *ngIf="f.submitted && !longitude.valid">Longitude is required</div>
+     </div>
+     <div *ngIf="addManager == true">
+           <button type="button" md-raised-button color="primary" (click)="openMapAdd()">Set location</button>
+     </div>
       <!-- <div>
         <md-select style="margin: 15px;" ngModel name="Role" #role="ngModel" placeholder="Role" required>
             <md-option value="AppUser">User</md-option>

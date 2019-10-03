@@ -55,14 +55,7 @@ export class AccomodationComponent implements OnInit {
     this.managerActive = false;
     this.createPermisions();
 
-    this.httpAccommodationService.getAccommodations().subscribe(
-      (res: any) => {
-        this.accommodations = res; 
-        console.log(this.accommodations);
-      },
-        // this.setImagesForAccommodations();},
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+    this.initializeAccomodations();
   }
 
   // setImagesForAccommodations(){
@@ -94,6 +87,29 @@ export class AccomodationComponent implements OnInit {
     dialogRef.componentInstance.adding=false;
     dialogRef.componentInstance.mapInfo = this.mapInfo;
     dialogRef.componentInstance.accomodation=acc;
+  }
+
+  initializeAccomodations(){
+    if(this.managerRole==true){
+      this.httpAccommodationService.getManagerAccommodations(this.userManagerId).subscribe(
+        (res: any) => {
+          this.accommodations = res; 
+          console.log(this.accommodations);
+        },
+          // this.setImagesForAccommodations();},
+          error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
+    }
+    else{
+      this.httpAccommodationService.getAccommodations().subscribe(
+        (res: any) => {
+          this.accommodations = res; 
+          console.log(this.accommodations);
+        },
+          // this.setImagesForAccommodations();},
+          error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
+    }
   }
 
   createPermisions(){

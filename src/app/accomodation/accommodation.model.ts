@@ -19,6 +19,7 @@ export class Accommodation{
     stars: number;
     summerPrice: number;
     typeId: string;
+    type:string;
     winterPrice: number;
 }
 

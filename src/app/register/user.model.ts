@@ -1,3 +1,4 @@
+import { Address } from "app/accomodation/accommodation.model";
 
 export class User{
 
@@ -7,4 +8,11 @@ export class User{
     firstName:string;
     lastName:string;
     email:string;
+}
+
+export class Agent {
+    id:number;
+    user:User;
+    pib:string;
+    address:Address;
 }

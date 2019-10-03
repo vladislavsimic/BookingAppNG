@@ -35,8 +35,8 @@ export class HttpAccommodationService{
         return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "properties").map(this.extractData);        
     }
 
-    getManagerAccommodations(username:string): Observable<any>{
-        return this.http.get(this.appUrl.RootLocation+"acc/accsmanager/"+username,this.getRequestOptions()).map(this.extractData);
+    getManagerAccommodations(id:string): Observable<any>{
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend + "properties/"+id+"/manager",this.getRequestOptions()).map(this.extractData);
     }
 
     getUserByUsername(username:string){

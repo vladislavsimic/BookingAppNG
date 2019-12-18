@@ -1,10 +1,21 @@
-<div>
-  <div  class="example-card"  *ngFor="let acc of accommodations"  >
+
+<md-input-container>
+  <input mdInput type="search" placeholder="Accomodation place..." name="place" [(ngModel)]="accName" #place="ngModel" />
+</md-input-container>
+<md-select [(ngModel)]="selectedStarValue" name="star">
+  <md-option *ngFor="let starNum of stars" [value]="starNum">
+    {{starNum}}
+  </md-option>
+</md-select>
+<button md-raised-button color="primary" (click) = "searchAccomodations(place.value)">Search</button>
+<button md-raised-button color="primary" (click) = "resetSearchAccomodations()">Reset</button>
+
+<div  class="example-card"  *ngFor="let acc of accommodations"  >
     <md-card class="example-card">
       <md-card-header>
         <div md-card-avatar class="example-header-image"></div>
         <md-card-title>{{acc.name}} </md-card-title>
-        <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">Location: {{acc.address}} </a> 
+        <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">{{acc.address.city}} </a> 
         </md-card-subtitle>
         <md-card-subtitle>
           Stars : {{acc.stars}}
@@ -13,16 +24,16 @@
       <img md-card-image src={{acc.imageUrls[0]}} (click) = "detailsDialog(acc)"/>
       <md-card-content>
         <p>
-        Opis: {{acc.description}}
+        {{acc.description}}
         </p>
       </md-card-content>
       <md-card-actions>
+          <button md-raised-button color="primary" (click) = "detailsDialog(acc)">Details</button>
         <button *ngIf="(managerRole == true) || (adminRole == true)"  md-raised-button color="primary" (click) = "editAccNewDialog(acc)">Edit</button>
         <button *ngIf="(managerRole == true) || (adminRole == true)" md-raised-button color="warn" (click) = "delete(acc)">Delete</button>
         <button *ngIf="userUndefined==false" md-raised-button color="primary" (click) = "reservationsDialog(acc)">Reservations</button>
       </md-card-actions>
     </md-card>
-  </div>
 </div>
 
 <span *ngIf="(adminRole == true) || (managerRole == true && managerActive == true)" class="done">

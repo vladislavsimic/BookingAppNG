@@ -16,6 +16,8 @@ import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/ac
 import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
 import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
 import * as jwt_decode from "jwt-decode";
+import {Router, ActivatedRoute} from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-accomodation',
@@ -26,6 +28,7 @@ import * as jwt_decode from "jwt-decode";
 export class AccomodationComponent implements OnInit {
 
   private accommodations:Array<Accommodation>;
+  private originalAccomodations:Array<Accommodation>;
   accommodation:Accommodation;
   private editFlag;
   filtredAcc: Array<Accommodation>;
@@ -39,11 +42,16 @@ export class AccomodationComponent implements OnInit {
   private userManagerId:string;
   private appUser:boolean;
   private role:string;
+  private accName:string;
+  private stars:number[] = [1,2,3,4,5,6,7,8,9,10];
+  private selectedStarValue:any;
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               public dialog:MdDialog,
               private httpUsersService:HttpUsersService,
-              private snackBar:MdSnackBar) { }
+              private snackBar:MdSnackBar,
+              private router:Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
      
@@ -57,21 +65,6 @@ export class AccomodationComponent implements OnInit {
 
     this.initializeAccomodations();
   }
-
-  // setImagesForAccommodations(){
-    
-  //   this.accommodations.forEach(element => {
-  //       this.httpAccommodationService.getImageUrlForAccommodation(element.Id).subscribe(
-  //         (result:any)=>{
-  //           result=result.json();
-  //           if(result!=undefined){
-  //             var str=result.replace(/\\/g,"/");
-  //             element.image=str;
-  //           }
-  //         }
-  //       );
-  //   });
-  // }
 
   locationClick(acc:Accommodation){
     let config = new MdDialogConfig();
@@ -93,8 +86,10 @@ export class AccomodationComponent implements OnInit {
     if(this.managerRole==true){
       this.httpAccommodationService.getManagerAccommodations(this.userManagerId).subscribe(
         (res: any) => {
-          this.accommodations = res; 
+          this.accommodations = res;
+          this.originalAccomodations = res; 
           console.log(this.accommodations);
+          console.log(this.originalAccomodations);
         },
           // this.setImagesForAccommodations();},
           error => {alert("Unsuccessful fetch operation!"); console.log(error);}
@@ -103,8 +98,10 @@ export class AccomodationComponent implements OnInit {
     else{
       this.httpAccommodationService.getAccommodations().subscribe(
         (res: any) => {
-          this.accommodations = res; 
+          this.accommodations = res;
+          this.originalAccomodations = res; 
           console.log(this.accommodations);
+          console.log(this.originalAccomodations);
         },
           // this.setImagesForAccommodations();},
           error => {alert("Unsuccessful fetch operation!"); console.log(error);}
@@ -128,6 +125,38 @@ export class AccomodationComponent implements OnInit {
           this.userManagerId = decodedToken.sub;
           // this.setUserManager();
       }
+  }
+
+  searchAccomodations(place:string){
+    this.filtredAcc = new Array<Accommodation>();
+    
+    if((this.accName != undefined) || (this.selectedStarValue != undefined)){
+      for (let accomodation of this.originalAccomodations) {
+        console.log(accomodation.address.city);
+
+        if(this.accName != undefined && this.selectedStarValue != undefined){
+          if(accomodation.address.city.toLowerCase() == place.toLowerCase() && accomodation.stars == this.selectedStarValue){
+              this.filtredAcc.push(accomodation);
+          }
+          continue;
+        }
+
+        if(this.accName != undefined && accomodation.address.city.toLowerCase() == place.toLowerCase()){
+          this.filtredAcc.push(accomodation);
+        }
+        else if(this.selectedStarValue != undefined && accomodation.stars == this.selectedStarValue){
+          this.filtredAcc.push(accomodation);
+        }
+      }
+      this.accommodations = this.filtredAcc;
+    }
+    
+  }
+
+  resetSearchAccomodations(){
+    this.accName=undefined;
+    this.selectedStarValue = undefined;
+    this.initializeAccomodations();
   }
 
   // setUserManager(){
@@ -203,20 +232,27 @@ export class AccomodationComponent implements OnInit {
 
 
   detailsDialog(acc:Accommodation){
-    let config = new MdDialogConfig();
-    config.data = acc;
-    config.height = '700px';
-    config.width = '850px';
-    let dialogRef = this.dialog.open(AccomodationDetailsComponent,config);
-    dialogRef.componentInstance.detAccomodation = acc;
+    // let config = new MdDialogConfig();
+    // config.data = acc;
+    // config.height = '700px';
+    // config.width = '850px';
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          id: acc.id,
+      }
+    }
+    this.router.navigate(['accomodation-view'], navigationExtras);
+  //   let dialogRef = this.dialog.open(AccomodationDetailsComponent,config);
+  //   dialogRef.componentInstance.detAccomodation = acc;
     
-    dialogRef.afterClosed().subscribe(result => {
+  //   dialogRef.afterClosed().subscribe(result => {
      
-     if (result != null)
-     {
-      this.ngOnInit();
-     }
-  });
+  //    if (result != null)
+  //    {
+  //     this.ngOnInit();
+  //    }
+  // });
  }
 
  reservationsDialog(acc:Accommodation){

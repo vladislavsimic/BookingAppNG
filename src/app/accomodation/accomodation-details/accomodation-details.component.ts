@@ -26,31 +26,32 @@ import {RoomEditComponent} from "app/room/room-edit/room-edit.component"
 })
 export class AccomodationDetailsComponent implements OnInit {
 
- public detAccomodation : Accommodation;
- public detAccomodationCopy : any;
+ public accomodation : Accommodation;
  public rooms : Array<Room>;
  public nRoomReservation:Reservation;
  public managerRole:boolean;
  public role:string;
+ private accId:number;
  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               private router: Router,
               private httpRoomReservationService:HttpRoomReservationService,
-              public dialogRef: MdDialogRef<AccomodationDetailsComponent>,
               private httpRoomService:HttpRoomService,
-              public dialog:MdDialog,
-              private snackBar:MdSnackBar) 
+              private snackBar:MdSnackBar,
+              private route: ActivatedRoute) 
               {
-               // this.detAccomodationCopy = this.detAccomodation;
+                this.route.queryParams.subscribe(params => {
+                  this.accId = params.id;
+              });
               }
  
   ngOnInit() {
-    this.managerRole=false;
-    this.createPermisions();
+    // this.managerRole=false;
+    // this.createPermisions();
 
-    this.httpAccommodationService.getAccommodation(this.detAccomodation.id).subscribe(
-      (res: any) => {this.detAccomodationCopy = res; console.log(this.detAccomodationCopy)},
+    this.httpAccommodationService.getAccommodation(this.accId).subscribe(
+      (res: any) => {this.accomodation = res; console.log(this.accomodation)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
   }

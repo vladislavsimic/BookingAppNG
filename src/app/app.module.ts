@@ -54,6 +54,7 @@ import {FilterService} from "app/search/search.service";
 
 const Routes=[
   {path: "accomodation",component:AccomodationComponent},
+  {path:"accomodation-view", component:AccomodationDetailsComponent},
   {path: "accommodation-add",component:AccommodationAddComponent, canActivate: [ManagerGuard]},
   {path: "accommodation-edit",component:AccommodationEditComponent, canActivate: [ManagerGuard]},
   {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},

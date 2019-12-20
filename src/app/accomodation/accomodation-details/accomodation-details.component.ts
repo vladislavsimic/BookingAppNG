@@ -32,6 +32,7 @@ export class AccomodationDetailsComponent implements OnInit {
  public managerRole:boolean;
  public role:string;
  private accId:number;
+ private accomodationId : number;
  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
@@ -42,7 +43,9 @@ export class AccomodationDetailsComponent implements OnInit {
               private route: ActivatedRoute) 
               {
                 this.route.queryParams.subscribe(params => {
-                  this.accId = params.id;
+                  this.accomodationId = params["accId"];
+                  console.log(this.accomodationId);
+                  console.log(params);
               });
               }
  

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { Accommodation } from 'app/accomodation/accommodation.model';
+import { AccomodationCommentComponent } from 'app/accomodation/accomodation-comment/accomodation-comment.component';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public accomodation : Accommodation;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  navigateToAccDetails(){
+    
+    this.accomodation = new Accommodation();
+    this.accomodation.name="vladislav";
+    this.accomodation.id=123;
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          name: 'Prashobh',
+          role: 'Angular developer',
+          accId: this.accomodation.id
+      }
+    }
+    this.router.navigate(['accomodation-view'], navigationExtras);
   }
 
 }

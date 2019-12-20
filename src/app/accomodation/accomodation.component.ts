@@ -236,7 +236,7 @@ export class AccomodationComponent implements OnInit {
     // config.data = acc;
     // config.height = '700px';
     // config.width = '850px';
-
+    
     let navigationExtras: NavigationExtras = {
       queryParams: {
           id: acc.id,

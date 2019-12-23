@@ -37,11 +37,11 @@ export class AccomodationCommentComponent implements OnInit {
               }
 
   ngOnInit() {
-       this.accService.getAccommodation(this.commentAccomodation.id).subscribe((res: any) => {
-        this.commentAccomodation = res; console.log(this.commentAccomodation);
-      },
-        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );
+      //  this.accService.getAccommodation(this.commentAccomodation.id).subscribe((res: any) => {
+      //   this.commentAccomodation = res; console.log(this.commentAccomodation);
+      // },
+      //   error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      // );
   }
 
   saveComment(comment: Comment, form: NgForm){

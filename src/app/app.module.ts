@@ -50,6 +50,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ManagersComponent } from './managers/managers.component';
 import {HttpUsersService} from "app/managers/users.service";
 import {FilterService} from "app/search/search.service";
+import { AccomodationserviceComponent } from './accomodationservice/accomodationservice.component';
+import { AccomodationserviceAddComponent } from './accomodationservice/accomodationservice-add/accomodationservice-add.component';
+import { AccomodationserviceEditComponent } from './accomodationservice/accomodationservice-edit/accomodationservice-edit.component';
 
 
 const Routes=[
@@ -106,7 +109,10 @@ const Routes=[
     FileDropDirective,
     ImageuploadComponent,
     SearchComponent,
-    ManagersComponent
+    ManagersComponent,
+    AccomodationserviceComponent,
+    AccomodationserviceAddComponent,
+    AccomodationserviceEditComponent
   ],
   
   entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],

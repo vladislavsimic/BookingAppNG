@@ -239,7 +239,7 @@ export class AccomodationComponent implements OnInit {
     
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          id: acc.id,
+          accId: acc.id,
       }
     }
     this.router.navigate(['accomodation-view'], navigationExtras);

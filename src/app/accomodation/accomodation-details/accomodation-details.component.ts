@@ -32,7 +32,9 @@ export class AccomodationDetailsComponent implements OnInit {
  public managerRole:boolean;
  public role:string;
  private accId:number;
- private accomodationId : number;
+ private accomodationId : string;
+ private accName : string;
+ private propertyServices : string[];
  
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
@@ -46,16 +48,15 @@ export class AccomodationDetailsComponent implements OnInit {
                   this.accomodationId = params["accId"];
                   console.log(this.accomodationId);
                   console.log(params);
-              });
+                });
               }
  
   ngOnInit() {
     // this.managerRole=false;
     // this.createPermisions();
-
-    this.httpAccommodationService.getAccommodation(this.accId).subscribe(
-      (res: any) => {this.accomodation = res; console.log(this.accomodation)},
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    this.httpAccommodationService.getAccommodation(this.accomodationId).subscribe(
+      (res: any) => { this.accomodation = res; console.log(this.accomodation)},
+      error => {alert("Unsuccessful fetch operation!"); console.log(error); }
     );
   }
   
@@ -66,6 +67,14 @@ export class AccomodationDetailsComponent implements OnInit {
     }
   }
   
+  reserveAccomodation(acc:Accommodation){
+
+  }
+
+  addComment(acc:Accommodation){
+
+  }
+
   // saveRoomReservation(roomRes: RoomReservation, form: NgForm){
     
   //      this.httpRoomReservationService.postRoomReservations(roomRes).subscribe(

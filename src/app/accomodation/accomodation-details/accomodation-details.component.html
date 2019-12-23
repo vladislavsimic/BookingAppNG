@@ -1,6 +1,53 @@
 <md-card class="example-card">
         <md-card-header>
           <div md-card-avatar class="example-header-image"></div>
-          <md-card-title>Test</md-card-title>
+          <md-card-title>{{accomodation?.name}}</md-card-title>
+          <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">{{accomodation?.address.city}} </a> 
+          </md-card-subtitle>
+          <md-card-subtitle>
+            Stars : {{accomodation?.stars}}
+          </md-card-subtitle>
         </md-card-header>
+        <img md-card-image src={{accomodation?.imageUrls[0]}} />
+        <md-card-actions>
+                <button md-raised-button color="primary" (click) = "reserveAccomodation(acc)">Reserve</button>
+        </md-card-actions>
+        <md-card-content>
+                <p>
+                Description: {{accomodation?.description}}
+                </p>
+                <p>
+                    Autumn price: {{accomodation?.autumnPrice}}
+                </p>
+                <p>
+                    Spring price: {{accomodation?.springPrice}}
+                </p>
+                <p>
+                    Summer price: {{accomodation?.summerPrice}}
+                </p>
+                <p>
+                    Winter price: {{accomodation?.winterPrice}}
+                </p>
+                <p>
+                   Number of people: {{accomodation?.numberOfPeople}}
+                </p>
+        </md-card-content>
+        <md-card-content>
+            <p>
+            Services
+            </p>
+            <ul>
+                    <li *ngFor="let serv of accomodation?.propertyServices">
+                       {{serv}}
+                    </li>
+             </ul>
+        </md-card-content>
+        <md-card-content>
+            <p>
+            Comments
+            </p>
+        </md-card-content>
+        <md-card-actions>
+                <button md-raised-button color="primary" (click) = "addComment(acc)">Add comment</button>
+        </md-card-actions>
 </md-card>

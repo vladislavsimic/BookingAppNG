@@ -117,6 +117,7 @@ export class AccommodationAddComponent implements OnInit {
        this.postAccommodation.typeId = accommodation.accomodationTypeId;
        this.postAccommodation.imageUrls = accommodation.imageUrls;
        this.postAccommodation.agentId = this.managerId;
+       this.postAccommodation.propertyServices = ["3087e97b-e7d3-4aa8-93d0-f72330017bf5"];
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

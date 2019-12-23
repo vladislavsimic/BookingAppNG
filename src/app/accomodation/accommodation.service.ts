@@ -43,8 +43,8 @@ export class HttpAccommodationService{
         return this.http.get(this.appUrl.RootLocation+'appUser/appUsers/'+ username).map(this.extractData);
     }
 
-    getAccommodation(Id:number){
-        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend +'properties/' + Id).map(this.extractData);
+    getAccommodation(id:string){
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.MainBackend +'properties/' + id, this.getRequestOptions()).map(this.extractData);
     }
 
     getImageUrlForAccommodation(id:number):Observable<Response> {

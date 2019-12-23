@@ -53,6 +53,9 @@ import {FilterService} from "app/search/search.service";
 import { AccomodationserviceComponent } from './accomodationservice/accomodationservice.component';
 import { AccomodationserviceAddComponent } from './accomodationservice/accomodationservice-add/accomodationservice-add.component';
 import { AccomodationserviceEditComponent } from './accomodationservice/accomodationservice-edit/accomodationservice-edit.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationAddComponent } from './reservation/reservation-add/reservation-add.component';
+import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 
 
 const Routes=[
@@ -112,7 +115,10 @@ const Routes=[
     ManagersComponent,
     AccomodationserviceComponent,
     AccomodationserviceAddComponent,
-    AccomodationserviceEditComponent
+    AccomodationserviceEditComponent,
+    ReservationComponent,
+    ReservationAddComponent,
+    ReservationEditComponent
   ],
   
   entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],

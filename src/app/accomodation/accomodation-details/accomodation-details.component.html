@@ -46,8 +46,26 @@
             <p>
             Comments
             </p>
+            <table border="1">
+                <thead>
+                    <th>Id</th>
+                    <!-- <th>User</th> -->
+                    <th>Text</th>
+                    <!-- <th>Edit </th>
+                    <th>Delete</th> -->
+                </thead>
+                <tr *ngFor="let rating of ratings">
+                    <td>{{rating.Id}}</td>
+                    <!-- <td>{{comment.Grade}}</td> -->
+                    <td>{{rating.comment}}</td>
+                    <!-- <td>{{comment.Accommodation.Name}}</td> -->
+                    <!-- <td><button (click)="editClick(comment)">Edit</button></td>
+                    <td><button (click)="delete(comment)">Delete</button></td> -->
+                </tr>
+                
+            </table>
         </md-card-content>
         <md-card-actions>
-                <button md-raised-button color="primary" (click) = "addComment(acc)">Add comment</button>
+                <button md-raised-button color="primary" (click) = "addComment(acc)">Add rating</button>
         </md-card-actions>
 </md-card>

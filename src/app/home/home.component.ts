@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Accommodation } from 'app/accomodation/accommodation.model';
-import { AccomodationCommentComponent } from 'app/accomodation/accomodation-comment/accomodation-comment.component';
 
 @Component({
   selector: 'app-home',

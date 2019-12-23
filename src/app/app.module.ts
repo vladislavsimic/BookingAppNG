@@ -39,7 +39,6 @@ import { HomeComponent } from './home/home.component';
 import {AdminGuard} from './adminGuard';
 import {ManagerGuard} from './managerGuard';
 import { AccomodationDetailsComponent } from './accomodation/accomodation-details/accomodation-details.component';
-import { AccomodationCommentComponent } from './accomodation/accomodation-comment/accomodation-comment.component';
 import {HttpCommentService} from "app/comment/comment.service";
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
@@ -106,7 +105,6 @@ const Routes=[
     RegisterComponent,
     HomeComponent,
     AccomodationDetailsComponent,
-    AccomodationCommentComponent,
     MapComponent,
     FileSelectDirective,
     FileDropDirective,
@@ -121,7 +119,7 @@ const Routes=[
     ReservationEditComponent
   ],
   
-  entryComponents: [AccomodationDetailsComponent,AccomodationCommentComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
+  entryComponents: [AccomodationDetailsComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
 
   imports: [
     BrowserModule,

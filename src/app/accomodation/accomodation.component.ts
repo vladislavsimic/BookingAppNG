@@ -13,7 +13,6 @@ import {HttpUsersService} from "app/managers/users.service"
 import {RoomAddComponent} from "app/room/room-add/room-add.component"
 import {AccommodationAddComponent} from "app/accomodation/accommodation-add/accommodation-add.component"
 import {AccommodationEditComponent} from "app/accomodation/accommodation-edit/accommodation-edit.component";
-import {AccomodationCommentComponent} from "app/accomodation/accomodation-comment/accomodation-comment.component";
 import { AccomodationDetailsComponent} from "app/accomodation/accomodation-details/accomodation-details.component";
 import * as jwt_decode from "jwt-decode";
 import {Router, ActivatedRoute} from '@angular/router';
@@ -260,13 +259,6 @@ export class AccomodationComponent implements OnInit {
     config.data = acc;
     config.height = '700px';
     config.width = '850px';
-    
-    let dialogRef = this.dialog.open(AccomodationCommentComponent,config);
-    dialogRef.componentInstance.commentAccomodation = acc;
-    dialogRef.componentInstance.managerRole = this.managerRole;
-    dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-  });
  }
 
  openSearchDialog(){

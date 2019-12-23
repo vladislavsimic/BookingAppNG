@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
           accId: this.accomodation.id
       }
     }
-    this.router.navigate(['accomodation-view'], navigationExtras);
+    // this.router.navigate(['accomodation-view'], navigationExtras);
   }
 
 }

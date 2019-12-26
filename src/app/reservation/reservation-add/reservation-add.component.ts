@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Reservation} from "../reservation.model"
+import { Component, OnInit, Input } from '@angular/core';
+import {Reservation,ReservationCheck} from "../reservation.model"
 import {HttpReservationService} from "../reservation.service"
 import {MdSnackBar} from "@angular/material";
 import {NgForm} from '@angular/forms';
-
+import {Accommodation} from "app/accomodation/accommodation.model"
 
 @Component({
   selector: 'app-reservation-add',
@@ -14,6 +14,8 @@ import {NgForm} from '@angular/forms';
 export class ReservationAddComponent implements OnInit {
 
   public nReservation: any={};
+  public accomodation : Accommodation;
+  private reservationFree : ReservationCheck;
 
   constructor(private httpReservationService:HttpReservationService,
     private snackBar:MdSnackBar) { }
@@ -21,7 +23,7 @@ export class ReservationAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveRoomReservation(reservation: Reservation, form: NgForm){
+  saveReservation(reservation: Reservation, form: NgForm){
       
     var date = new Date();
       var startDate = new Date(reservation.startDate);
@@ -38,14 +40,30 @@ export class ReservationAddComponent implements OnInit {
         return;
       }
 
+      reservation.startDate = startDate.toISOString();
+      reservation.endDate = endDate.toISOString();
+
+      reservation.price = this.accomodation.autumnPrice;
+      reservation.propertyId = this.accomodation.id;
       
-       this.httpReservationService.postReservation(reservation).subscribe(
+      this.httpReservationService.checkReservation(reservation.propertyId, reservation).subscribe(
+        (res: any) => { this.reservationFree = res; console.log(this.reservationFree)},
+        error => {alert("Unsuccessful fetch operation!"); console.log(error); }
+      );
+
+      if(this.reservationFree.reservationFree == true){
+        this.httpReservationService.postReservation(reservation).subscribe(
           ()=>{ 
             console.log('RoomRes successfuly posted');
             this.snackBar.open("Reservation successfuly posted", "", { duration: 2500,});            
           },
           error => {alert("Close!"); console.log(error);}
-        );
+      );
+      }
+      else{
+        this.snackBar.open("the selected term is busy.", "", { duration: 2500,});
+      }
+      
   }
 
   openSnackBar(message: string, action: string) {

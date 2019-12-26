@@ -1,12 +1,19 @@
 import {User} from 'app/register/user.model';
 import {Accommodation} from 'app/accomodation/accommodation.model';
+import { AccomodationComponent } from 'app/accomodation/accomodation.component';
 
 export class Reservation{
 
-    Id:number;
+    id:string;
 
     price:number;
-    accomodation: Accommodation;
-    startDate:Date;
-    endDate:Date;
+    propertyId: number;
+    numberOfPeople:number;
+    startDate:string;
+    endDate:string;
+    propertyResponse : Accommodation;
+}
+
+export class ReservationCheck{
+    reservationFree:boolean;
 }

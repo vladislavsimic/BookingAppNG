@@ -21,9 +21,8 @@ import { RoomReservationComponent } from './roomreservation/roomreservation.comp
 import { RoomComponent } from './room/room.component';
 import { RoomAddComponent } from './room/room-add/room-add.component';
 import { RoomEditComponent } from './room/room-edit/room-edit.component';
-import { RoomReservationAddComponent } from './roomreservation/room-reservation-add/room-reservation-add.component';
 import { RoomReservationEditComponent } from './roomreservation/room-reservation-edit/room-reservation-edit.component';
-import {HttpRoomReservationService}  from './roomreservation/roomreservation.service';
+import {HttpReservationService}  from './reservation/reservation.service';
 import { CommentAddComponent } from './comment/comment-add/comment-add.component';
 import { CommentEditComponent } from './comment/comment-edit/comment-edit.component';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule} from '@angular/material/';
@@ -55,6 +54,8 @@ import { AccomodationserviceEditComponent } from './accomodationservice/accomoda
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationAddComponent } from './reservation/reservation-add/reservation-add.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
+import { RatingComponent } from './rating/rating.component';
+import { HttpRatingService } from './rating/rating.service';
 
 
 const Routes=[
@@ -66,14 +67,15 @@ const Routes=[
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
   {path: "comment",component:CommentComponent,canActivate: [AdminGuard]},
+  {path: "reservation-view", component:ReservationComponent},
   {path: "room-reservation",component:RoomReservationComponent,canActivate: [AdminGuard]},
   {path: "region-edit",component:RegionEditComponent, canActivate: [AdminGuard]},
   {path: "room",component:RoomComponent,canActivate: [AdminGuard]},
   {path: "register",component:RegisterComponent},
   {path: "login",component:LoginComponent},
   {path: "room-add",component:RoomAddComponent,canActivate: [AdminGuard]},
+  {path: "reservation-add", component: ReservationAddComponent},
   {path: "room-edit",component:RoomEditComponent,canActivate: [AdminGuard]},
-  {path: "room-reservation-add",component:RoomReservationAddComponent,canActivate: [AdminGuard]},
   {path: "room-reservation-edit",component:RoomReservationEditComponent,canActivate: [AdminGuard]},
   {path: "comment-add",component:CommentAddComponent,canActivate: [AdminGuard]},
   {path: "comment-edit",component:CommentEditComponent,canActivate: [AdminGuard]},
@@ -87,12 +89,12 @@ const Routes=[
     AccomodationComponent,
     AccomodationtypeComponent,
     CommentComponent,
-    RoomReservationComponent,
+    ReservationComponent,
     RoomComponent,
     RoomAddComponent,
     RoomEditComponent,
     RoomReservationComponent,
-    RoomReservationAddComponent,
+    ReservationAddComponent,
     RoomReservationEditComponent,
     CommentAddComponent,
     CommentEditComponent,
@@ -116,10 +118,11 @@ const Routes=[
     AccomodationserviceEditComponent,
     ReservationComponent,
     ReservationAddComponent,
-    ReservationEditComponent
+    ReservationEditComponent,
+    RatingComponent
   ],
   
-  entryComponents: [AccomodationDetailsComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
+  entryComponents: [AccomodationDetailsComponent, ReservationAddComponent, RatingComponent, ReservationComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
 
   imports: [
     BrowserModule,
@@ -135,8 +138,8 @@ const Routes=[
   ],
    
   providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpRoomReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService],
+  HttpAccommodationService,HttpRoomService,HttpReservationService,HttpRegisterService,HttpCommentService,
+  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService, HttpRatingService],
 
   bootstrap: [AppComponent]
 })

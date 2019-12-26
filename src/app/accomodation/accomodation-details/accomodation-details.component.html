@@ -2,70 +2,72 @@
         <md-card-header>
           <div md-card-avatar class="example-header-image"></div>
           <md-card-title>{{accomodation?.name}}</md-card-title>
-          <md-card-subtitle><a class='kinda-link' (click)="locationClick(acc)">{{accomodation?.address.city}} </a> 
+          <md-card-subtitle><a class='kinda-link' (click)="locationClick(accomodation)">{{accomodation?.address.city}} </a> 
           </md-card-subtitle>
           <md-card-subtitle>
             Stars : {{accomodation?.stars}}
           </md-card-subtitle>
         </md-card-header>
         <img md-card-image src={{accomodation?.imageUrls[0]}} />
+        <md-card>
+                <md-card-header>
+                    <md-card-title>Details</md-card-title>
+                </md-card-header>
+                <md-card-content>
+                        <p>
+                        Description: {{accomodation?.description}}
+                        </p>
+                        <p>
+                            Autumn price: {{accomodation?.autumnPrice}}
+                        </p>
+                        <p>
+                            Spring price: {{accomodation?.springPrice}}
+                        </p>
+                        <p>
+                            Summer price: {{accomodation?.summerPrice}}
+                        </p>
+                        <p>
+                            Winter price: {{accomodation?.winterPrice}}
+                        </p>
+                        <p>
+                           Number of people: {{accomodation?.numberOfPeople}}
+                        </p>
+                </md-card-content>
+        </md-card>
+        <md-card>
+                <md-card-header>
+                        <md-card-title>Services</md-card-title>
+                    </md-card-header>
+                <md-card-content>
+                    <label *ngFor="let serv of propertyServices">{{serv}}</label>
+                </md-card-content>
+        </md-card>
+        <md-card>
+                <md-card-header>
+                        <md-card-title>Ratings</md-card-title>
+                    </md-card-header>
+                <md-card-content>
+                    <table border="0">
+                        <thead>
+                            <th>Comment</th>
+                            <th>Overall Rating </th>
+                            <th>Services Rating</th>
+                            <th>Staff Rating</th>
+                        </thead>
+                        <tr *ngFor="let rating of ratings">
+                            <td>{{rating.comment}}</td>
+                            <td>{{rating.overallRating}}</td>
+                            <td>{{rating.servicesRating}}</td>
+                            <td>{{rating.staffRating}}</td>
+                            <!-- <td>{{comment.Accommodation.Name}}</td> -->
+                            <!-- <td><button (click)="editClick(comment)">Edit</button></td>
+                            <td><button (click)="delete(comment)">Delete</button></td> -->
+                        </tr>
+                    </table>
+                </md-card-content>
+        </md-card>
         <md-card-actions>
-                <button md-raised-button color="primary" (click) = "reserveAccomodation(acc)">Reserve</button>
-        </md-card-actions>
-        <md-card-content>
-                <p>
-                Description: {{accomodation?.description}}
-                </p>
-                <p>
-                    Autumn price: {{accomodation?.autumnPrice}}
-                </p>
-                <p>
-                    Spring price: {{accomodation?.springPrice}}
-                </p>
-                <p>
-                    Summer price: {{accomodation?.summerPrice}}
-                </p>
-                <p>
-                    Winter price: {{accomodation?.winterPrice}}
-                </p>
-                <p>
-                   Number of people: {{accomodation?.numberOfPeople}}
-                </p>
-        </md-card-content>
-        <md-card-content>
-            <p>
-            Services
-            </p>
-            <ul>
-                    <li *ngFor="let serv of accomodation?.propertyServices">
-                       {{serv}}
-                    </li>
-             </ul>
-        </md-card-content>
-        <md-card-content>
-            <p>
-            Comments
-            </p>
-            <table border="1">
-                <thead>
-                    <th>Id</th>
-                    <!-- <th>User</th> -->
-                    <th>Text</th>
-                    <!-- <th>Edit </th>
-                    <th>Delete</th> -->
-                </thead>
-                <tr *ngFor="let rating of ratings">
-                    <td>{{rating.Id}}</td>
-                    <!-- <td>{{comment.Grade}}</td> -->
-                    <td>{{rating.comment}}</td>
-                    <!-- <td>{{comment.Accommodation.Name}}</td> -->
-                    <!-- <td><button (click)="editClick(comment)">Edit</button></td>
-                    <td><button (click)="delete(comment)">Delete</button></td> -->
-                </tr>
-                
-            </table>
-        </md-card-content>
-        <md-card-actions>
-                <button md-raised-button color="primary" (click) = "addComment(acc)">Add rating</button>
+                <button md-raised-button color="primary" (click) = "reserveAccomodation(accomodation)">Reserve</button>
+                <button md-raised-button color="primary" (click) = "showReservations(accomodation)">My reservations</button>
         </md-card-actions>
 </md-card>

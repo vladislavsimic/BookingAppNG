@@ -32,8 +32,3 @@ export class Address{
     longitude: number;
     street: string;
 }
-
-export class Rating{
-    id: number;
-    comment : string;
-}

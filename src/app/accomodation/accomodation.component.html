@@ -31,7 +31,6 @@
         <button md-raised-button color="primary" (click) = "detailsDialog(acc)">Details</button>
         <button *ngIf="(managerRole == true) || (adminRole == true)"  md-raised-button color="primary" (click) = "editAccNewDialog(acc)">Edit</button>
         <button *ngIf="(managerRole == true) || (adminRole == true)" md-raised-button color="warn" (click) = "delete(acc)">Delete</button>
-        <button *ngIf="userUndefined==false" md-raised-button color="primary" (click) = "reservationsDialog(acc)">Reservations</button>
       </md-card-actions>
     </md-card>
 </div>

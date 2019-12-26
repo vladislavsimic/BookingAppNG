@@ -1,17 +1,21 @@
 <table border="1">
   <thead>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>Accomodation name</th>
-      <th>Begin</th>
-      <th>End</th>
+      <th>Begin Date</th>
+      <th>End Date</th>
+      <th>Number of people</th>
       <th>Price</th>
+      <th>Rating</th>
   </thead>
   <tr *ngFor="let reservation of reservations">
-      <td>{{reservation.Id}}</td>
-      <td>{{reservation.accomodation.name}}</td>
-      <td>{{reservation.startDate | date : format : timezone }}</td>
-      <td>{{reservation.endDate | date : format : timezone }}</td>
-      <td>{{reservation.Price}}</td>
+      <!-- <td>{{reservation.Id}}</td> -->
+      <td>{{reservation.propertyResponse.name}}</td>
+      <td>{{reservation.startDate }}</td>
+      <td>{{reservation.endDate }}</td>
+      <td>{{reservation.numberOfPeople }}</td>
+      <td>{{reservation.price}}</td>
+      <td><button (click)="addRating(reservation)">Add Rating</button></td>
       <!-- <td><button (click)="editClick(roomres)">Edit</button></td>
       <td><button (click)="delete(roomres)">Delete</button></td> -->
   </tr>

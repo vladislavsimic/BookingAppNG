@@ -1,17 +1,25 @@
 <div class="container">
   <form type="form" #f="ngForm" (ngSubmit)="f.form.valid && saveReservation(f.value,f)"  novalidate>
       <div>
-          <label for="startDate">Start date:</label>
-          <input ngui-datetime-picker date-only="false" #StartDate = "ngModel"
-           [(ngModel)]='nReservation.startDate' name="StartDate" required/>
-           <div *ngIf="f.submitted && !StartDate.valid">StartDate is required</div>
+        <md-input-container>
+            <input mdInput ngui-datetime-picker date-only="false" placeholder="Start date" #startDate="ngModel"
+            [(ngModel)]='nReservation.startDate' name="startDate" required/>
+        </md-input-container>
+        <div *ngIf="f.submitted && !startDate.valid">StartDate is required</div>
       </div>
       <div>
-          <label for="endDate">End date:</label>
-      <input ngui-datetime-picker  date-only="false" #EndDate = "ngModel" 
-      [(ngModel)]='nReservation.endDate' name="EndDate" required/>
-      <div *ngIf="f.submitted && !EndDate.valid">EndDate is required</div>
+            <md-input-container>
+                <input mdInput ngui-datetime-picker  date-only="false" #endDate="ngModel" 
+                [(ngModel)]='nReservation.endDate' name="endDate" required/>
+            </md-input-container>
+      <div *ngIf="f.submitted && !endDate.valid">EndDate is required</div>
       </div>
-        <button md-raised-button color="primary" type="submit">Reserve</button>
+      <div>
+            <md-input-container>
+                <input  mdInput placeholder="Number of people" type="number" name="numberOfPeople" [(ngModel)]="nReservation.numberOfPeople" #numberOfPeople="ngModel" required />
+            </md-input-container>
+          <div *ngIf="f.submitted && !numberOfPeople.valid">Number Of People is required</div>
+      </div>
+      <button md-raised-button color="primary" type="submit">Reserve</button>
   </form>
 </div>

@@ -121,21 +121,13 @@ export class AppComponent {
             label: "Accomodation Type"
         },
         {
-          route: ['/comment'],
-          label: "Comments"
-        },
-        {
-          route: ['/room'],
-          label: "Room"
-        },
-        {
-          route: ['/room-reservation'],
-          label: "Reservations"
-        },
-        {
           route: ['/managers'],
           label: "Managers"
-        }
+        },
+        {
+            route: ['/accomodation-services'],
+            label: "Accomodation services"
+          }
     ]
      
 }

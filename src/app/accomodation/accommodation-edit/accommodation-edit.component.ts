@@ -106,7 +106,7 @@ export class AccommodationEditComponent implements OnInit {
       this.accommodationForEdit.address.longitude = accommodation.longitude;
       this.accommodationForEdit.address.street = accommodation.street;
       this.accommodationForEdit.imageUrls = accommodation.imageUrls;
-      this.accommodationForEdit.typeId = this.eAccommodation.type;
+      this.accommodationForEdit.typeId = accommodation.accomodationTypeId;
       this.accommodationForEdit.category = this.eAccommodation.category;
 
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(

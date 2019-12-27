@@ -10,8 +10,9 @@ import {HttpRoomService} from "./room/room.service";
 import {HttpPlaceService} from "./place/place.service";
 import {HttpRegionService} from "./region/region.service";
 import {HttpAccomodationTypeService} from "./accomodationtype/accomodationtype.service";
+import {HttpAccomodationServicesService} from "./accomodation-services/accomodation-service.service"
 import {HttpAccommodationService} from "./accomodation/accommodation.service"
-import {HttpRegisterService} from "./register/register.service"
+import {HttpRegisterService} from "./register/register.service" 
 import {HttpAuthenticationService} from "./login/userAuthentication.service"
 import { AppComponent } from './app.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
@@ -48,14 +49,14 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { ManagersComponent } from './managers/managers.component';
 import {HttpUsersService} from "app/managers/users.service";
 import {FilterService} from "app/search/search.service";
-import { AccomodationserviceComponent } from './accomodationservice/accomodationservice.component';
-import { AccomodationserviceAddComponent } from './accomodationservice/accomodationservice-add/accomodationservice-add.component';
-import { AccomodationserviceEditComponent } from './accomodationservice/accomodationservice-edit/accomodationservice-edit.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationAddComponent } from './reservation/reservation-add/reservation-add.component';
 import { ReservationEditComponent } from './reservation/reservation-edit/reservation-edit.component';
 import { RatingComponent } from './rating/rating.component';
 import { HttpRatingService } from './rating/rating.service';
+import { AccomodationServicesComponent } from './accomodation-services/accomodation-services.component';
+import { AccomodationServicesAddComponent } from './accomodation-services/accomodation-services-add/accomodation-services-add.component';
+import { AccomodationServicesEditComponent } from './accomodation-services/accomodation-services-edit/accomodation-services-edit.component';
 
 
 const Routes=[
@@ -66,6 +67,9 @@ const Routes=[
   {path: "accomodation-type",component:AccomodationtypeComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-edit",component:AccomodationtypeEditComponent, canActivate: [AdminGuard]},
   {path: "accomodation-type-add",component:AccomodationtypeAddComponent, canActivate: [AdminGuard]},
+  {path: "accomodation-services", component:AccomodationServicesComponent, canActivate:[AdminGuard]},
+  {path: "accomodation-service-add",component:AccomodationServicesAddComponent, canActivate: [AdminGuard]},
+  {path: "accomodation-service-edit",component:AccomodationServicesEditComponent, canActivate: [AdminGuard]},
   {path: "comment",component:CommentComponent,canActivate: [AdminGuard]},
   {path: "reservation-view", component:ReservationComponent},
   {path: "room-reservation",component:RoomReservationComponent,canActivate: [AdminGuard]},
@@ -113,16 +117,25 @@ const Routes=[
     ImageuploadComponent,
     SearchComponent,
     ManagersComponent,
-    AccomodationserviceComponent,
-    AccomodationserviceAddComponent,
-    AccomodationserviceEditComponent,
     ReservationComponent,
     ReservationAddComponent,
     ReservationEditComponent,
-    RatingComponent
+    RatingComponent,
+    AccomodationServicesComponent,
+    AccomodationServicesAddComponent,
+    AccomodationServicesEditComponent
   ],
   
-  entryComponents: [AccomodationDetailsComponent, ReservationAddComponent, RatingComponent, ReservationComponent, ImageuploadComponent,SearchComponent,RoomAddComponent,RoomEditComponent,MapComponent],
+  entryComponents: [
+    AccomodationDetailsComponent, 
+    ReservationAddComponent, 
+    RatingComponent, 
+    ReservationComponent, 
+    ImageuploadComponent,
+    SearchComponent, 
+    RoomAddComponent, 
+    RoomEditComponent,
+    MapComponent],
 
   imports: [
     BrowserModule,
@@ -130,17 +143,40 @@ const Routes=[
     HttpModule,
     RouterModule.forRoot(Routes),
     NguiDatetimePickerModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,MaterialModule,MdNativeDateModule,MdSnackBarModule,
-    BrowserAnimationsModule,NgxPaginationModule,
+    MdButtonModule, 
+    MdCardModule, 
+    MdMenuModule, 
+    MdToolbarModule, 
+    MdIconModule,
+    MaterialModule,
+    MdNativeDateModule,
+    MdSnackBarModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule,
     //prilikom import-a mape prosleđujemo Google API key koji dobijamo preko google konzole
     AgmCoreModule.forRoot({apiKey: 'AIzaSyAtvp71DTpNaEw59EcmxvFMQOKRyRUiArg'})
    
   ],
    
-  providers: [HttpCountryService,AppUrl,HttpPlaceService,HttpRegionService,HttpAccomodationTypeService,
-  HttpAccommodationService,HttpRoomService,HttpReservationService,HttpRegisterService,HttpCommentService,
-  HttpAuthenticationService,AdminGuard,ManagerGuard,HttpUsersService,FilterService, HttpRatingService],
+  providers: [
+    HttpCountryService,
+    AppUrl,HttpPlaceService,
+    HttpRegionService,
+    HttpAccomodationTypeService,
+    HttpAccommodationService,
+    HttpAccomodationServicesService,
+    HttpRoomService,
+    HttpReservationService,
+    HttpRegisterService,
+    HttpCommentService,
+    HttpAuthenticationService,
+    AdminGuard,
+    ManagerGuard,
+    HttpUsersService,
+    FilterService, 
+    HttpRatingService],
 
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

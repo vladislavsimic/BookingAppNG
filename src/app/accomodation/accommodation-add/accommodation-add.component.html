@@ -112,7 +112,12 @@
                         <md-card-title>Services</md-card-title>
                 </md-card-header>
                 <md-card-content>
-                        
+                        <div *ngFor="let item of accommodationServices">
+                                <label>
+                                <input type="checkbox" [ngModelOptions]="{standalone: true}" value="{{item.id}}" [(ngModel)]="item.Checked" [name]="item.Name" [attr.disabled]="item.id==1 ? true : null" />
+                                <span innerHTML="{{item.name}}"></span>
+                            </label>
+                            </div>
                 </md-card-content>
           </md-card>
       </div>

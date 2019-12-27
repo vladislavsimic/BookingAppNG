@@ -21,19 +21,13 @@
     <nav md-tab-nav-bar >
         <a md-tab-link  [routerLink]="['/home']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Home</a>
         <div class="nav_bar">
-            <a md-tab-link [routerLink]="['/accomodation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation</a>
+            <a md-tab-link [routerLink]="['/accomodation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodations</a>
         </div>
         <div class="nav_bar">
-            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/accomodation-type']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation Type</a>
+            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/accomodation-type']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accommodation Types</a>
         </div>
         <div class="nav_bar">
-            <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/comment']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Comment</a>
-        </div>
-        <div class="nav_bar">
-            <a md-tab-link *ngIf="adminRole==true" [routerLink]="['/room']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Room</a>
-        </div>
-        <div class="nav_bar">
-            <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/room-reservation']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Room Reservation</a>
+            <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/accomodation-services']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Accomodation Services</a>
         </div>
         <div class="nav_bar">
             <a *ngIf="adminRole==true" md-tab-link [routerLink]="['/managers']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Managers</a>

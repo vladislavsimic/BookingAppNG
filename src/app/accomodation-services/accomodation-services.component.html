@@ -1,0 +1,15 @@
+<table border="1">
+    <thead>
+        <th>Service name</th>
+        <th *ngIf="adminRole==true">Edit</th>
+    </thead>
+    <tr *ngFor="let serv of services">
+        <td>{{serv.name}}</td>
+        <td *ngIf="adminRole==true"><button (click)="editClick(serv)">Edit</button></td>
+    </tr>
+</table>
+<a *ngIf="adminRole==true" [routerLink]="['/accomodation-service-add']">Add Accomodation Service</a>
+<router-outlet></router-outlet>
+<div *ngIf="editFlag==true">
+    <app-accomodation-services-edit [eAccomodationService] = "accomodationServices" (notifyParent)="getNotification($event)"></app-accomodation-services-edit>
+</div>

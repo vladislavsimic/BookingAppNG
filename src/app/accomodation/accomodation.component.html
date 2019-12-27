@@ -1,14 +1,28 @@
+<md-card>
+    <!-- <md-card-header>
+        <md-card-title>Filter and search</md-card-title>
+    </md-card-header> -->
+    <md-card-content>
+        <md-input-container>
+            <input mdInput type="search" placeholder="Accomodation place..." name="place" [(ngModel)]="accName" #place="ngModel" />
+          </md-input-container>
+          <md-select [(ngModel)]="selectedStarValue" name="star" placeholder="Stars">
+            <md-option *ngFor="let starNum of stars" [value]="starNum">
+              {{starNum}}
+            </md-option>
+          </md-select>
+          <md-card-actions>
+              <button md-raised-button color="primary" (click) = "searchAccomodations(place.value)">Search</button>
+              <button md-raised-button color="warn" (click) = "resetSearchAccomodations()">Reset</button>
+          </md-card-actions>
+    </md-card-content>
+</md-card>
 
-<md-input-container>
-  <input mdInput type="search" placeholder="Accomodation place..." name="place" [(ngModel)]="accName" #place="ngModel" />
-</md-input-container>
-<md-select [(ngModel)]="selectedStarValue" name="star">
-  <md-option *ngFor="let starNum of stars" [value]="starNum">
-    {{starNum}}
-  </md-option>
-</md-select>
-<button md-raised-button color="primary" (click) = "searchAccomodations(place.value)">Search</button>
-<button md-raised-button color="primary" (click) = "resetSearchAccomodations()">Reset</button>
+<md-card>
+    <md-card-actions>
+        <button md-raised-button color="primary" *ngIf="(adminRole == true) || (managerRole == true && managerActive == true)" (click) = "openAccNewDialog()">Add new accomodation</button>
+    </md-card-actions>
+</md-card>
 
 <div  class="example-card"  *ngFor="let acc of accommodations"  >
     <md-card class="example-card">
@@ -34,12 +48,6 @@
       </md-card-actions>
     </md-card>
 </div>
-
-<span *ngIf="(adminRole == true) || (managerRole == true && managerActive == true)" class="done">
-    <button md-fab (click) = "openAccNewDialog()" >
-    <md-icon>New</md-icon>
-    </button>
-</span>
 
 <!-- <span class="search">
     <button md-fab (click) = "openSearchDialog()" >

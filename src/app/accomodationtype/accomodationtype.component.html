@@ -2,12 +2,10 @@
     <thead>
         <th>Name</th>
         <th *ngIf="adminRole==true">Edit</th>
-        <th *ngIf="adminRole==true">Delete</th>
     </thead>
     <tr *ngFor="let accomodationType of accomodationTypes">
         <td>{{accomodationType.name}}</td>
         <td *ngIf="adminRole==true"><button (click)="editClick(accomodationType)">Edit</button></td>
-        <td *ngIf="adminRole==true"><button (click)="delete(accomodationType)">Delete</button></td>
     </tr>
     
 </table>

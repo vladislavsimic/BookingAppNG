@@ -17,6 +17,8 @@ import {MapComponent} from "app/map/map.component"
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
 import {Manager} from "app/managers/manager.model"
 import * as jwt_decode from "jwt-decode";
+import { AccomodationServices } from 'app/accomodation-services/accomodation-service.model';
+import { HttpAccomodationServicesService } from 'app/accomodation-services/accomodation-service.service';
 
 @Component({
   selector: 'app-accommodation-add',
@@ -29,12 +31,14 @@ export class AccommodationAddComponent implements OnInit {
   nAccommodation:any={};
   private managerId : string;
   public accommodationTypes: Array<AccomodationType>;
+  public accommodationServices: any={};
   public places:Array<Place>;
   private postAccommodation:Accommodation;
   mapInfo:MapModel;
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
+              private httpAccommodationServicesService:HttpAccomodationServicesService,
               private router: Router,
               private httpPlaceService:HttpPlaceService,
               public dialogRef: MdDialogRef<AccommodationAddComponent>,
@@ -54,11 +58,12 @@ export class AccommodationAddComponent implements OnInit {
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
       );
-    //   this.httpPlaceService.getPlaces().subscribe((res: any) => {
-    //     this.places = res; console.log(this.places);
-    //   },
-    //     error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    //   );
+
+      this.httpAccommodationServicesService.getServices().subscribe((res: any) => {
+        this.accommodationServices = res; console.log(this.accommodationServices);
+      },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
   }
 
   openChooseImagesDialog(){
@@ -97,6 +102,8 @@ export class AccommodationAddComponent implements OnInit {
 
   saveAccommodation(accommodation: any, form: NgForm){
 
+      console.log("Oznaceni" + this.accommodationServices);
+      
        this.postAccommodation=new Accommodation();
        this.postAccommodation.address = new Address();
 

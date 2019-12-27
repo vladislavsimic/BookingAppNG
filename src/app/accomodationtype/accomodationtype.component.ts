@@ -49,17 +49,4 @@ export class AccomodationtypeComponent implements OnInit {
     this.editFlag=true;
     this.accomodationType=accomodationType;
   }
-
-  delete(accomodationType:AccomodationType){
-
-    this.httpAccomodationTypeService.deleteAccomodationType(accomodationType.id).subscribe(
-      ()=>{
-        console.log('AccomodationType ' + accomodationType.name + ' successfuly deleted');
-        this.snackBar.open("AccomodationType " + accomodationType.name + " successfuly deleted", "", { duration: 2500,});
-        this.ngOnInit();
-      },
-      error=>{alert("AccomodationType ' + accomodationType.Name + ' failed delete!"); console.log(error);}
-    );
-  }
-
 }

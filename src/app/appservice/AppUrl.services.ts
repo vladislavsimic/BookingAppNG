@@ -9,9 +9,12 @@ export class AppUrl{
 
     public ReservationService : string;
 
+    public AccomodationServicesService : string;
+
     constructor(){
         this.RootLocation = "http://localhost:8765/";
         this.MainBackend = "main-backend/";
         this.ReservationService = "reservations-microservice/"
+        this.AccomodationServicesService = "services-microservice/";
     }
 }

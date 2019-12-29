@@ -1,4 +1,5 @@
 import {AccomodationType} from "app/accomodationtype/accomodationtype.model"
+import { AccomodationServices } from "app/accomodation-services/accomodation-service.model";
 
 export class Accommodation{
 
@@ -8,19 +9,17 @@ export class Accommodation{
     address:Address;
     agentId:string;
 
-    autumnPrice: number;
+    price: number;
     category: string;
     createdAt: Date;
     imageUrls: string[];
     numberOfCancellationDays: number;
     numberOfPeople: number;
-    propertyServices: string[];
-    springPrice: number;
+    services: Array<string>;
+    propertyServices : string[];
     stars: number;
-    summerPrice: number;
     typeId: string;
     type:string;
-    winterPrice: number;
 }
 
 export class Address{

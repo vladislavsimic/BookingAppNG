@@ -25,7 +25,7 @@ export class ReservationAddComponent implements OnInit {
 
   saveReservation(reservation: Reservation, form: NgForm){
       
-    var date = new Date();
+      var date = new Date();
       var startDate = new Date(reservation.startDate);
       var endDate = new Date(reservation.endDate);
       
@@ -43,27 +43,28 @@ export class ReservationAddComponent implements OnInit {
       reservation.startDate = startDate.toISOString();
       reservation.endDate = endDate.toISOString();
 
-      reservation.price = this.accomodation.autumnPrice;
+      reservation.price = this.accomodation.price;
       reservation.propertyId = this.accomodation.id;
       
       this.httpReservationService.checkReservation(reservation.propertyId, reservation).subscribe(
-        (res: any) => { this.reservationFree = res; console.log(this.reservationFree)},
+        (res: any) => { 
+          this.reservationFree = res; console.log(this.reservationFree)
+          if(this.reservationFree.reservationFree == true){
+            this.httpReservationService.postReservation(reservation).subscribe(
+              ()=>{ 
+                console.log('RoomRes successfuly posted');
+                this.snackBar.open("Reservation successfuly posted.", "", { duration: 2500,});            
+              },
+              error => {alert("Close!"); console.log(error);}
+            );
+          }
+          else{
+            this.snackBar.open("The selected term is busy.", "", { duration: 2500,});
+          }
+        
+        },
         error => {alert("Unsuccessful fetch operation!"); console.log(error); }
       );
-
-      if(this.reservationFree.reservationFree == true){
-        this.httpReservationService.postReservation(reservation).subscribe(
-          ()=>{ 
-            console.log('RoomRes successfuly posted');
-            this.snackBar.open("Reservation successfuly posted", "", { duration: 2500,});            
-          },
-          error => {alert("Close!"); console.log(error);}
-      );
-      }
-      else{
-        this.snackBar.open("the selected term is busy.", "", { duration: 2500,});
-      }
-      
   }
 
   openSnackBar(message: string, action: string) {

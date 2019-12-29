@@ -30,12 +30,16 @@ export class HttpReservationService{
         return this.http.post(this.appUrl.RootLocation + this.appUrl.ReservationService + 'reservations/check/'+accomodationId, reservation, this.getRequestOptions()).map(this.extractData);
     }
 
-    getReservations(): Observable<any> {
-        return this.http.get(this.appUrl.RootLocation+"roomReservation/roomReservations").map(this.extractData);        
-    }
-
     getPropertyReservations(accomodationId: string) {
         return this.http.get(this.appUrl.RootLocation + this.appUrl.ReservationService + 'reservations/property/'+accomodationId, this.getRequestOptions()).map(this.extractData);
+    }
+
+    getUserPropertyReservations(accomodationId: string) {
+        return this.http.get(this.appUrl.RootLocation + this.appUrl.ReservationService + 'reservations/user/property/'+accomodationId, this.getRequestOptions()).map(this.extractData);
+    }
+
+    changeReservationStatus(reservation:Reservation) {
+        return this.http.put(this.appUrl.RootLocation + this.appUrl.ReservationService + 'reservations/' + reservation.id, reservation, this.getRequestOptions());
     }
 
     private extractData(res: Response) {

@@ -94,7 +94,7 @@ export class AppComponent {
         AppComponent.adminR = false;
         AppComponent.managerR = false;
         this.ngOnInit();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/accomodation']);
     //       },
     //       error=>{console.log(error); alert("Logout failed!");}
     //   );

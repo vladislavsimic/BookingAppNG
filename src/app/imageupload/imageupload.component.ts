@@ -24,7 +24,7 @@ export class ImageuploadComponent implements OnInit {
   ngOnInit() {
     this.fileChoosed=false;
     
-    this.uploader=new FileUploader({url:this.appUrl.RootLocation + "acc/image/upload"});
+    this.uploader=new FileUploader({url:this.appUrl.RootLocation + this.appUrl.MainBackend + "image/properties/"+this.accommodation.id+"/many"});
     
     this.token=localStorage.getItem("id_token");
     this.uploader.authToken=this.token;

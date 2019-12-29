@@ -1,28 +1,33 @@
-<table border="1">
-  <thead>
-      <!-- <th>ID</th> -->
-      <th>Accomodation name</th>
-      <th>Begin Date</th>
-      <th>End Date</th>
-      <th>Number of people</th>
-      <th>Price</th>
-      <th>Rating</th>
-  </thead>
-  <tr *ngFor="let reservation of reservations">
-      <!-- <td>{{reservation.Id}}</td> -->
-      <td>{{reservation.propertyResponse.name}}</td>
-      <td>{{reservation.startDate }}</td>
-      <td>{{reservation.endDate }}</td>
-      <td>{{reservation.numberOfPeople }}</td>
-      <td>{{reservation.price}}</td>
-      <td><button (click)="addRating(reservation)">Add Rating</button></td>
-      <!-- <td><button (click)="editClick(roomres)">Edit</button></td>
-      <td><button (click)="delete(roomres)">Delete</button></td> -->
-  </tr>
-  
-</table>
-<!--<a [routerLink]="['/room-reservation-add']">Add Room Reservation</a>
-<router-outlet></router-outlet>-->
-<!-- <div *ngIf="editFlag==true">
-  <app-room-reservation-edit [eRoomReservation] = "roomreservation" (notifyParent)="getNotification($event)"></app-room-reservation-edit>
-</div> -->
+<div *ngIf="reservations?.length!=0">
+  <table border="1">
+    <thead>
+        <!-- <th>ID</th> -->
+        <th>Accomodation name</th>
+        <th>Begin Date</th>
+        <th>End Date</th>
+        <th>Number of people</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th *ngIf="userRole==true">Rating</th>
+        <th *ngIf="managerRole==true">Completed</th>
+    </thead>
+    <tr *ngFor="let reservation of reservations">
+        <!-- <td>{{reservation.Id}}</td> -->
+        <td>{{reservation.propertyResponse.name}}</td>
+        <td>{{reservation.startDate }}</td>
+        <td>{{reservation.endDate }}</td>
+        <td>{{reservation.numberOfPeople }}</td>
+        <td>{{reservation.price}}$</td>
+        <td>{{reservation.reservationStatus}}</td>
+        <td *ngIf="userRole==true && reservationHasCompleted(reservation)"><button (click)="addRating(reservation)">Add Rating</button></td>
+        <td *ngIf="managerRole==true && reservationHasCompleted(reservation)==false">
+            <button (click)="completeReservation(reservation)">Complete reservation</button>
+        </td>
+        <!-- <td><button (click)="editClick(roomres)">Edit</button></td>
+        <td><button (click)="delete(roomres)">Delete</button></td> -->
+    </tr>
+  </table>
+</div>
+<div *ngIf="reservations?.length==0">
+    This accommodation has no reservation
+</div>

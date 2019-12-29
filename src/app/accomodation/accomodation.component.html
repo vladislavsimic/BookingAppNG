@@ -20,11 +20,11 @@
 
 <md-card>
     <md-card-actions>
-        <button md-raised-button color="primary" *ngIf="(adminRole == true) || (managerRole == true && managerActive == true)" (click) = "openAccNewDialog()">Add new accomodation</button>
+        <button md-raised-button color="primary" *ngIf="(managerRole == true && managerActive == true)" (click) = "openAccNewDialog()">Add new accomodation</button>
     </md-card-actions>
 </md-card>
 
-<div  class="example-card"  *ngFor="let acc of accommodations"  >
+<div class="example-card"  *ngFor="let acc of accommodations"  >
     <md-card class="example-card">
       <md-card-header>
         <div md-card-avatar class="example-header-image"></div>

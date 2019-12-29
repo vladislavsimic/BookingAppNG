@@ -31,7 +31,7 @@ export class AccommodationAddComponent implements OnInit {
   nAccommodation:any={};
   private managerId : string;
   public accommodationTypes: Array<AccomodationType>;
-  public accommodationServices: any={};
+  public accommodationServices: Array<AccomodationServices>;
   public places:Array<Place>;
   private postAccommodation:Accommodation;
   mapInfo:MapModel;
@@ -101,18 +101,15 @@ export class AccommodationAddComponent implements OnInit {
   }
 
   saveAccommodation(accommodation: any, form: NgForm){
+    
+      console.log(this.accommodationServices);
 
-      console.log("Oznaceni" + this.accommodationServices);
-      
        this.postAccommodation=new Accommodation();
        this.postAccommodation.address = new Address();
 
        this.postAccommodation.name = accommodation.name;
        this.postAccommodation.description = accommodation.description;
-       this.postAccommodation.autumnPrice = accommodation.autumnPrice;
-       this.postAccommodation.springPrice = accommodation.springPrice;
-       this.postAccommodation.winterPrice = accommodation.winterPrice;
-       this.postAccommodation.summerPrice = accommodation.summerPrice;
+       this.postAccommodation.price = accommodation.price;
        this.postAccommodation.stars = accommodation.stars;
        this.postAccommodation.numberOfCancellationDays = accommodation.numberOfCancellationDays;
        this.postAccommodation.numberOfPeople = accommodation.numberOfPeople;
@@ -122,9 +119,15 @@ export class AccommodationAddComponent implements OnInit {
        this.postAccommodation.address.longitude = accommodation.longitude;
        this.postAccommodation.address.street = accommodation.street;
        this.postAccommodation.typeId = accommodation.accomodationTypeId;
-       this.postAccommodation.imageUrls = accommodation.imageUrls;
+       this.postAccommodation.imageUrls = [];
        this.postAccommodation.agentId = this.managerId;
-       this.postAccommodation.propertyServices = ["3087e97b-e7d3-4aa8-93d0-f72330017bf5"];
+       this.postAccommodation.services = new Array<string>();
+       this.accommodationServices.forEach(element => {
+         if(element.checked!=undefined && element.checked==true){
+           this.postAccommodation.services.push(element.id);
+         }
+       });
+       //this.postAccommodation.services = ["3e1e1578-b5db-4d8f-832d-58b826d4aa5d", "6b88bdf2-5c46-4b6f-bf50-4cb281fb2ebd","11cd4713-521a-442a-9a32-b68bb871ad65"];
 
        this.httpAccommodationService.postAccommodation(this.postAccommodation).subscribe(
           ()=>{ 

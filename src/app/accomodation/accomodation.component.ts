@@ -42,8 +42,9 @@ export class AccomodationComponent implements OnInit {
   private appUser:boolean;
   private role:string;
   private accName:string;
-  private stars:number[] = [1,2,3,4,5,6,7,8,9,10];
+  private stars:number[] = [1,2,3,4,5];
   private selectedStarValue:any;
+  breakpoint: number = 3;  //to adjust to screen
 
   constructor(private httpAccommodationService:HttpAccommodationService,
               public dialog:MdDialog,
@@ -53,7 +54,7 @@ export class AccomodationComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-     
+    this.breakpoint = (window.innerWidth <= 800) ? 1 : 3;
     this.editFlag = false;
     this.adminRole = false;
     this.managerRole = false;
@@ -63,6 +64,10 @@ export class AccomodationComponent implements OnInit {
     this.createPermisions();
 
     this.initializeAccomodations();
+  }
+
+  onResize(event) { //to adjust to screen size
+    this.breakpoint = (event.target.innerWidth <= 800) ? 1 : 3;
   }
 
   locationClick(acc:Accommodation){

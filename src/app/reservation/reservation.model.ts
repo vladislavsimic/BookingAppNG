@@ -12,8 +12,15 @@ export class Reservation{
     startDate:string;
     endDate:string;
     propertyResponse : Accommodation;
+    reservationStatus : ReservationStatus;
 }
 
 export class ReservationCheck{
     reservationFree:boolean;
+}
+
+export enum ReservationStatus {
+    PENDING, 
+    SUCCESSFUL, 
+    CANCELED
 }

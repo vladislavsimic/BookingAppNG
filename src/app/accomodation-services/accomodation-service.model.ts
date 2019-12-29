@@ -1,5 +1,6 @@
 
 export class AccomodationServices{
-    id: number;
+    id: string;
     name : string;
+    checked:boolean;
 }

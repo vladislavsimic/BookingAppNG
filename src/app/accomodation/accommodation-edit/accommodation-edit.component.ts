@@ -16,6 +16,8 @@ import{MapModel} from "app/map/map.model";
 import {MapComponent} from "app/map/map.component"
 import {AppComponent} from "app/app.component";
 import {ImageuploadComponent} from "app/imageupload/imageupload.component"
+import { AccomodationServices } from 'app/accomodation-services/accomodation-service.model';
+import { HttpAccomodationServicesService } from 'app/accomodation-services/accomodation-service.service';
 
 @Component({
   selector: 'app-accommodation-edit',
@@ -28,12 +30,15 @@ export class AccommodationEditComponent implements OnInit {
   private accommodationForEdit:Accommodation;
   public accommodationTypes:Array<AccomodationType>;
   public eAccommodation : Accommodation;
+  public accommodationServices: Array<AccomodationServices>;
+  public accommodationServicesView: Array<AccomodationServices>;
   mapInfo:MapModel;
 
   constructor(private httpPlaceService:HttpPlaceService,
               private httpAccommodationService:HttpAccommodationService,
               private httpAccommodationTypeService:HttpAccomodationTypeService,
               public dialogRef: MdDialogRef<AccommodationEditComponent>,
+              private httpAccommodationServicesService:HttpAccomodationServicesService,
               private router:Router,
               public dialog:MdDialog,
               private snackBar:MdSnackBar) {
@@ -46,7 +51,21 @@ export class AccommodationEditComponent implements OnInit {
         this.accommodationTypes = res; console.log(this.accommodationTypes);
       },
         error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-      );      
+      );
+      
+      this.httpAccommodationServicesService.getServices().subscribe((res: any) => {
+        this.accommodationServices = res; 
+        console.log(this.accommodationServices);
+
+        this.accommodationServices.forEach(element => {
+          if(this.eAccommodation.propertyServices.includes(element.name)){
+            element.checked=true;
+          }
+        });
+
+      },
+        error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+      );
   }
 
   openChangeImageDialog(){
@@ -93,10 +112,7 @@ export class AccommodationEditComponent implements OnInit {
 
       this.accommodationForEdit.name = accommodation.name;
       this.accommodationForEdit.description = accommodation.description;
-      this.accommodationForEdit.autumnPrice = accommodation.autumnPrice;
-      this.accommodationForEdit.springPrice = accommodation.springPrice;
-      this.accommodationForEdit.winterPrice = accommodation.winterPrice;
-      this.accommodationForEdit.summerPrice = accommodation.summerPrice;
+      this.accommodationForEdit.price = accommodation.price;
       this.accommodationForEdit.stars = accommodation.stars;
       this.accommodationForEdit.numberOfCancellationDays = accommodation.numberOfCancellationDays;
       this.accommodationForEdit.numberOfPeople = accommodation.numberOfPeople;
@@ -108,6 +124,12 @@ export class AccommodationEditComponent implements OnInit {
       this.accommodationForEdit.imageUrls = accommodation.imageUrls;
       this.accommodationForEdit.typeId = accommodation.accomodationTypeId;
       this.accommodationForEdit.category = this.eAccommodation.category;
+      this.accommodationForEdit.services = new Array<string>();
+      this.accommodationServices.forEach(element => {
+        if(element.checked!=undefined && element.checked==true){
+          this.accommodationForEdit.services.push(element.id);
+        }
+      });
 
       this.httpAccommodationService.editAccommodation(this.accommodationForEdit).subscribe(
         ()=>{ 

@@ -15,27 +15,9 @@
     </div>
     <div>
         <md-input-container>
-        <input  mdInput placeholder="Autumn Price" type="number" name="autumnPrice" [(ngModel)]="nAccommodation.autumnPrice" #autumnPrice="ngModel" required />
+        <input  mdInput placeholder="Price" type="number" name="price" [(ngModel)]="nAccommodation.price" #price="ngModel" required />
         </md-input-container>
-        <div *ngIf="f.submitted && !autumnPrice.valid">Autumn Price is required</div>
-    </div>
-    <div>
-        <md-input-container>
-        <input  mdInput placeholder="Summer Price" type="number" name="summerPrice" [(ngModel)]="nAccommodation.summerPrice" #summerPrice="ngModel" required />
-        </md-input-container>
-        <div *ngIf="f.submitted && !summerPrice.valid">Summer Price is required</div>
-    </div>
-    <div>
-        <md-input-container>
-        <input  mdInput placeholder="Spring Price" type="number" name="springPrice" [(ngModel)]="nAccommodation.springPrice" #springPrice="ngModel" required />
-        </md-input-container>
-        <div *ngIf="f.submitted && !springPrice.valid">Spring Price is required</div>
-    </div>
-    <div>
-        <md-input-container>
-        <input  mdInput placeholder="Winter Price" type="number" name="winterPrice" [(ngModel)]="nAccommodation.winterPrice" #winterPrice="ngModel" required />
-        </md-input-container>
-        <div *ngIf="f.submitted && !winterPrice.valid">Winter Price is required</div>
+        <div *ngIf="f.submitted && !price.valid">Price is required</div>
     </div>
     <div>
         <md-input-container>
@@ -88,7 +70,7 @@
       <div>
             <button type="button" md-raised-button color="primary" (click)="openMapAdd()">Set location</button>
       </div>
-      <div>
+      <!-- <div>
          <md-input-container>
           <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="imageUrls" [(ngModel)]="nAccommodation.imageUrls" #imageUrls="ngModel" required />
          </md-input-container>
@@ -96,10 +78,10 @@
       </div>
       <div>
             <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChooseImagesDialog()">Choose Image</button>
-      </div>
+      </div> -->
       <div>
         <md-select style="margin: 15px;" [(ngModel)]="nAccommodation.accomodationTypeId" name="accomodationTypeId"  #accomodationTypeId="ngModel" 
-        placeholder="AccomodationType" required>
+        placeholder="Accomodation Type" required>
             <md-option *ngFor="let accommodationType of accommodationTypes" [value]="accommodationType.id">
                 {{accommodationType.name}}
             </md-option>
@@ -114,7 +96,7 @@
                 <md-card-content>
                         <div *ngFor="let item of accommodationServices">
                                 <label>
-                                <input type="checkbox" [ngModelOptions]="{standalone: true}" value="{{item.id}}" [(ngModel)]="item.Checked" [name]="item.Name" [attr.disabled]="item.id==1 ? true : null" />
+                                <input type="checkbox" [ngModelOptions]="{standalone: true}" value="{{item.id}}" [(ngModel)]="item.checked" [name]="item.Name" [attr.disabled]="item.id==1 ? true : null" />
                                 <span innerHTML="{{item.name}}"></span>
                             </label>
                             </div>

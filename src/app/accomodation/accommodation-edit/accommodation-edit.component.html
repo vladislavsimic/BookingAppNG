@@ -15,27 +15,9 @@
       </div>
       <div>
           <md-input-container>
-          <input  mdInput placeholder="Autumn Price" type="number" name="autumnPrice" [(ngModel)]="eAccommodation.autumnPrice" #autumnPrice="ngModel" required />
+          <input  mdInput placeholder="Price" type="number" name="price" [(ngModel)]="eAccommodation.price" #price="ngModel" required />
           </md-input-container>
-          <div *ngIf="f.submitted && !autumnPrice.valid">Autumn Price is required</div>
-      </div>
-      <div>
-          <md-input-container>
-          <input  mdInput placeholder="Summer Price" type="number" name="summerPrice" [(ngModel)]="eAccommodation.summerPrice" #summerPrice="ngModel" required />
-          </md-input-container>
-          <div *ngIf="f.submitted && !summerPrice.valid">Summer Price is required</div>
-      </div>
-      <div>
-          <md-input-container>
-          <input  mdInput placeholder="Spring Price" type="number" name="springPrice" [(ngModel)]="eAccommodation.springPrice" #springPrice="ngModel" required />
-          </md-input-container>
-          <div *ngIf="f.submitted && !springPrice.valid">Spring Price is required</div>
-      </div>
-      <div>
-          <md-input-container>
-          <input  mdInput placeholder="Winter Price" type="number" name="winterPrice" [(ngModel)]="eAccommodation.winterPrice" #winterPrice="ngModel" required />
-          </md-input-container>
-          <div *ngIf="f.submitted && !winterPrice.valid">Winter Price is required</div>
+          <div *ngIf="f.submitted && !price.valid">Price is required</div>
       </div>
       <div>
           <md-input-container>
@@ -106,6 +88,21 @@
           </md-select>
           <div *ngIf="f.submitted && !accomodationTypeId.valid">Accommodation Type is required</div>
         </div>
+        <div>
+                <md-card>
+                      <md-card-header>
+                              <md-card-title>Services</md-card-title>
+                      </md-card-header>
+                      <md-card-content>
+                              <div *ngFor="let item of accommodationServices">
+                                      <label>
+                                      <input type="checkbox" [ngModelOptions]="{standalone: true}" value="{{item.id}}" [(ngModel)]="item.checked" [name]="item.Name" [attr.disabled]="item.id==1 ? true : null" />
+                                      <span innerHTML="{{item.name}}"></span>
+                                  </label>
+                                  </div>
+                      </md-card-content>
+                </md-card>
+            </div>
       <button md-raised-button color="primary" type="submit">Save</button>
     </form>
   </div>

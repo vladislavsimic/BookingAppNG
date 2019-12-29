@@ -19,6 +19,7 @@ import {MapComponent} from "app/map/map.component"
 import {ReservationAddComponent} from "app/reservation/reservation-add/reservation-add.component"
 import { NavigationExtras } from '@angular/router';
 import { HttpRatingService } from 'app/rating/rating.service';
+import { AccomodationServices } from 'app/accomodation-services/accomodation-service.model';
 
 @Component({
   selector: 'app-accomodation-details',
@@ -31,12 +32,12 @@ export class AccomodationDetailsComponent implements OnInit {
  public accomodation : Accommodation;
  public rooms : Array<Room>;
  public nRoomReservation:Reservation;
- public managerRole:boolean;
+ public userRole:boolean;
+ public adminManagerRole:boolean;
  public role:string;
  private accId:number;
  private accomodationId : string;
  private accName : string;
- private propertyServices : string[];
  private ratings : Array<Rating>;
  mapInfo:MapModel;
  
@@ -57,8 +58,9 @@ export class AccomodationDetailsComponent implements OnInit {
               }
  
   ngOnInit() {
-    // this.managerRole=false;
-    // this.createPermisions();
+    this.userRole=false;
+    this.adminManagerRole = false;
+    this.createPermisions();
 
     this.httpRatingService.getAccomodationRatings(this.accomodationId).subscribe(
       (res: any) => { this.ratings = res; console.log(this.ratings)},
@@ -69,13 +71,15 @@ export class AccomodationDetailsComponent implements OnInit {
       (res: any) => { this.accomodation = res; console.log(this.accomodation)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error); }
     );
-
   }
-  
+
   createPermisions(){
     this.role = localStorage.getItem('role');
-    if(this.role == "AGENT"){
-      this.managerRole=true;
+    if(this.role == "AGENT" || this.role=="ADMIN"){
+      this.adminManagerRole=true;
+    }
+    else if(this.role=="USER"){
+      this.userRole=true;
     }
   }
   
@@ -90,6 +94,10 @@ export class AccomodationDetailsComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
+  }
+
+  getTotalRating(){
+    return this.ratings.map(t => t.overallRating).reduce((acc, value) => acc + value, 0);
   }
 
   addComment(acc:Accommodation){

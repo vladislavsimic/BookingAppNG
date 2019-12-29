@@ -25,7 +25,7 @@ export class RatingComponent implements OnInit {
 
   saveRating(rating: Rating, form: NgForm){
     rating.servicesRating = 1;
-    rating.staffRating = 2;
+    rating.staffRating = 1;
     this.httpRatingService.postRating(rating, this.reservationId).subscribe(
       ()=>{ 
         console.log('Rating successfuly posted');

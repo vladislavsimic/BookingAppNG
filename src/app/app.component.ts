@@ -36,6 +36,7 @@ export class AppComponent {
       this.managerRole=false;
       this.createPermision();
       this.checkForUser();
+      this.username = localStorage.getItem('username');
   }
 
   createPermision(){

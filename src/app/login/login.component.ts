@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       response=>{
         localStorage.setItem('id_token',response.json().accessToken);
         localStorage.setItem('role',response.json().role);
-        localStorage.setItem('username',response.json().role);
+        localStorage.setItem('username',response.json().username);
         console.log(response.json());                    
         this.dialogRef.close("success");
       },

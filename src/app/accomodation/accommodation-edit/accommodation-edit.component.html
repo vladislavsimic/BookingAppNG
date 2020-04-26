@@ -68,14 +68,14 @@
             <div *ngIf="f.submitted && !longitude.valid">Longitude is required</div>
         </div>
         <div>
-              <button type="button" md-raised-button color="primary" (click)="openMapAdd()">Set location</button>
+              <button type="button" md-raised-button color="primary" (click)="openMapChangeLocation()">Set location</button>
         </div>
-        <div>
+        <!-- <div>
            <md-input-container>
             <input mdInput type="text" [readonly] = "true" placeholder="ImageURL" name="imageUrls" [(ngModel)]="eAccommodation.imageUrls" #imageUrls="ngModel" required />
            </md-input-container>
             <div *ngIf="f.submitted && !imageUrls.valid">ImageURL is required</div>
-        </div>
+        </div> -->
         <div>
               <button type="button" style="margin: 15px;" md-raised-button color="primary" (click)="openChangeImageDialog()">Choose Image</button>
         </div>
